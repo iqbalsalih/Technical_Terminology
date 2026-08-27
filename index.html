@@ -3,433 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TechTerm | أكاديمية المصطلحات التقنية بالإنجليزية</title>
+<meta name="theme-color" content="#0d1321">
+<title>TechTerm | أكاديمية المصطلحات التقنية</title>
 <style>
-  :root{
-    --bg:#0A0E17;
-    --bg-soft:#0F1522;
-    --panel:#141B2B;
-    --panel-2:#1A2236;
-    --line:#26314A;
-    --text:#E7ECF7;
-    --text-dim:#8B96AE;
-    --text-dimmer:#5C6680;
-    --good:#22C55E;
-    --bad:#EF4444;
-    --warn:#EAB308;
-    --accent:#3B82F6;      /* default / overridden per-track */
-    --accent-soft:rgba(59,130,246,0.14);
-    --mono:"Consolas","SFMono-Regular","Menlo","Courier New",monospace;
-    --sans:"Segoe UI","Tahoma","Arial",sans-serif;
-  }
-  body.track-cs{ --accent:#3B9DE0; --accent-soft:rgba(59,157,224,0.14); }
-  body.track-ai{ --accent:#9B6BF2; --accent-soft:rgba(155,107,242,0.16); }
-  body.track-sec{ --accent:#22C77E; --accent-soft:rgba(34,199,126,0.14); }
-
-  *{box-sizing:border-box;}
-  html,body{height:100%;}
-  body{
-    margin:0;
-    background:
-      radial-gradient(circle at 85% -10%, rgba(59,130,246,0.10), transparent 45%),
-      radial-gradient(circle at -10% 110%, rgba(34,199,126,0.08), transparent 45%),
-      var(--bg);
-    color:var(--text);
-    font-family:var(--sans);
-    line-height:1.75;
-    min-height:100vh;
-  }
-  .app{max-width:980px; margin:0 auto; padding:20px 16px 80px;}
-
-  /* ---------------- header ---------------- */
-  header.top{
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 4px 20px;
-    border-bottom:1px solid var(--line);
-    margin-bottom:22px;
-    flex-wrap:wrap;
-    gap:10px;
-  }
-  .brand{display:flex; align-items:center; gap:12px; cursor:pointer;}
-  .brand .logo{
-    width:42px;height:42px;border-radius:10px;
-    background:linear-gradient(145deg,#3B9DE0,#9B6BF2,#22C77E);
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono); font-weight:bold; color:#fff; font-size:15px;
-    flex-shrink:0;
-  }
-  .brand h1{margin:0; font-size:18px; color:var(--text);}
-  .brand p{margin:0; font-size:11.5px; color:var(--text-dim);}
-  .header-actions{display:flex; gap:8px; align-items:center;}
-
-  .icon-btn{
-    background:var(--panel);
-    border:1px solid var(--line);
-    color:var(--text);
-    border-radius:9px;
-    padding:9px 14px;
-    font-size:13.5px;
-    cursor:pointer;
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:var(--sans);
-  }
-  .icon-btn:hover{border-color:var(--accent); color:var(--accent);}
-
-  /* ---------------- generic ---------------- */
-  .screen{display:none;}
-  .screen.active{display:block; animation:fadeIn .25s ease;}
-  @keyframes fadeIn{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
-
-  .panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:24px;
-  }
-  .term-window{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:12px;
-    overflow:hidden;
-  }
-  .term-bar{
-    display:flex; align-items:center; gap:6px;
-    padding:9px 14px;
-    background:var(--panel-2);
-    border-bottom:1px solid var(--line);
-  }
-  .term-bar span{width:10px;height:10px;border-radius:50%; display:inline-block;}
-  .term-bar .r{background:#EF4444;} .term-bar .y{background:#EAB308;} .term-bar .g{background:#22C55E;}
-  .term-bar .label{
-    margin-inline-start:10px; font-family:var(--mono); font-size:11.5px; color:var(--text-dim);
-  }
-  .term-body{padding:22px;}
-
-  h2.title{
-    margin:0 0 6px;
-    font-size:21px;
-    color:var(--text);
-  }
-  h2.title .accent{color:var(--accent);}
-  p.lead{color:var(--text-dim); font-size:14.5px; margin-top:4px;}
-
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--accent); color:#0A0E17;
-    border:none; border-radius:9px;
-    padding:12px 22px; font-size:15px; font-weight:600;
-    cursor:pointer; font-family:var(--sans);
-    transition:filter .15s, transform .12s;
-  }
-  .btn:hover{filter:brightness(1.12); transform:translateY(-1px);}
-  .btn:disabled{opacity:.4; cursor:not-allowed; transform:none;}
-  .btn.outline{
-    background:transparent; color:var(--text); border:1.5px solid var(--line);
-  }
-  .btn.outline:hover{border-color:var(--accent); color:var(--accent);}
-  .btn.small{padding:8px 14px; font-size:13px; border-radius:7px; font-weight:500;}
-  .row-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:22px;}
-
-  .en{font-family:var(--mono); direction:ltr; unicode-bidi:isolate;}
-
-  /* ---------------- home / tracks ---------------- */
-  .track-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:20px;}
-  .track-card{
-    position:relative;
-    border-radius:14px;
-    padding:22px;
-    cursor:pointer;
-    border:1px solid var(--line);
-    background:var(--panel);
-    overflow:hidden;
-    transition:transform .15s, border-color .15s;
-  }
-  .track-card:hover{transform:translateY(-3px);}
-  .track-card::before{
-    content:""; position:absolute; inset:0 0 auto 0; height:4px;
-  }
-  .track-card.cs{--tc:#3B9DE0;} .track-card.ai{--tc:#9B6BF2;} .track-card.sec{--tc:#22C77E;}
-  .track-card::before{background:var(--tc);}
-  .track-card:hover{border-color:var(--tc);}
-  .track-card .ic{font-size:30px; margin-bottom:10px;}
-  .track-card h3{margin:0 0 6px; font-size:17px; color:var(--text);}
-  .track-card p{margin:0; font-size:13px; color:var(--text-dim);}
-  .track-card .cnt{margin-top:12px; font-family:var(--mono); font-size:11.5px; color:var(--tc);}
-
-  /* ---------------- level grid ---------------- */
-  .level-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; margin-top:20px;}
-  .level-card{
-    border:1.5px solid var(--line);
-    border-radius:12px;
-    padding:18px;
-    cursor:pointer;
-    background:var(--panel-2);
-    position:relative;
-  }
-  .level-card:hover{border-color:var(--accent);}
-  .level-card.locked{opacity:.45; cursor:not-allowed;}
-  .level-card .lv-num{font-family:var(--mono); font-size:11px; color:var(--text-dim);}
-  .level-card .lv-name{font-size:17px; font-weight:bold; color:var(--text); margin:4px 0 8px;}
-  .level-card .lv-status{font-size:12px; color:var(--text-dim);}
-  .level-card .lv-status.done{color:var(--good);}
-  .badge-lock{position:absolute; top:14px; left:14px; font-size:16px;}
-
-  /* ---------------- lesson selector ---------------- */
-  .lesson-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px;}
-  .lesson-card{
-    border:1.5px solid var(--line);border-radius:12px;padding:18px;background:var(--panel-2);
-    cursor:pointer;position:relative;transition:transform .15s,border-color .15s;
-  }
-  .lesson-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-  .lesson-card.locked{opacity:.5;cursor:not-allowed;transform:none;}
-  .lesson-card .lesson-num{font-family:var(--mono);font-size:11px;color:var(--text-dim);}
-  .lesson-card h3{margin:5px 0 4px;font-size:16px;color:var(--text);}
-  .lesson-card .lesson-en{font-family:var(--mono);font-size:11px;color:var(--accent);direction:ltr;text-align:left;}
-  .lesson-card .lesson-status{font-size:12px;margin-top:10px;color:var(--text-dim);}
-  .lesson-card .lesson-status.done{color:var(--good);}
-  .lesson-card .lesson-status.locked{color:var(--bad);}
-  .exam-card{border-color:var(--accent);background:var(--accent-soft);}
-  .exam-card .lesson-status{font-weight:600;}
-
-  /* ---------------- vocab flashcards ---------------- */
-  .vocab-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; margin-top:14px;}
-  .flashcard{height:130px; perspective:1200px; cursor:pointer;}
-  .flashcard-inner{position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d;}
-  .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
-  .flashcard-face{
-    position:absolute; inset:0; backface-visibility:hidden;
-    border-radius:11px; border:1px solid var(--line);
-    padding:14px; display:flex; flex-direction:column; justify-content:center;
-  }
-  .flashcard-front{background:var(--panel-2);}
-  .flashcard-front .term{font-family:var(--mono); font-size:15.5px; color:var(--accent); font-weight:bold; direction:ltr; text-align:left;}
-  .flashcard-front .hint{font-size:11px; color:var(--text-dimmer); margin-top:8px;}
-  .flashcard-back{background:var(--accent-soft); transform:rotateY(180deg); overflow:auto;}
-  .flashcard-back .ar{font-size:15px; font-weight:bold; color:var(--text);}
-  .flashcard-back .def{font-size:11.5px; color:var(--text-dim); margin-top:6px; line-height:1.6;}
-
-  /* ---------------- passage / translation ---------------- */
-  .passage-box{
-    direction:ltr; text-align:left;
-    font-family:Georgia,'Times New Roman',serif;
-    font-size:17.5px; line-height:2.05;
-    color:var(--text);
-  }
-  .word{cursor:pointer; padding:1px 2px; border-radius:4px;}
-  .word:hover{background:var(--accent-soft); color:var(--accent);}
-  mark.term-hit, .word.term{
-    background:none;
-    color:var(--accent);
-    font-weight:600;
-    border-bottom:2px dotted var(--accent);
-    cursor:pointer;
-    padding:1px 2px;
-    border-radius:4px;
-  }
-  mark.term-hit:hover, .word.term:hover{background:var(--accent-soft);}
-
-  .translation-panel{
-    margin-top:16px;
-    border:1px dashed var(--line);
-    border-radius:12px;
-    padding:16px 18px;
-    min-height:56px;
-    background:var(--panel-2);
-  }
-  .translation-panel.active{border-style:solid; border-color:var(--accent);}
-  .tp-placeholder{color:var(--text-dimmer); font-size:13.5px;}
-  .tp-row{display:flex; align-items:center; justify-content:space-between; gap:10px;}
-  .tp-en{font-family:var(--mono); font-size:17px; color:var(--accent); font-weight:bold;}
-  .tp-speak{
-    background:var(--panel); border:1px solid var(--line); color:var(--text);
-    border-radius:8px; width:34px; height:34px; cursor:pointer; font-size:15px; flex-shrink:0;
-  }
-  .tp-speak:hover{border-color:var(--accent);}
-  .tp-ar{font-size:17px; font-weight:bold; margin-top:8px; color:var(--text);}
-  .tp-def{font-size:13.5px; color:var(--text-dim); margin-top:6px; line-height:1.7;}
-  .tp-notfound{font-size:13px; color:var(--text-dimmer); margin-top:8px;}
-
-  .section-label{
-    font-size:12.5px; letter-spacing:.4px; text-transform:uppercase;
-    color:var(--text-dimmer); margin:26px 0 10px; font-family:var(--mono);
-  }
-
-  /* ---------------- quiz ---------------- */
-  .progress-track{height:6px; background:var(--panel-2); border-radius:4px; overflow:hidden; margin-bottom:22px;}
-  .progress-fill{height:100%; background:var(--accent); width:0%; transition:width .3s;}
-  .quiz-prompt{font-size:16.5px; margin-bottom:16px;}
-  .quiz-options{display:grid; gap:10px;}
-  .quiz-opt{
-    border:1.5px solid var(--line); border-radius:10px; padding:13px 16px;
-    background:var(--panel-2); cursor:pointer; font-size:15px; text-align:right;
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .quiz-opt:hover{border-color:var(--accent);}
-  .quiz-opt.correct{border-color:var(--good); background:rgba(34,197,94,0.12); color:var(--good);}
-  .quiz-opt.incorrect{border-color:var(--bad); background:rgba(239,68,68,0.12); color:var(--bad);}
-  .quiz-opt.disabled{pointer-events:none;}
-
-  .score-ring{
-    width:120px; height:120px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; flex-direction:column;
-    border:6px solid var(--line); margin:0 auto 18px;
-  }
-  .score-ring.pass{border-color:var(--good); color:var(--good);}
-  .score-ring.fail{border-color:var(--bad); color:var(--bad);}
-  .score-ring .pct{font-size:26px; font-weight:bold; font-family:var(--mono);}
-  .score-ring .of{font-size:11px; color:var(--text-dim);}
-
-  .missed-list{margin-top:20px; display:flex; flex-direction:column; gap:8px;}
-  .missed-item{
-    display:flex; justify-content:space-between; align-items:center;
-    background:var(--panel-2); border:1px solid var(--line); border-radius:9px; padding:10px 14px;
-  }
-
-  /* ---------------- dictionary tool ---------------- */
-  .dict-search{
-    width:100%; padding:14px 16px; border-radius:10px;
-    border:1.5px solid var(--line); background:var(--panel-2); color:var(--text);
-    font-size:16px; font-family:var(--sans);
-  }
-  .dict-search:focus{outline:none; border-color:var(--accent);}
-  .dict-results{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
-  .dict-item{
-    border:1px solid var(--line); border-radius:10px; padding:12px 16px;
-    background:var(--panel-2);
-  }
-  .dict-item .row{display:flex; justify-content:space-between; align-items:center; gap:10px;}
-  .dict-item .en{color:var(--accent); font-weight:bold; font-size:15px;}
-  .dict-item .ar{font-weight:bold; font-size:15px;}
-  .dict-item .def{font-size:12.5px; color:var(--text-dim); margin-top:6px;}
-  .dict-tag{font-size:10.5px; color:var(--text-dimmer); font-family:var(--mono);}
-  .empty-note{color:var(--text-dimmer); font-size:13.5px; text-align:center; padding:20px 0;}
-
-  footer.tip{text-align:center; font-size:12px; color:var(--text-dimmer); margin-top:34px;}
-
-  @media (max-width:520px){
-    .term-body{padding:16px;}
-    .panel{padding:18px;}
-  }
+:root{
+  --bg:#0a0e17; --bg-soft:#0f1522; --panel:#141b2b; --panel-2:#1a2236; --line:#26314a;
+  --text:#e7ecf7; --text-dim:#8b96ae; --text-dimmer:#5c6680; --good:#22c55e; --bad:#ef4444;
+  --warn:#eab308; --accent:#3b82f6; --accent-soft:rgba(59,130,246,.14);
+  --shadow:0 16px 40px rgba(0,0,0,.22); --radius:16px; --scale:1;
+  --sans:"Segoe UI","Tahoma","Arial",sans-serif; --mono:"Consolas","SFMono-Regular","Menlo","Courier New",monospace;
+}
+body.light{--bg:#f5f7fb;--bg-soft:#eef2f8;--panel:#fff;--panel-2:#f6f8fc;--line:#dbe2ef;--text:#172033;--text-dim:#5d6b84;--text-dimmer:#8290a8;--shadow:0 14px 32px rgba(39,56,85,.10)}
+body.track-cs{--accent:#2f9bd4;--accent-soft:rgba(47,155,212,.13)}
+body.track-ai{--accent:#8d63e8;--accent-soft:rgba(141,99,232,.14)}
+body.track-sec{--accent:#16b97a;--accent-soft:rgba(22,185,122,.13)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth} body{margin:0;min-height:100vh;background:radial-gradient(circle at 85% -10%,rgba(59,130,246,.09),transparent 42%),radial-gradient(circle at -10% 110%,rgba(34,197,94,.07),transparent 38%),var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;font-size:calc(15px * var(--scale));}
+button,input{font:inherit} button{cursor:pointer} .hidden{display:none!important}
+.app-shell{max-width:1180px;margin:0 auto;padding:18px 16px 60px}.topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:4px 0 16px;margin-bottom:18px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px;cursor:pointer}.logo{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;font-family:var(--mono);font-weight:800;background:linear-gradient(145deg,#3b9de0,#9b6bf2,#22c77e);box-shadow:0 8px 24px rgba(59,130,246,.22)}.brand h1{font-size:19px;margin:0}.brand p{margin:0;color:var(--text-dim);font-size:12px}.top-actions,.nav-actions,.row-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.icon-btn,.ghost-btn,.primary-btn,.danger-btn{border-radius:10px;padding:9px 13px;border:1px solid var(--line);background:var(--panel);color:var(--text);transition:.18s ease;display:inline-flex;align-items:center;gap:7px}.icon-btn:hover,.ghost-btn:hover{border-color:var(--accent);color:var(--accent)}.primary-btn{background:var(--accent);border-color:var(--accent);color:#07111f;font-weight:700}.primary-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.danger-btn{border-color:rgba(239,68,68,.35);color:var(--bad);background:rgba(239,68,68,.06)}.small{padding:7px 10px;font-size:13px}.full{width:100%;justify-content:center}
+.screen{display:none}.screen.active{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.dashboard-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}.hero{padding:26px}.hero-head{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.eyebrow,.section-label{font:11px var(--mono);color:var(--text-dimmer);letter-spacing:.5px;text-transform:uppercase}.title{margin:0 0 5px;font-size:clamp(21px,3.5vw,29px)}.lead{margin:0;color:var(--text-dim);font-size:14px}.accent{color:var(--accent)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.kpi{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:14px}.kpi .v{font:700 24px var(--mono);color:var(--accent)}.kpi .l{font-size:11.5px;color:var(--text-dim);margin-top:3px}.progress-track{height:9px;background:var(--panel-2);border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .3s ease}.progress-wrap{margin-top:15px}.progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--text-dim);font-size:12px;margin-bottom:6px}
+.streak-card{display:flex;flex-direction:column;gap:10px;justify-content:center;min-height:100%}.streak{font-size:38px;font-weight:800}.streak-sub{color:var(--text-dim);font-size:13px}.nav-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.tab{border:1px solid var(--line);background:var(--panel);padding:9px 13px;border-radius:10px;color:var(--text-dim)}.tab.active{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.track-grid,.level-grid,.lesson-grid,.review-grid,.badge-grid{display:grid;gap:14px}.track-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:16px}.track-card{position:relative;overflow:hidden;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;min-height:160px;transition:.18s}.track-card:hover{transform:translateY(-2px);border-color:var(--tc)}.track-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--tc)}.track-card.cs{--tc:#2f9bd4}.track-card.ai{--tc:#8d63e8}.track-card.sec{--tc:#16b97a}.track-icon{font-size:30px}.track-card h3{margin:10px 0 4px;font-size:18px}.track-card p{margin:0;color:var(--text-dim);font-size:13px}.track-meta{margin-top:12px;color:var(--tc);font:11px var(--mono)}
+.map{display:flex;flex-direction:column;gap:12px;margin-top:18px}.map-node{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);background:var(--panel-2);border-radius:14px}.map-node .node-dot{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--bg-soft);border:2px solid var(--line);font-weight:800}.map-node.done .node-dot{border-color:var(--good);color:var(--good);background:rgba(34,197,94,.08)}.map-node.current .node-dot{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 12%,transparent)}.map-node.locked{opacity:.48}.map-node .node-title{font-weight:700}.map-node .node-sub{font-size:12px;color:var(--text-dim)}.map-node .node-side{text-align:left;font-size:12px;color:var(--text-dim)}.exam-node{border-style:dashed}.connector{height:16px;width:3px;background:var(--line);margin-right:24px;border-radius:2px}
+.lesson-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}.lesson-progress{min-width:240px}.vocab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin-top:12px}.flashcard{height:145px;perspective:1200px;cursor:pointer}.flashcard-inner{position:relative;width:100%;height:100%;transition:.5s;transform-style:preserve-3d}.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}.flashcard-face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:center;background:var(--panel-2)}.flashcard-back{transform:rotateY(180deg);background:var(--accent-soft)}.term{font-family:var(--mono);direction:ltr;text-align:left;color:var(--accent);font-weight:800}.hint{font-size:11px;color:var(--text-dimmer);margin-top:7px}.ar{font-weight:800}.def{font-size:11.5px;color:var(--text-dim);margin-top:6px;line-height:1.6}.passage-box{direction:ltr;text-align:left;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:2.05;padding:16px;border:1px solid var(--line);background:var(--panel-2);border-radius:12px;margin-top:12px}.word,.term-hit{cursor:pointer;padding:1px 3px;border-radius:4px}.word:hover,.term-hit:hover{background:var(--accent-soft);color:var(--accent)}.term-hit{color:var(--accent);font-weight:700;border-bottom:2px dotted var(--accent);background:none}.translation-panel{margin-top:12px;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;min-height:56px;background:var(--panel-2)}.translation-panel.active{border-style:solid;border-color:var(--accent)}.tp-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.tp-en{font:700 17px var(--mono);color:var(--accent);direction:ltr}.tp-ar{font-size:16px;font-weight:800;margin-top:5px}.tp-def{font-size:12.5px;color:var(--text-dim);margin-top:5px}.speak{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;width:36px;height:36px}.speak:hover{border-color:var(--accent);color:var(--accent)}
+.quiz-option{border:1px solid var(--line);padding:13px 14px;border-radius:11px;background:var(--panel-2);display:flex;justify-content:space-between;gap:10px;align-items:center;transition:.16s}.quiz-option:hover{border-color:var(--accent)}.quiz-option.correct{border-color:var(--good);background:rgba(34,197,94,.11);color:var(--good)}.quiz-option.incorrect{border-color:var(--bad);background:rgba(239,68,68,.11);color:var(--bad)}.quiz-option.disabled{pointer-events:none}.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:12px;color:var(--text-dim)}.quiz-options{display:grid;gap:10px}.score-ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:0 auto 15px;border:6px solid var(--line);text-align:center}.score-ring.pass{border-color:var(--good);color:var(--good)}.score-ring.fail{border-color:var(--bad);color:var(--bad)}.score-ring .pct{font:700 27px var(--mono)}.score-ring .of{font-size:11px;color:var(--text-dim)}
+.review-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:14px}.review-card{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:15px}.review-card .term-line{font:700 17px var(--mono);color:var(--accent);direction:ltr}.risk{display:inline-flex;font-size:10px;padding:3px 7px;border-radius:999px;background:rgba(239,68,68,.1);color:var(--bad);border:1px solid rgba(239,68,68,.18)}
+.analytics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}.metric-list{display:grid;gap:9px}.metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);font-size:13px}.metric:last-child{border-bottom:0}.bars{display:flex;align-items:flex-end;gap:7px;height:130px;padding-top:10px}.bar{flex:1;min-width:10px;background:var(--accent);opacity:.85;border-radius:5px 5px 2px 2px}.bar-label{font-size:9px;color:var(--text-dimmer);text-align:center;margin-top:3px;white-space:nowrap}.badge-grid{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:14px}.badge{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:14px;opacity:.42;transition:.2s}.badge.unlocked{opacity:1;border-color:var(--accent);background:var(--accent-soft)}.badge-icon{font-size:28px}.badge-title{font-weight:800;margin-top:5px}.badge-desc{font-size:11px;color:var(--text-dim)}
+.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.setting{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:16px}.setting h3{margin:0 0 5px;font-size:15px}.setting p{margin:0 0 10px;color:var(--text-dim);font-size:12px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.toggle{position:relative;width:48px;height:28px;background:var(--line);border-radius:999px;border:0}.toggle::after{content:"";position:absolute;width:22px;height:22px;top:3px;right:3px;border-radius:50%;background:var(--text);transition:.2s}.toggle.on{background:var(--accent)}.toggle.on::after{right:23px;background:#fff}.range{width:100%}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--panel);border:1px solid var(--accent);padding:11px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:60;transition:.25s;max-width:min(92vw,480px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);display:grid;place-items:center;z-index:50;padding:16px}.modal{width:min(520px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}.modal h2{margin:0 0 6px}.form{display:grid;gap:10px;margin-top:14px}.field{display:grid;gap:6px}.field label{font-size:12px;color:var(--text-dim)}.field input{width:100%;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:11px 12px;border-radius:10px;outline:none}.field input:focus{border-color:var(--accent)}.auth-note{font-size:11px;color:var(--text-dimmer);margin-top:10px}.auth-switch{text-align:center;font-size:12px;color:var(--text-dim);margin-top:12px}.link-btn{background:none;border:0;color:var(--accent);padding:0}.daily-banner{border:1px solid rgba(234,179,8,.35);background:rgba(234,179,8,.07);border-radius:13px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.empty{padding:30px;text-align:center;color:var(--text-dimmer)}.muted{color:var(--text-dim)}
+@media(max-width:900px){.dashboard-grid,.analytics-grid,.settings-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.app-shell{padding:12px 10px 42px}.topbar{align-items:flex-start}.kpi-grid{grid-template-columns:1fr 1fr}.map-node{grid-template-columns:46px 1fr}.map-node .node-side{grid-column:2;text-align:right}.hero{padding:18px}.panel{padding:16px}.lesson-progress{min-width:100%}.passage-box{font-size:16px}.top-actions{width:100%}.top-actions>*{flex:1;justify-content:center}}
 </style>
 </head>
 <body>
-<div class="app">
+<div id="authModal" class="modal-backdrop">
+  <div class="modal">
+    <div class="eyebrow">TECHTERM / LOCAL ACCOUNT</div>
+    <h2 id="authTitle">تسجيل الدخول</h2>
+    <p id="authSubtitle" class="lead">سجّل دخولك لمتابعة تقدمك من هذا الجهاز.</p>
+    <div class="form">
+      <div class="field"><label>اسم المستخدم</label><input id="authUser" autocomplete="username" maxlength="24"></div>
+      <div class="field"><label>كلمة المرور</label><input id="authPass" type="password" autocomplete="current-password" maxlength="64"></div>
+      <button id="authSubmit" class="primary-btn full">🔐 تسجيل الدخول</button>
+      <div class="auth-switch"><span id="authSwitchText">ليس لديك حساب؟</span> <button id="authSwitch" class="link-btn">إنشاء حساب</button></div>
+      <div class="auth-note">الحساب محلي على هذا الجهاز. لا يوجد خادم أو مزامنة سحابية في هذه النسخة.</div>
+    </div>
+  </div>
+</div>
 
-  <header class="top">
+<div class="app-shell hidden" id="appShell">
+  <header class="topbar">
     <div class="brand" id="brandHome">
       <div class="logo">&lt;/&gt;</div>
-      <div>
-        <h1>TechTerm</h1>
-        <p>أكاديمية المصطلحات التقنية — حاسوب · ذكاء اصطناعي · أمن سيبراني</p>
-      </div>
+      <div><h1>TechTerm</h1><p>أكاديمية المصطلحات التقنية — حاسوب · ذكاء اصطناعي · أمن سيبراني</p></div>
     </div>
-    <div class="header-actions">
+    <div class="top-actions">
       <button class="icon-btn" id="dictBtn">📖 القاموس</button>
-      <button class="icon-btn" id="homeBtn">🏠 الرئيسية</button>
+      <button class="icon-btn" id="reviewBtn">🧠 المراجعة</button>
+      <button class="icon-btn" id="analyticsBtn">📊 تقدمي</button>
+      <button class="icon-btn" id="settingsBtn">⚙️ الإعدادات</button>
+      <button class="icon-btn" id="logoutBtn">↪️ خروج</button>
     </div>
   </header>
 
-  <!-- ============ HOME / TRACKS ============ -->
-  <section class="screen active" id="screen-home">
-    <h2 class="title">اختر مسارك</h2>
-    <p class="lead">تعلّم مئات المصطلحات التقنية المتخصصة عبر دروس وقطع قراءة مصمَّمة لطلاب الحاسوب وتكنولوجيا المعلومات، الذكاء الاصطناعي، والأمن السيبراني — من المستوى المبتدئ إلى الاحترافي.</p>
-    <div class="track-grid" id="trackGrid"></div>
-  </section>
-
-  <!-- ============ LEVELS ============ -->
-  <section class="screen" id="screen-levels">
-    <h2 class="title" id="levelsTitle"></h2>
-    <p class="lead" id="levelsLead"></p>
-    <div class="level-grid" id="levelGrid"></div>
-    <div class="row-actions"><button class="btn outline small" id="backHomeBtn">↩ المسارات</button></div>
-  </section>
-
-  <!-- ============ LESSONS IN LEVEL ============ -->
-  <section class="screen" id="screen-lessons">
-    <div class="panel">
-      <h2 class="title" id="lessonsTitle"></h2>
-      <p class="lead" id="lessonsLead"></p>
-      <div class="lesson-grid" id="lessonGrid"></div>
-      <div class="row-actions">
-        <button class="btn outline small" id="backToLevelsBtn">↩ رجوع للمستويات</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ LESSON ============ -->
-  <section class="screen" id="screen-lesson">
-    <div class="term-window">
-      <div class="term-bar">
-        <span class="r"></span><span class="y"></span><span class="g"></span>
-        <span class="label" id="lessonBarLabel">lesson.md</span>
-      </div>
-      <div class="term-body">
-        <h2 class="title" id="lessonTitle"></h2>
-        <p class="lead" id="lessonLead"></p>\n        <div class="section-label" id="lessonProgressLabel"></div>
-
-        <div class="section-label">// المفردات — اضغط على البطاقة لعرض الترجمة</div>
-        <div class="vocab-grid" id="vocabGrid"></div>
-
-        <div class="section-label">// نص القراءة — اضغط أي كلمة لعرض ترجمتها</div>
-        <div class="passage-box" id="passageBox"></div>
-        <div class="row-actions" style="margin-top:12px;">
-          <button class="btn outline small" id="listenPassageBtn">🔊 استماع للنص</button>
+  <section id="screen-home" class="screen active">
+    <div class="dashboard-grid">
+      <div class="panel hero">
+        <div class="hero-head">
+          <div><div class="eyebrow">DASHBOARD</div><h2 class="title">مرحبًا، <span id="welcomeName" class="accent"></span> 👋</h2><p class="lead">طوّر مصطلحاتك التقنية خطوة بخطوة، واكسب XP، وحافظ على سلسلة تعلّمك اليومية.</p></div>
+          <div class="streak-card"><div class="streak">🔥 <span id="streakValue">0</span></div><div class="streak-sub">يوم متتالي</div></div>
         </div>
-
-        <div class="translation-panel" id="translationPanel">
-          <div class="tp-placeholder">اضغط أي كلمة في النص أو أي بطاقة لعرض ترجمتها هنا.</div>
+        <div class="progress-wrap"><div class="progress-row"><span>التقدم الكلي</span><strong id="globalProgressText">0%</strong></div><div class="progress-track"><div id="globalProgressFill" class="progress-fill"></div></div></div>
+        <div class="kpi-grid">
+          <div class="kpi"><div id="xpValue" class="v">0</div><div class="l">XP</div></div>
+          <div class="kpi"><div id="lessonsDoneValue" class="v">0</div><div class="l">دروس مكتملة</div></div>
+          <div class="kpi"><div id="levelsDoneValue" class="v">0</div><div class="l">مستويات مكتملة</div></div>
+          <div class="kpi"><div id="vocabMasteredValue" class="v">0</div><div class="l">مصطلحات متقنة</div></div>
         </div>
-
-        <div class="row-actions">
-          <button class="btn" id="startLessonQuizBtn">📝 ابدأ اختبار الدرس</button>
-          <button class="btn outline" id="backLevelsBtn2">↩ رجوع للمستويات</button>
-        </div>
+        <div id="dailyBanner" class="daily-banner hidden"><div>🔥 <strong>عدت اليوم!</strong><span class="muted"> حافظ على سلسلة التعلّم.</span></div><button id="dailyAction" class="ghost-btn small">فتح المراجعة</button></div>
       </div>
+      <div class="panel"><div class="eyebrow">QUICK START</div><h3 style="margin:5px 0">استمر من حيث توقفت</h3><p id="continueText" class="lead">اختر مسارًا للبدء.</p><div class="row-actions"><button id="continueBtn" class="primary-btn">🚀 متابعة التعلم</button></div><div style="margin-top:18px" class="section-label">// أحدث الإنجازات</div><div id="recentBadges" class="badge-grid"></div></div>
     </div>
+    <div class="nav-tabs"><button class="tab active" data-home-tab="paths">🗺 المسارات</button><button class="tab" data-home-tab="progress">📊 ملخص التقدم</button></div>
+    <div id="homeTabPaths"><div class="panel"><h2 class="title">اختر مسارك</h2><p class="lead">ثلاثة مسارات، أربعة مستويات لكل مسار، وثلاثة دروس في كل مستوى.</p><div id="trackGrid" class="track-grid"></div></div></div>
+    <div id="homeTabProgress" class="hidden"><div class="panel"><h2 class="title">ملخصك الحالي</h2><div id="homeProgressSummary" class="analytics-grid"></div></div></div>
   </section>
 
-  <!-- ============ QUIZ ============ -->
-  <section class="screen" id="screen-quiz">
-    <div class="panel">
-      <h2 class="title" id="quizTitle"></h2>
-      <div class="progress-track"><div class="progress-fill" id="quizProgressFill"></div></div>
-      <div class="quiz-prompt" id="quizPrompt"></div>
-      <div class="quiz-options" id="quizOptions"></div>
-      <div class="row-actions">
-        <button class="btn" id="quizNextBtn" style="display:none;">السؤال التالي</button>
-      </div>
-    </div>
-  </section>
+  <section id="screen-levels" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">LEARNING MAP</div><h2 id="levelsTitle" class="title"></h2><p id="levelsLead" class="lead"></p></div><button id="backHomeBtn" class="ghost-btn">↩ الرئيسية</button></div><div id="levelMap" class="map"></div></div></section>
 
-  <!-- ============ QUIZ RESULT ============ -->
-  <section class="screen" id="screen-quiz-result">
-    <div class="panel" style="text-align:center;">
-      <div class="score-ring" id="scoreRing">
-        <div class="pct" id="scorePct">0%</div>
-        <div class="of" id="scoreOf">0 / 0</div>
-      </div>
-      <h2 class="title" id="resultTitle" style="text-align:center; display:block;"></h2>
-      <p class="lead" id="resultText"></p>
-      <div class="missed-list" id="missedList" style="text-align:right;"></div>
-      <div class="row-actions" style="justify-content:center;" id="resultActions"></div>
-    </div>
-  </section>
+  <section id="screen-lessons" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">LEVEL / LESSONS</div><h2 id="lessonsTitle" class="title"></h2><p id="lessonsLead" class="lead"></p></div><button id="backToLevelsBtn" class="ghost-btn">↩ المستويات</button></div><div id="lessonGrid" class="map"></div></div></section>
 
-  <!-- ============ DICTIONARY ============ -->
-  <section class="screen" id="screen-dict">
-    <h2 class="title">📖 قاموس المصطلحات التقنية</h2>
-    <p class="lead">اكتب أي كلمة بالعربية أو الإنجليزية للحصول على ترجمتها العلمية بطريقة أكاديمية دقيقة، في أي من الاتجاهين.</p>
-    <input type="text" class="dict-search" id="dictSearch" placeholder="اكتب مثلاً: خوارزمية أو algorithm ...">
-    <div class="dict-results" id="dictResults"></div>
-  </section>
+  <section id="screen-lesson" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow" id="lessonBarLabel">LESSON</div><h2 id="lessonTitle" class="title"></h2><p id="lessonLead" class="lead"></p></div><div class="lesson-progress"><div class="progress-row"><span>إكمال الدرس</span><strong id="lessonProgressText">0%</strong></div><div class="progress-track"><div id="lessonProgressFill" class="progress-fill"></div></div></div></div><div class="row-actions" style="margin-top:16px"><button id="learnModeBtn" class="tab active">📖 Learn</button><button id="practiceModeBtn" class="tab">🧩 Practice</button><button id="backLevelsBtn2" class="ghost-btn">↩ رجوع</button></div><div id="lessonLearnArea"><div class="section-label">// المفردات</div><div id="vocabGrid" class="vocab-grid"></div><div class="section-label">// نص القراءة</div><div id="passageBox" class="passage-box"></div><div class="row-actions"><button id="listenPassageBtn" class="ghost-btn">🔊 استماع للنص</button></div><div id="translationPanel" class="translation-panel"><div class="muted">اضغط كلمة في النص أو بطاقة لعرض الترجمة والتعريف.</div></div><div class="row-actions"><button id="startLessonQuizBtn" class="primary-btn">📝 ابدأ اختبار الدرس</button></div></div><div id="lessonPracticeArea" class="hidden"><div class="panel" style="margin-top:14px;background:var(--panel-2)"><h3 style="margin-top:0">🧩 Practice Mode</h3><p class="lead">أسئلة قصيرة ومتنوعة للتدرب قبل الاختبار الرسمي. المصطلحات التي تخطئ بها أكثر ستظهر لك بنسبة أعلى لاحقًا.</p><div class="row-actions"><button id="startPracticeBtn" class="primary-btn">بدء التدريب</button></div></div></div></div></section>
 
-  <footer class="tip">جميع الدروس والقاموس تعمل بالكامل من ملف واحد على جهازك — بدون إنترنت.</footer>
+  <section id="screen-quiz" class="screen"><div class="panel"><div class="quiz-meta"><span id="quizModeLabel">QUIZ</span><span id="quizCounter">1/1</span></div><div class="progress-track"><div id="quizProgressFill" class="progress-fill"></div></div><h2 id="quizTitle" class="title" style="font-size:22px;margin-top:18px"></h2><div id="quizPrompt" style="font-size:16px;margin:14px 0"></div><div id="quizOptions" class="quiz-options"></div><div class="row-actions"><button id="quizNextBtn" class="primary-btn" style="display:none">السؤال التالي</button></div></div></section>
+
+  <section id="screen-quiz-result" class="screen"><div class="panel" style="text-align:center"><div id="scoreRing" class="score-ring"><div><div id="scorePct" class="pct">0%</div><div id="scoreOf" class="of">0 / 0</div></div></div><h2 id="resultTitle" class="title" style="font-size:25px"></h2><p id="resultText" class="lead"></p><div id="xpEarnedResult" class="accent" style="font-weight:800;margin-top:7px"></div><div id="missedList" style="margin-top:18px;text-align:right"></div><div id="resultActions" class="row-actions" style="justify-content:center"></div></div></section>
+
+  <section id="screen-review" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">SMART REVIEW</div><h2 class="title">🧠 مركز المراجعة الذكي</h2><p class="lead">مصطلحات مختارة تلقائيًا حسب أخطائك، تكرار الفشل، ومدة الغياب عن المراجعة.</p></div><button id="reviewBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div id="reviewSummary" class="kpi-grid"></div><div id="reviewGrid" class="review-grid"></div><div class="row-actions"><button id="startReviewBtn" class="primary-btn">🧠 إنشاء اختبار مراجعة</button></div></div></section>
+
+  <section id="screen-analytics" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">MY PROGRESS</div><h2 class="title">📊 تحليلات التعلّم</h2><p class="lead">صورة شاملة عن دروسك، مستوياتك، محاولاتك، المفردات، XP والسلسلة اليومية.</p></div><button id="analyticsBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div id="analyticsGrid" class="analytics-grid"></div><div class="section-label">// الإنجازات</div><div id="badgeGrid" class="badge-grid"></div></div></section>
+
+  <section id="screen-settings" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">SETTINGS</div><h2 class="title">⚙️ الإعدادات</h2><p class="lead">تحكم في المظهر، الصوت، حجم الخط، وبيانات التقدم.</p></div><button id="settingsBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div class="settings-grid" style="margin-top:16px"><div class="setting"><h3>المظهر</h3><p>التبديل بين الوضع الداكن والفاتح.</p><div class="setting-row"><span id="themeLabel">الوضع الداكن</span><button id="themeToggle" class="toggle"></button></div></div><div class="setting"><h3>الصوت</h3><p>كتم جميع المؤثرات والصوتيات.</p><div class="setting-row"><span id="muteLabel">مفعّل</span><button id="muteToggle" class="toggle on"></button></div></div><div class="setting"><h3>مستوى الصوت</h3><p>اضبط شدة مؤثرات التطبيق.</p><input id="volumeRange" class="range" type="range" min="0" max="100" step="1"></div><div class="setting"><h3>حجم الخط</h3><p>تكبير أو تصغير النص للقراءة المريحة.</p><input id="fontRange" class="range" type="range" min="90" max="125" step="5"></div><div class="setting"><h3>الحساب المحلي</h3><p id="accountInfo"></p><button id="logoutBtn2" class="ghost-btn">↪️ تسجيل الخروج</button></div><div class="setting"><h3>بيانات التقدم</h3><p>حذف تقدم الحساب الحالي وإعادة كل الدروس والإنجازات إلى الصفر.</p><button id="resetProgressBtn" class="danger-btn">🗑 إعادة ضبط التقدم</button></div></div></div></section>
+
+  <section id="screen-dict" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">DICTIONARY</div><h2 class="title">📖 قاموس المصطلحات التقنية</h2><p class="lead">ابحث بالعربية أو الإنجليزية في المصطلحات المتخصصة وكلمات النصوص.</p></div><button id="dictBackBtn" class="ghost-btn">↩ الرئيسية</button></div><input id="dictSearch" class="field-input" placeholder="اكتب مثلاً: algorithm أو خوارزمية" style="width:100%;margin-top:16px;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:13px;border-radius:10px"><div id="dictResults" style="display:grid;gap:9px;margin-top:13px"></div></div></section>
+
+  <footer style="text-align:center;color:var(--text-dimmer);font-size:11px;margin-top:24px">TechTerm يعمل محليًا من ملف واحد. التقدم والحسابات تُحفظ داخل localStorage لهذا المتصفح.</footer>
 </div>
+<div id="toast" class="toast"></div>
 
 <script>
-/* =========================================================
-   DATA — TRACKS
-========================================================= */
 const TRACKS = {
   cs:{ key:"cs", name:"علوم الحاسوب وتكنولوجيا المعلومات", short:"Computer Science & IT", icon:"💻", cls:"cs" },
   ai:{ key:"ai", name:"الذكاء الاصطناعي", short:"Artificial Intelligence", icon:"🤖", cls:"ai" },
@@ -727,739 +411,171 @@ Object.keys(VOCAB).forEach(trackKey=>{
 });
 const ALL_GLOSSARY = Object.values(MASTER_GLOSSARY_MAP);
 
-/* =========================================================
-   STATE + PROGRESS PERSISTENCE
-========================================================= */
-const state = {
-  track:null, level:null, lessonIndex:null,
-  currentQuiz:null, quizIndex:0, quizScore:0, quizMissed:[],
-  quizMode:null // 'lesson' | 'level'
-};
 
-function loadProgress(){
-  try{
-    const raw = localStorage.getItem("techterm_progress_v2");
-    if(raw) return JSON.parse(raw);
-    // Migrate the old progress format without granting exam completion.
-    const old = localStorage.getItem("techterm_progress_v1");
-    if(old) return JSON.parse(old);
-  }catch(e){}
-  return {};
-}
-function saveProgress(){
-  try{ localStorage.setItem("techterm_progress_v2", JSON.stringify(progress)); }catch(e){}
-}
-let progress = loadProgress();
-
-function ensureProgress(track, level){
-  progress[track] = progress[track] || {};
-  progress[track][level] = progress[track][level] || {
-    lessons:{}, examPassed:false, examScore:0
-  };
-  const rec = progress[track][level];
-  rec.lessons = rec.lessons || {};
-  return rec;
-}
-function isLevelUnlocked(track, levelIndex){
-  if(levelIndex === 0) return true;
-  const prevLevel = LEVEL_KEYS[levelIndex-1];
-  return !!(progress[track] && progress[track][prevLevel] && progress[track][prevLevel].examPassed);
-}
-function areAllLessonsPassed(track, level){
-  const rec = ensureProgress(track, level);
-  return getLevelLessons(track, level).every((_,i)=> rec.lessons[i] && rec.lessons[i].passed);
-}
-function lessonPassed(track, level, lessonIndex){
-  const rec = ensureProgress(track, level);
-  return !!(rec.lessons[lessonIndex] && rec.lessons[lessonIndex].passed);
-}
 
 /* =========================================================
-   UTIL
+   TECHTERM APP STATE — v3
 ========================================================= */
-function escapeHtml(s){
-  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-}
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-function setTrackTheme(trackKey){
-  document.body.classList.remove("track-cs","track-ai","track-sec");
-  if(trackKey) document.body.classList.add("track-"+trackKey);
-}
-function shuffle(arr){
-  const a = arr.slice();
-  for(let i=a.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
-  }
-  return a;
-}
-function speak(text, rate){
-  if(!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = "en-US";
-  utt.rate = rate || 0.92;
-  const voices = window.speechSynthesis.getVoices();
-  const enVoice = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith("en"));
-  if(enVoice) utt.voice = enVoice;
-  window.speechSynthesis.speak(utt);
-}
-
-function findTranslation(rawWord){
-  const key = String(rawWord).toLowerCase().trim();
-  if(MASTER_GLOSSARY_MAP[key]) return {found:true, source:"glossary", ...MASTER_GLOSSARY_MAP[key]};
-  if(GENERAL_DICT[key]) return {found:true, source:"general", en:key, ar:GENERAL_DICT[key], def:null};
-  const stems = [];
-  if(key.endsWith("ies")) stems.push(key.slice(0,-3)+"y");
-  if(key.endsWith("es")) stems.push(key.slice(0,-2));
-  if(key.endsWith("s") && !key.endsWith("ss")) stems.push(key.slice(0,-1));
-  if(key.endsWith("ing")) stems.push(key.slice(0,-3));
-  if(key.endsWith("ed")) stems.push(key.slice(0,-2));
-  if(key.endsWith("ly")) stems.push(key.slice(0,-2));
-  for(const s of stems){
-    if(MASTER_GLOSSARY_MAP[s]) return {found:true, source:"glossary", ...MASTER_GLOSSARY_MAP[s]};
-    if(GENERAL_DICT[s]) return {found:true, source:"general", en:s, ar:GENERAL_DICT[s], def:null};
-  }
-  return {found:false, en:rawWord};
-}
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-document.getElementById("brandHome").addEventListener("click", goHome);
-document.getElementById("homeBtn").addEventListener("click", goHome);
-document.getElementById("dictBtn").addEventListener("click", openDictionary);
-document.getElementById("backHomeBtn").addEventListener("click", goHome);
-document.getElementById("backToLevelsBtn").addEventListener("click", ()=> openLevels(state.track));
-document.getElementById("backLevelsBtn2").addEventListener("click", ()=> openLessons(state.track, state.level));
-
-function goHome(){
-  setTrackTheme(null);
-  showScreen("screen-home");
-}
-
-/* =========================================================
-   HOME / TRACKS
-========================================================= */
-function renderTrackGrid(){
-  const grid = document.getElementById("trackGrid");
-  grid.innerHTML = "";
-  Object.values(TRACKS).forEach(t=>{
-    const totalTerms = LEVEL_KEYS.reduce((sum,lv)=> sum + VOCAB[t.key][lv].length, 0);
-    const div = document.createElement("div");
-    div.className = "track-card " + t.cls;
-    div.innerHTML = `
-      <div class="ic">${t.icon}</div>
-      <h3>${t.name}</h3>
-      <p class="en">${t.short}</p>
-      <div class="cnt">${totalTerms} مصطلح · 4 مستويات · 12 درسًا</div>`;
-    div.addEventListener("click", ()=> openLevels(t.key));
-    grid.appendChild(div);
-  });
-}
-renderTrackGrid();
-
-/* =========================================================
-   LEVELS
-========================================================= */
-function openLevels(trackKey){
-  state.track = trackKey;
-  state.level = null;
-  state.lessonIndex = null;
-  setTrackTheme(trackKey);
-
-  const t = TRACKS[trackKey];
-  document.getElementById("levelsTitle").innerHTML = `${t.icon} ${t.name}`;
-  document.getElementById("levelsLead").textContent =
-    "كل مستوى يحتوي على 3 دروس مختلفة. أكمل اختبارات الدروس ثم اجتز الاختبار النهائي لفتح المستوى التالي.";
-
-  const grid = document.getElementById("levelGrid");
-  grid.innerHTML = "";
-
-  LEVEL_KEYS.forEach((lv, idx)=>{
-    const unlocked = isLevelUnlocked(trackKey, idx);
-    const p = progress[trackKey] && progress[trackKey][lv];
-    const div = document.createElement("div");
-    div.className = "level-card" + (unlocked ? "" : " locked");
-
-    let status = unlocked ? "لم يبدأ بعد" : "مغلق";
-    let statusCls = "";
-    if(p && p.examPassed){
-      status = "مكتمل ✓ (" + p.examScore + "%)";
-      statusCls = "done";
-    }else if(unlocked && p){
-      const passedCount = getLevelLessons(trackKey,lv).filter((_,i)=>p.lessons && p.lessons[i] && p.lessons[i].passed).length;
-      status = `${passedCount}/3 دروس مكتملة`;
-    }
-
-    div.innerHTML = `
-      ${unlocked ? "" : '<div class="badge-lock">🔒</div>'}
-      <div class="lv-num">LEVEL ${idx+1}</div>
-      <div class="lv-name">${LEVEL_LABELS[lv]}</div>
-      <div class="lv-status ${statusCls}">${status}</div>`;
-    if(unlocked) div.addEventListener("click", ()=> openLessons(trackKey, lv));
-    grid.appendChild(div);
-  });
-
-  showScreen("screen-levels");
-}
-
-/* =========================================================
-   LESSON SELECTOR
-========================================================= */
-function openLessons(trackKey, levelKey){
-  state.track = trackKey;
-  state.level = levelKey;
-  state.lessonIndex = null;
-  setTrackTheme(trackKey);
-
-  const t = TRACKS[trackKey];
-  const idx = LEVEL_KEYS.indexOf(levelKey);
-  const rec = ensureProgress(trackKey, levelKey);
-  const lessons = getLevelLessons(trackKey, levelKey);
-  const passedCount = lessons.filter((_,i)=>rec.lessons[i] && rec.lessons[i].passed).length;
-  const allPassed = passedCount === lessons.length;
-
-  document.getElementById("lessonsTitle").innerHTML =
-    `${t.icon} ${t.name} — <span class="accent">${LEVEL_LABELS[levelKey]}</span>`;
-  document.getElementById("lessonsLead").textContent =
-    `اختر درسًا للدراسة. يجب اجتياز اختبار كل درس بنسبة 70% على الأقل قبل دخول الاختبار النهائي. التقدم: ${passedCount}/${lessons.length}.`;
-
-  const grid = document.getElementById("lessonGrid");
-  grid.innerHTML = "";
-
-  lessons.forEach((lesson,i)=>{
-    const passed = !!(rec.lessons[i] && rec.lessons[i].passed);
-    const div = document.createElement("div");
-    div.className = "lesson-card";
-    div.innerHTML = `
-      <div class="lesson-num">LESSON ${i+1} · ${lesson.terms.length} مصطلحات</div>
-      <h3>${escapeHtml(lesson.titleAr)}</h3>
-      <div class="lesson-en">${escapeHtml(lesson.titleEn)}</div>
-      <div class="lesson-status ${passed ? "done" : ""}">
-        ${passed ? "✓ اجتزت اختبار هذا الدرس" : "📖 ادرس المصطلحات ثم اختبر نفسك"}
-      </div>`;
-    div.addEventListener("click", ()=> openLesson(trackKey,levelKey,i));
-    grid.appendChild(div);
-  });
-
-  const exam = document.createElement("div");
-  exam.className = "lesson-card exam-card" + (allPassed ? "" : " locked");
-  exam.innerHTML = `
-    <div class="lesson-num">FINAL EXAM · 30 سؤالًا</div>
-    <h3>🎓 الاختبار النهائي للمستوى</h3>
-    <div class="lesson-en">Comprehensive Level Exam</div>
-    <div class="lesson-status ${allPassed ? "done" : "locked"}">
-      ${allPassed ? "✓ جميع الدروس مكتملة — ابدأ الاختبار النهائي" : `🔒 أكمل اختبارات الدروس أولًا (${passedCount}/${lessons.length})`}
-    </div>`;
-  if(allPassed) exam.addEventListener("click", ()=> startQuiz("level"));
-  grid.appendChild(exam);
-
-  showScreen("screen-lessons");
-}
-
-/* =========================================================
-   LESSON
-========================================================= */
-function openLesson(trackKey, levelKey, lessonIndex){
-  state.track = trackKey;
-  state.level = levelKey;
-  state.lessonIndex = lessonIndex;
-  setTrackTheme(trackKey);
-
-  const lessons = getLevelLessons(trackKey, levelKey);
-  const lesson = lessons[lessonIndex];
-  if(!lesson) return;
-
-  const rec = ensureProgress(trackKey, levelKey);
-  rec.lessons[lessonIndex] = rec.lessons[lessonIndex] || {seen:true,passed:false,score:0};
-  rec.lessons[lessonIndex].seen = true;
-  saveProgress();
-
-  const t = TRACKS[trackKey];
-
-  document.getElementById("lessonBarLabel").textContent =
-    `${trackKey}/${levelKey}/lesson-${lessonIndex+1}.md`;
-  document.getElementById("lessonTitle").innerHTML =
-    `${t.icon} ${escapeHtml(lesson.titleAr)} — <span class="accent">${escapeHtml(lesson.titleEn)}</span>`;
-  document.getElementById("lessonLead").innerHTML =
-    `${escapeHtml(lesson.lead)}`;
-  document.getElementById("lessonProgressLabel").textContent =
-    `// الدرس ${lessonIndex+1} من ${lessons.length} — ${lesson.terms.length} مصطلحات — اختبار الدرس: 6 أسئلة`;
-
-  const vocabGrid = document.getElementById("vocabGrid");
-  vocabGrid.innerHTML = "";
-  lesson.terms.forEach(v=>{
-    const card = document.createElement("div");
-    card.className = "flashcard";
-    card.innerHTML = `
-      <div class="flashcard-inner">
-        <div class="flashcard-face flashcard-front">
-          <div class="term en">${escapeHtml(v.en)}</div>
-          <div class="hint">اضغط لعرض الترجمة والتعريف</div>
-        </div>
-        <div class="flashcard-face flashcard-back">
-          <div class="ar">${escapeHtml(v.ar)}</div>
-          <div class="def">${escapeHtml(v.def)}</div>
-        </div>
-      </div>`;
-    card.addEventListener("click", ()=>{
-      card.classList.toggle("flipped");
-      renderTranslationPanel({found:true,en:v.en,ar:v.ar,def:v.def},v.en);
-    });
-    vocabGrid.appendChild(card);
-  });
-
-  document.getElementById("passageBox").innerHTML = renderPassageHTML(lesson.passage, lesson.terms);
-  document.getElementById("passageBox").onclick = (e)=>{
-    const el = e.target.closest(".word, mark.term-hit");
-    if(!el) return;
-    const key = el.dataset.key;
-    const wordAttr = el.dataset.word;
-    const result = key
-      ? (MASTER_GLOSSARY_MAP[key] ? {found:true,source:"glossary",...MASTER_GLOSSARY_MAP[key]} : findTranslation(key))
-      : findTranslation(wordAttr);
-    renderTranslationPanel(result, el.textContent);
-  };
-
-  document.getElementById("translationPanel").classList.remove("active");
-  document.getElementById("translationPanel").innerHTML =
-    '<div class="tp-placeholder">اضغط أي كلمة في النص أو أي بطاقة لعرض ترجمتها هنا.</div>';
-
-  document.getElementById("listenPassageBtn").onclick = ()=> speak(lesson.passage,0.9);
-  document.getElementById("startLessonQuizBtn").onclick = ()=> startQuiz("lesson");
-
-  showScreen("screen-lesson");
-}
-
-function renderPassageHTML(passageText, vocabList){
-  const placeholders = [];
-  let text = passageText;
-  const terms = vocabList.slice().sort((a,b)=>
-    b.en.split(" ").length - a.en.split(" ").length || b.en.length - a.en.length
-  );
-  terms.forEach(v=>{
-    const esc = v.en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
-    const re = new RegExp("\\b(" + esc + ")\\b","gi");
-    text = text.replace(re,m=>{
-      const idx = placeholders.length;
-      placeholders.push({display:m,key:v.en.toLowerCase()});
-      return "\u0001"+idx+"\u0002";
-    });
-  });
-  const parts = text.split(/(\u0001\d+\u0002|[A-Za-z']+)/g);
-  let html = "";
-  parts.forEach(p=>{
-    if(p===undefined || p==="") return;
-    const m=p.match(/^\u0001(\d+)\u0002$/);
-    if(m){
-      const ph=placeholders[parseInt(m[1])];
-      html += `<mark class="term-hit" data-key="${escapeHtml(ph.key)}">${escapeHtml(ph.display)}</mark>`;
-    }else if(/^[A-Za-z']+$/.test(p)){
-      html += `<span class="word" data-word="${escapeHtml(p.toLowerCase())}">${escapeHtml(p)}</span>`;
-    }else html += escapeHtml(p);
-  });
-  return html;
-}
-
-function renderTranslationPanel(result, originalDisplay){
-  const panel=document.getElementById("translationPanel");
-  if(result.found){
-    panel.innerHTML=`
-      <div class="tp-row">
-        <bdi dir="ltr" class="tp-en">${escapeHtml(result.en || originalDisplay)}</bdi>
-        <button class="tp-speak" data-speak="${escapeHtml(result.en || originalDisplay)}">🔊</button>
-      </div>
-      <div class="tp-ar">${escapeHtml(result.ar)}</div>
-      ${result.def ? `<div class="tp-def">${escapeHtml(result.def)}</div>` : ""}`;
-  }else{
-    panel.innerHTML=`
-      <div class="tp-row">
-        <bdi dir="ltr" class="tp-en">${escapeHtml(originalDisplay)}</bdi>
-        <button class="tp-speak" data-speak="${escapeHtml(originalDisplay)}">🔊</button>
-      </div>
-      <div class="tp-notfound">لم يتم العثور على ترجمة لهذه الكلمة في القاموس المتخصص.</div>`;
-  }
-  panel.classList.add("active");
-  const btn=panel.querySelector(".tp-speak");
-  if(btn) btn.addEventListener("click",ev=>speak(ev.currentTarget.dataset.speak,0.85));
-}
-
-/* =========================================================
-   QUIZ ENGINE + AUDIO FEEDBACK
-========================================================= */
+const DB_KEY = "techterm_app_v3";
+const XP = { lesson:40, correct:8, quiz:20, exam:120, perfect:60 };
+const BADGES = [
+ {id:"first",icon:"🥇",title:"First Lesson",desc:"إكمال أول درس"},
+ {id:"perfect",icon:"🔥",title:"Perfect Score",desc:"الحصول على 100% في اختبار"},
+ {id:"vocab",icon:"📚",title:"Vocabulary Master",desc:"إتقان 30 مصطلحًا"},
+ {id:"level",icon:"🎓",title:"Level Completed",desc:"إكمال مستوى كامل"},
+ {id:"master",icon:"🏆",title:"TechTerm Master",desc:"إكمال المسارات الثلاثة"}
+];
+let appDB = loadDB();
+let activeUser = null;
+let authMode = "login";
+let lastDailyToastShown = false;
 let audioCtx = null;
+const state = {track:null,level:null,lessonIndex:null,currentQuiz:null,quizIndex:0,quizScore:0,quizMissed:[],quizMode:null,quizXP:0};
 
-function playTone(frequency, duration=0.12, type="sine", volume=0.06, delay=0){
-  try{
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if(!AC) return;
-    audioCtx = audioCtx || new AC();
-    if(audioCtx.state === "suspended") audioCtx.resume();
-    const now = audioCtx.currentTime + delay;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.type = type;
-    osc.frequency.setValueAtTime(frequency, now);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(volume, now + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start(now);
-    osc.stop(now + duration + 0.02);
-  }catch(e){}
+function loadDB(){
+  try{return JSON.parse(localStorage.getItem(DB_KEY)) || {users:{},active:null,settings:{theme:"dark",muted:false,volume:65,font:100}};}catch(e){return {users:{},active:null,settings:{theme:"dark",muted:false,volume:65,font:100}}}
 }
+function saveDB(){try{localStorage.setItem(DB_KEY,JSON.stringify(appDB))}catch(e){}}
+function hashPassword(str){
+  // Lightweight local account hash; this is not a server-side security boundary.
+  let h=2166136261; for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)} return (h>>>0).toString(16);
+}
+function userTemplate(username,passwordHash){return {username,passwordHash,createdAt:Date.now(),xp:0,streak:0,lastActive:null,lessons:{},levels:{},termStats:{},achievements:{},quizHistory:[],settings:{...appDB.settings}}}
+function getUser(){return activeUser ? appDB.users[activeUser] : null}
+function saveUser(){if(activeUser&&appDB.users[activeUser]){appDB.users[activeUser]=getUser();appDB.active=activeUser;saveDB()}}
+function ensureTermStat(en){const u=getUser();u.termStats[en]=u.termStats[en]||{correct:0,incorrect:0,lastReview:null};return u.termStats[en]}
+function levelKeyFor(track,level){return track+"/"+level}
+function lessonKey(track,level,i){return track+"/"+level+"/"+i}
+function lessonRec(track,level,i){const u=getUser();const k=lessonKey(track,level,i);u.lessons[k]=u.lessons[k]||{seen:false,passed:false,score:0,attempts:0,best:0,lastSeen:null};return u.lessons[k]}
+function levelRec(track,level){const u=getUser();const k=levelKeyFor(track,level);u.levels[k]=u.levels[k]||{examPassed:false,examScore:0,attempts:0,best:0};return u.levels[k]}
+function isLevelUnlocked(track,idx){if(idx===0)return true;return !!levelRec(track,LEVEL_KEYS[idx-1]).examPassed}
+function areAllLessonsPassed(track,level){return getLevelLessons(track,level).every((_,i)=>lessonRec(track,level,i).passed)}
+function completedLessonsCount(){return Object.values(getUser().lessons).filter(x=>x.passed).length}
+function completedLevelsCount(){return Object.values(getUser().levels).filter(x=>x.examPassed).length}
+function totalLessons(){return Object.values(LESSON_META).reduce((sum,t)=>sum+Object.values(t).reduce((s,a)=>s+a.length,0),0)}
+function globalProgress(){return Math.round(completedLessonsCount()/totalLessons()*100)}
+function masteredCount(){return Object.values(getUser().termStats).filter(s=>s.correct>=3&&s.incorrect<=1).length}
+function touchActiveDay(){
+  const u=getUser(); const today=todayKey();
+  if(u.lastActive===today)return;
+  if(u.lastActive){const diff=dayDiff(u.lastActive,today); if(diff===1)u.streak+=1;else u.streak=1;} else u.streak=1;
+  u.lastActive=today; saveUser();
+  if(u.streak>0&&!lastDailyToastShown){lastDailyToastShown=true; setTimeout(()=>toast(`🔥 سلسلة ${u.streak} يوم${u.streak===1?'':'ًا'} — استمر!`),350)}
+}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function dayDiff(a,b){const x=new Date(a+"T00:00:00Z"),y=new Date(b+"T00:00:00Z");return Math.round((y-x)/86400000)}
+function awardXP(amount,reason){const u=getUser();u.xp+=amount;saveUser(); if(amount>0) toast(`+${amount} XP · ${reason}`)}
+function unlockBadge(id){const u=getUser();if(!u.achievements[id]){u.achievements[id]=Date.now();saveUser();const b=BADGES.find(x=>x.id===id);if(b)toast(`${b.icon} شارة جديدة: ${b.title}`)}}
+function evaluateBadges(){
+ const u=getUser(); if(completedLessonsCount()>=1)unlockBadge("first"); if(u.quizHistory.some(x=>x.score===100))unlockBadge("perfect"); if(masteredCount()>=30)unlockBadge("vocab"); if(completedLevelsCount()>=1)unlockBadge("level"); if(completedLevelsCount()>=12)unlockBadge("master");
+}
+function applySettings(){const u=getUser();const s=u?u.settings:appDB.settings;document.body.classList.toggle("light",s.theme==="light");document.documentElement.style.setProperty("--scale",(s.font||100)/100);document.getElementById("themeToggle").classList.toggle("on",s.theme==="light");document.getElementById("themeLabel").textContent=s.theme==="light"?"الوضع الفاتح":"الوضع الداكن";document.getElementById("muteToggle").classList.toggle("on",!s.muted);document.getElementById("muteLabel").textContent=s.muted?"مكتوم":"مفعّل";document.getElementById("volumeRange").value=s.volume??65;document.getElementById("fontRange").value=s.font??100}
+function settings(){return getUser().settings}
+function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
+function setTrackTheme(track){document.body.classList.remove("track-cs","track-ai","track-sec");if(track)document.body.classList.add("track-"+track)}
+function escapeHtml2(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function shuffle2(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function speak(text,rate=.9){if(settings().muted||!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate;const voices=speechSynthesis.getVoices();const v=voices.find(x=>(x.lang||"").toLowerCase().startsWith("en"));if(v)u.voice=v;speechSynthesis.speak(u)}
+function playTone(freq,dur=.12,type="sine",vol=.06,delay=0){if(settings().muted)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();const now=audioCtx.currentTime+delay,osc=audioCtx.createOscillator(),gain=audioCtx.createGain(),v=(settings().volume||65)/100*vol;osc.type=type;osc.frequency.setValueAtTime(freq,now);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(v,now+.01);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);osc.connect(gain);gain.connect(audioCtx.destination);osc.start(now);osc.stop(now+dur+.02)}catch(e){}}
+function sfx(kind){if(kind==="correct"){playTone(660,.09,"sine",.055);playTone(880,.13,"sine",.055,.08)}else if(kind==="wrong"){playTone(220,.15,"sawtooth",.045);playTone(160,.17,"sawtooth",.04,.11)}else if(kind==="examStart"){playTone(523,.12,"sine",.05);playTone(659,.12,"sine",.05,.12)}else if(kind==="pass"){playTone(523,.13,"sine",.06);playTone(659,.13,"sine",.06,.12);playTone(784,.18,"sine",.06,.24);playTone(1047,.25,"sine",.06,.42)}else if(kind==="fail"){playTone(392,.15,"sine",.05);playTone(330,.17,"sine",.05,.15);playTone(262,.25,"sine",.05,.31)}}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2400)}
 
-function playFeedbackSound(kind){
-  if(kind === "correct"){
-    playTone(660,0.09,"sine",0.055,0);
-    playTone(880,0.13,"sine",0.055,0.08);
-  }else{
-    playTone(220,0.16,"sawtooth",0.045,0);
-    playTone(160,0.18,"sawtooth",0.04,0.12);
+/* ---------------- authentication ---------------- */
+function showAuth(mode){authMode=mode;document.getElementById("authModal").classList.remove("hidden");document.getElementById("authTitle").textContent=mode==="login"?"تسجيل الدخول":"إنشاء حساب";document.getElementById("authSubtitle").textContent=mode==="login"?"سجّل دخولك لمتابعة تقدمك من هذا الجهاز.":"أنشئ حسابًا محليًا لحفظ الدروس وXP والإنجازات.";document.getElementById("authSubmit").textContent=mode==="login"?"🔐 تسجيل الدخول":"✨ إنشاء الحساب";document.getElementById("authSwitchText").textContent=mode==="login"?"ليس لديك حساب؟":"لديك حساب بالفعل؟";document.getElementById("authSwitch").textContent=mode==="login"?"إنشاء حساب":"تسجيل الدخول"}
+function handleAuth(){const user=document.getElementById("authUser").value.trim().toLowerCase(),pass=document.getElementById("authPass").value;if(user.length<3||pass.length<4){toast("اسم المستخدم 3 أحرف على الأقل وكلمة المرور 4 أحرف على الأقل.");return}const h=hashPassword(pass);if(authMode==="login"){if(!appDB.users[user]||appDB.users[user].passwordHash!==h){toast("بيانات الدخول غير صحيحة.");return}activeUser=user;appDB.active=user;saveDB();enterApp();}else{if(appDB.users[user]){toast("اسم المستخدم موجود بالفعل.");return}appDB.users[user]=userTemplate(user,h);activeUser=user;appDB.active=user;saveDB();enterApp();toast("✨ تم إنشاء الحساب بنجاح")} }
+function logout(){activeUser=null;appDB.active=null;saveDB();document.getElementById("appShell").classList.add("hidden");document.getElementById("authUser").value="";document.getElementById("authPass").value="";showAuth("login")}
+function enterApp(){document.getElementById("authModal").classList.add("hidden");document.getElementById("appShell").classList.remove("hidden");const u=getUser();u.settings=u.settings||{...appDB.settings};applySettings();touchActiveDay();evaluateBadges();renderHome();}
+
+/* ---------------- navigation ---------------- */
+function openLevels(track){state.track=track;setTrackTheme(track);const t=TRACKS[track];document.getElementById("levelsTitle").innerHTML=`${t.icon} ${t.name}`;document.getElementById("levelsLead").textContent="خريطة متسلسلة: أنهِ الاختبار النهائي للمستوى حتى يفتح المستوى التالي.";const wrap=document.getElementById("levelMap");wrap.innerHTML="";LEVEL_KEYS.forEach((lv,idx)=>{const unlocked=isLevelUnlocked(track,idx),rec=levelRec(track,lv),lessons=getLevelLessons(track,lv),done=rec.examPassed,passed=lessons.filter((_,i)=>lessonRec(track,lv,i).passed).length,el=document.createElement("div");el.className="map-node "+(done?"done ":(!unlocked?"locked ":"current "))+(idx===LEVEL_KEYS.length-1?"exam-node":"");el.innerHTML=`<div class="node-dot">${done?"✓":unlocked?idx+1:"🔒"}</div><div><div class="node-title">Level ${idx+1} — ${LEVEL_LABELS[lv]}</div><div class="node-sub">${passed}/3 دروس مكتملة · ${done?"اختبار نهائي مجتاز":"النهائي غير مجتاز"}</div></div><div class="node-side">${done?`${rec.best||rec.examScore}% ✓`:unlocked?"متاح الآن":"مغلق"}</div>`;if(unlocked)el.addEventListener("click",()=>openLessons(track,lv));wrap.appendChild(el);if(idx<LEVEL_KEYS.length-1){const c=document.createElement("div");c.className="connector";wrap.appendChild(c)}});showScreen("screen-levels")}
+function lessonStatus(track,level,i){const rec=lessonRec(track,level,i);return rec.passed?"done":"open"}
+function firstIncompleteLesson(track,level){const lessons=getLevelLessons(track,level);for(let i=0;i<lessons.length;i++)if(!lessonRec(track,level,i).passed)return i;return lessons.length-1}
+function openLessons(track,level){state.track=track;state.level=level;setTrackTheme(track);const t=TRACKS[track],lessons=getLevelLessons(track,level),first=firstIncompleteLesson(track,level),all=areAllLessonsPassed(track,level);document.getElementById("lessonsTitle").innerHTML=`${t.icon} ${t.name} — <span class="accent">${LEVEL_LABELS[level]}</span>`;document.getElementById("lessonsLead").textContent=`أنهِ الدروس بالتسلسل. الاختبار النهائي يفتح فقط عند 100% من دروس المستوى (${lessons.filter((_,i)=>lessonRec(track,level,i).passed).length}/${lessons.length}).`;const grid=document.getElementById("lessonGrid");grid.innerHTML="";lessons.forEach((lesson,i)=>{const rec=lessonRec(track,level,i),locked=i>first&&!rec.passed,el=document.createElement("div");el.className="map-node "+(rec.passed?"done":locked?"locked":"current");el.innerHTML=`<div class="node-dot">${rec.passed?"✓":locked?"🔒":i+1}</div><div><div class="node-title">درس ${i+1} — ${escapeHtml2(lesson.titleAr)}</div><div class="node-sub">${lesson.terms.length} مصطلحات · ${rec.best?`أفضل نتيجة ${rec.best}%`:"لم يُجتز بعد"}</div></div><div class="node-side">${rec.passed?"✓ مكتمل":locked?"مغلق":"متاح"}</div>`;if(!locked)el.addEventListener("click",()=>openLesson(track,level,i));grid.appendChild(el)});const exam=document.createElement("div");exam.className="map-node exam-node "+(all?"current":"locked");exam.innerHTML=`<div class="node-dot">${all?"🎓":"🔒"}</div><div><div class="node-title">الاختبار النهائي للمستوى</div><div class="node-sub">30 سؤالًا · Translation + Definition + Adaptive Review</div></div><div class="node-side">${all?"مفتوح":"أكمل 100% من الدروس"}</div>`;if(all)exam.addEventListener("click",()=>startQuiz("level"));grid.appendChild(exam);showScreen("screen-lessons")}
+function openLesson(track,level,i){state.track=track;state.level=level;state.lessonIndex=i;setTrackTheme(track);const lessons=getLevelLessons(track,level),lesson=lessons[i],rec=lessonRec(track,level,i);if(!lesson)return;const first=firstIncompleteLesson(track,level);if(i>first&&!rec.passed){toast("🔒 أكمل الدرس السابق أولًا.");return}rec.seen=true;rec.lastSeen=Date.now();saveUser();document.getElementById("lessonBarLabel").textContent=`${track}/${level}/lesson-${i+1}.md`;document.getElementById("lessonTitle").innerHTML=`${TRACKS[track].icon} ${escapeHtml2(lesson.titleAr)} — <span class="accent">${escapeHtml2(lesson.titleEn)}</span>`;document.getElementById("lessonLead").textContent=lesson.lead;renderLessonProgress();const grid=document.getElementById("vocabGrid");grid.innerHTML="";lesson.terms.forEach(v=>{const card=document.createElement("div");card.className="flashcard";card.innerHTML=`<div class="flashcard-inner"><div class="flashcard-face"><div class="term">${escapeHtml2(v.en)}</div><div class="hint">اضغط لعرض الترجمة والتعريف</div></div><div class="flashcard-face flashcard-back"><div class="ar">${escapeHtml2(v.ar)}</div><div class="def">${escapeHtml2(v.def)}</div></div></div>`;card.onclick=()=>{card.classList.toggle("flipped");showTranslation(v,v.en)};grid.appendChild(card)});document.getElementById("passageBox").innerHTML=renderPassageHTML2(lesson.passage,lesson.terms);document.getElementById("passageBox").onclick=e=>{const el=e.target.closest(".word,.term-hit");if(!el)return;const k=el.dataset.key||el.dataset.word;const result=lookup(k);showTranslation(result,el.textContent)};document.getElementById("translationPanel").classList.remove("active");document.getElementById("translationPanel").innerHTML='<div class="muted">اضغط كلمة في النص أو بطاقة لعرض الترجمة والتعريف.</div>';document.getElementById("listenPassageBtn").onclick=()=>speak(lesson.passage,.88);document.getElementById("startLessonQuizBtn").onclick=()=>startQuiz("lesson");document.getElementById("startPracticeBtn").onclick=()=>startQuiz("practice");document.getElementById("learnModeBtn").onclick=()=>switchLessonMode("learn");document.getElementById("practiceModeBtn").onclick=()=>switchLessonMode("practice");switchLessonMode("learn");showScreen("screen-lesson")}
+function switchLessonMode(mode){document.getElementById("lessonLearnArea").classList.toggle("hidden",mode!=="learn");document.getElementById("lessonPracticeArea").classList.toggle("hidden",mode!=="practice");document.getElementById("learnModeBtn").classList.toggle("active",mode==="learn");document.getElementById("practiceModeBtn").classList.toggle("active",mode==="practice")}
+function renderLessonProgress(){const rec=lessonRec(state.track,state.level,state.lessonIndex);const pct=rec.passed?100:Math.min(99,Math.round((rec.seen?25:0)+(rec.attempts?75:0)));document.getElementById("lessonProgressText").textContent=pct+"%";document.getElementById("lessonProgressFill").style.width=pct+"%"}
+function renderPassageHTML2(text,list){let placeholders=[];let x=text;list.slice().sort((a,b)=>b.en.length-a.en.length).forEach(v=>{const esc=v.en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const re=new RegExp("\\b("+esc+")\\b","gi");x=x.replace(re,m=>{const idx=placeholders.length;placeholders.push({display:m,key:v.en.toLowerCase()});return"\u0001"+idx+"\u0002"})});return x.split(/(\u0001\d+\u0002|[A-Za-z']+)/g).map(p=>{const m=p.match(/^\u0001(\d+)\u0002$/);if(m){const ph=placeholders[+m[1]];return`<mark class="term-hit" data-key="${escapeHtml2(ph.key)}">${escapeHtml2(ph.display)}</mark>`}if(/^[A-Za-z']+$/.test(p))return`<span class="word" data-word="${escapeHtml2(p.toLowerCase())}">${escapeHtml2(p)}</span>`;return escapeHtml2(p)}).join("")}
+function lookup(raw){const k=String(raw).toLowerCase().trim();if(MASTER_GLOSSARY_MAP[k])return{found:true,...MASTER_GLOSSARY_MAP[k]};if(GENERAL_DICT[k])return{found:true,en:k,ar:GENERAL_DICT[k],def:null};for(const s of [k.replace(/ies$/,"y"),k.replace(/es$/,""),k.replace(/s$/,""),k.replace(/ing$/,""),k.replace(/ed$/,""),k.replace(/ly$/,"")]){if(MASTER_GLOSSARY_MAP[s])return{found:true,...MASTER_GLOSSARY_MAP[s]};if(GENERAL_DICT[s])return{found:true,en:s,ar:GENERAL_DICT[s],def:null}}return{found:false,en:raw}}
+function showTranslation(result,original){const p=document.getElementById("translationPanel");p.classList.add("active");if(result.found){p.innerHTML=`<div class="tp-row"><bdi class="tp-en">${escapeHtml2(result.en||original)}</bdi><button class="speak" data-speak="${escapeHtml2(result.en||original)}">🔊</button></div><div class="tp-ar">${escapeHtml2(result.ar)}</div>${result.def?`<div class="tp-def">${escapeHtml2(result.def)}</div>`:""}`;p.querySelector(".speak").onclick=e=>speak(e.currentTarget.dataset.speak,.85)}else p.innerHTML=`<div class="tp-row"><bdi class="tp-en">${escapeHtml2(original)}</bdi><button class="speak" data-speak="${escapeHtml2(original)}">🔊</button></div><div class="muted" style="margin-top:5px">لم يتم العثور على ترجمة لهذه الكلمة في القاموس.</div>`;if(p.querySelector(".speak"))p.querySelector(".speak").onclick=e=>speak(e.currentTarget.dataset.speak,.85)}
+
+/* ---------------- adaptive quiz engine ---------------- */
+function questionWeight(term){const s=ensureTermStat(term.en),fails=s.incorrect||0,recency=s.lastReview?Math.min(1,Math.max(0,(Date.now()-s.lastReview)/(1000*60*60*24*14))):1;return 1+fails*2+recency*1.5}
+function weightedPick(terms){const pool=terms.map(t=>({t,w:questionWeight(t)}));const total=pool.reduce((s,x)=>s+x.w,0);let r=Math.random()*total;for(const x of pool){r-=x.w;if(r<=0)return x.t}return pool[pool.length-1].t}
+function makeAdaptiveQuestion(v,pool){
+  const type=shuffle2(["en2ar","ar2en","definition2en","context","truefalse"])[0],other=pool.filter(x=>x.en!==v.en),d=shuffle2(other).slice(0,3);
+  if(type==="en2ar")return{type,prompt:`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟`,correct:v.ar,options:shuffle2([v.ar,...d.map(x=>x.ar)]),term:v,speak:v.en};
+  if(type==="ar2en")return{type,prompt:`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(v.ar)}</b>؟`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  if(type==="definition2en")return{type,prompt:`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(v.def)}</div>`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  if(type==="truefalse"){
+    const makeFalse=Math.random()<.5;
+    const falseTerm=d[0]||v;
+    const statement=makeFalse?`مصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi> يعني: ${escapeHtml2(falseTerm.ar)}`:`مصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi> يعني: ${escapeHtml2(v.ar)}`;
+    return{type,prompt:`هل العبارة التالية صحيحة؟<div style="margin-top:10px">${statement}</div>`,correct:makeFalse?"خطأ":"صحيح",options:["صحيح","خطأ"],term:v,speak:v.en};
   }
+  const passage=PASSAGES[state.track][state.level].text;
+  const idx=passage.toLowerCase().indexOf(v.en.toLowerCase());
+  const snippet=idx>=0?passage.slice(Math.max(0,idx-55),Math.min(passage.length,idx+v.en.length+90)):v.en;
+  return{type,prompt:`اختر المصطلح الذي يناسب السياق التالي:<div class="muted" style="margin-top:8px;direction:ltr;text-align:left">… ${escapeHtml2(snippet)} …</div>`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
 }
-
-function playExamEndSound(passed){
-  if(passed){
-    playTone(523.25,0.13,"sine",0.06,0);
-    playTone(659.25,0.13,"sine",0.06,0.12);
-    playTone(783.99,0.18,"sine",0.06,0.24);
-    playTone(1046.5,0.28,"sine",0.06,0.42);
-  }else{
-    playTone(392,0.16,"sine",0.05,0);
-    playTone(329.63,0.18,"sine",0.05,0.15);
-    playTone(261.63,0.28,"sine",0.05,0.32);
-  }
-}
-
-function makeQuestion(v, direction, distractorPool){
-  const distractors = shuffle(distractorPool.filter(x=>x.en !== v.en)).slice(0,3);
-  if(direction === "en2ar"){
-    return {
-      prompt:`ما الترجمة العربية الصحيحة للمصطلح: <bdi dir="ltr" class="en" style="color:var(--accent);font-weight:bold;">${escapeHtml(v.en)}</bdi> ؟`,
-      correctText:v.ar, options:shuffle([v.ar,...distractors.map(d=>d.ar)]),
-      direction, term:v, optionType:"ar"
-    };
-  }
-  if(direction === "ar2en"){
-    return {
-      prompt:`ما المصطلح الإنجليزي المقابل لـ: <b>${escapeHtml(v.ar)}</b> ؟`,
-      correctText:v.en, options:shuffle([v.en,...distractors.map(d=>d.en)]),
-      direction, term:v, optionType:"en"
-    };
-  }
-  return {
-    prompt:`أي مصطلح يطابق التعريف التالي؟<div style="margin-top:8px;color:var(--text-dim);font-size:14px;">${escapeHtml(v.def)}</div>`,
-    correctText:v.en, options:shuffle([v.en,...distractors.map(d=>d.en)]),
-    direction:"definition2en", term:v, optionType:"en"
-  };
-}
-
-function buildLessonQuiz(terms){
-  const questions=[];
-  terms.forEach(v=>{
-    questions.push(makeQuestion(v,"en2ar",ALL_GLOSSARY));
-    questions.push(makeQuestion(v,"ar2en",ALL_GLOSSARY));
-  });
-  return shuffle(questions);
-}
-
-function buildFinalExam(terms){
-  const questions=[];
-  terms.forEach(v=>{
-    // Every term is tested three ways: English -> Arabic,
-    // Arabic -> English, and definition -> English.
-    questions.push(makeQuestion(v,"en2ar",terms));
-    questions.push(makeQuestion(v,"ar2en",terms));
-    questions.push(makeQuestion(v,"definition2en",terms));
-  });
-  return shuffle(questions);
-}
-
-function startQuiz(mode){
-  const trackKey=state.track, levelKey=state.level;
-  const terms=VOCAB[trackKey][levelKey];
-
-  if(mode === "lesson"){
-    const lesson=getLevelLessons(trackKey,levelKey)[state.lessonIndex];
-    if(!lesson) return;
-    state.currentQuiz=buildLessonQuiz(lesson.terms);
-    document.getElementById("quizTitle").textContent =
-      `📝 اختبار الدرس ${state.lessonIndex+1} — ${lesson.titleAr}`;
-  }else{
-    if(!areAllLessonsPassed(trackKey,levelKey)){
-      openLessons(trackKey,levelKey);
-      return;
-    }
-    state.currentQuiz=buildFinalExam(terms);
-    document.getElementById("quizTitle").textContent =
-      `🎓 الاختبار النهائي الشامل — ${LEVEL_LABELS[levelKey]} (30 سؤالًا)`;
-  }
-
-  state.quizMode=mode;
-  state.quizIndex=0;
-  state.quizScore=0;
-  state.quizMissed=[];
-  renderQuizQuestion();
-  showScreen("screen-quiz");
-}
-
+function makeQuizQuestions(terms,count,mode){const out=[];const pool=ALL_GLOSSARY.length?ALL_GLOSSARY:terms;const n=Math.min(count,Math.max(terms.length,1));for(let i=0;i<n;i++){const v=mode==="review"?weightedPick(pool):terms[i%terms.length];out.push(makeAdaptiveQuestion(v,pool))}return shuffle2(out)}
+function buildLessonQuiz2(terms){return makeQuizQuestions(terms,Math.max(terms.length,6),"lesson")}
+function buildPracticeQuiz(terms){return makeQuizQuestions(terms,Math.min(8,Math.max(terms.length,6)),"practice")}
+function buildFinalExam2(terms){const qs=[];terms.forEach(v=>{qs.push({base:v,type:"en2ar"});qs.push({base:v,type:"ar2en"});qs.push({base:v,type:"definition2en"})});return shuffle2(qs).map(x=>{const d=makeAdaptiveQuestion(x.base,terms);d.type=x.type;if(x.type==="en2ar"){d.prompt=`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟`;d.correct=x.base.ar;d.options=shuffle2([x.base.ar,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.ar)])}else if(x.type==="ar2en"){d.prompt=`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(x.base.ar)}</b>؟`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}else{d.prompt=`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(x.base.def)}</div>`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}d.term=x.base;d.speak=x.base.en;return d})}
+function startQuiz(mode){let terms=[];if(mode==="lesson"||mode==="practice"){terms=getLevelLessons(state.track,state.level)[state.lessonIndex].terms}else if(mode==="level")terms=VOCAB[state.track][state.level];else if(mode==="review")terms=getReviewTerms().map(x=>x.term);if(!terms.length)return;state.quizMode=mode;state.quizIndex=0;state.quizScore=0;state.quizMissed=[];state.quizXP=0;state.currentQuiz=mode==="lesson"?buildLessonQuiz2(terms):mode==="practice"?buildPracticeQuiz(terms):mode==="level"?buildFinalExam2(terms):makeQuizQuestions(terms,Math.min(12,Math.max(terms.length,6)),"review");document.getElementById("quizTitle").textContent=mode==="level"?`🎓 الاختبار النهائي — ${LEVEL_LABELS[state.level]}`:mode==="review"?"🧠 اختبار المراجعة الذكي":mode==="practice"?"🧩 Practice Mode":"📝 اختبار الدرس";document.getElementById("quizModeLabel").textContent=mode.toUpperCase();sfx("examStart");renderQuizQuestion() ;showScreen("screen-quiz")}
 function renderQuizQuestion(){
-  const q=state.currentQuiz[state.quizIndex];
-  const total=state.currentQuiz.length;
-  document.getElementById("quizProgressFill").style.width =
-    Math.round((state.quizIndex/total)*100)+"%";
-  document.getElementById("quizPrompt").innerHTML =
-    `(${state.quizIndex+1}/${total}) ${q.prompt}`;
-
-  const optWrap=document.getElementById("quizOptions");
-  optWrap.innerHTML="";
+  const q=state.currentQuiz[state.quizIndex],total=state.currentQuiz.length;
+  document.getElementById("quizCounter").textContent=`${state.quizIndex+1}/${total}`;
+  document.getElementById("quizProgressFill").style.width=Math.round(state.quizIndex/total*100)+"%";
+  document.getElementById("quizPrompt").innerHTML=q.prompt;
+  const ob=document.getElementById("quizOptions");
+  ob.innerHTML="";
   document.getElementById("quizNextBtn").style.display="none";
-
   q.options.forEach(opt=>{
-    const div=document.createElement("div");
-    div.className="quiz-opt";
-    div.dataset.value=opt;
-
-    if(q.optionType === "en"){
-      div.innerHTML=`<bdi dir="ltr" class="en">${escapeHtml(opt)}</bdi>`;
-    }else{
-      div.textContent=opt;
-    }
-
-    div.addEventListener("click",()=>answerQuiz(opt,q,div));
-    optWrap.appendChild(div);
+    const b=document.createElement("div");b.className="quiz-option";b.dataset.value=opt;
+    b.innerHTML=q.type==="en2ar"||q.type==="truefalse"?escapeHtml2(opt):`<bdi dir="ltr" class="en">${escapeHtml2(opt)}</bdi>`;
+    b.onclick=()=>answerQuiz2(opt,q,b);ob.appendChild(b);
   });
 }
-
-function answerQuiz(selected,q,selectedEl){
-  const allOpts=document.querySelectorAll(".quiz-opt");
-  allOpts.forEach(o=>o.classList.add("disabled"));
-
-  const correct=selected===q.correctText;
-  if(correct){
-    state.quizScore++;
-    selectedEl.classList.add("correct");
-    playFeedbackSound("correct");
-  }else{
-    selectedEl.classList.add("incorrect");
-    state.quizMissed.push(q.term);
-    allOpts.forEach(o=>{
-      if(o.dataset.value===q.correctText) o.classList.add("correct");
-    });
-    playFeedbackSound("wrong");
-  }
-
-  const nextBtn=document.getElementById("quizNextBtn");
-  nextBtn.style.display="inline-flex";
-  nextBtn.textContent =
-    state.quizIndex===state.currentQuiz.length-1 ? "عرض النتيجة" : "السؤال التالي";
-
-  nextBtn.onclick=()=>{
-    if(state.quizIndex<state.currentQuiz.length-1){
-      state.quizIndex++;
-      renderQuizQuestion();
-    }else{
-      showQuizResult();
-    }
-  };
+function normalizeAnswer(x){return String(x||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.,!?]+$/g,"")}
+function answerQuiz2(selected,q,el){
+  document.querySelectorAll(".quiz-option").forEach(x=>x.classList.add("disabled"));
+  const ok=selected===q.correct;
+  const stat=ensureTermStat(q.term.en);stat.lastReview=Date.now();
+  if(ok){state.quizScore++;if(el)el.classList.add("correct");state.quizXP+=XP.correct;sfx("correct")}else{if(el)el.classList.add("incorrect");state.quizMissed.push(q.term);document.querySelectorAll(".quiz-option").forEach(x=>{if(x.dataset.value===q.correct)x.classList.add("correct")});sfx("wrong")}
+  saveUser();
+  const next=document.getElementById("quizNextBtn");next.style.display="inline-flex";next.textContent=state.quizIndex===state.currentQuiz.length-1?"عرض النتيجة":"السؤال التالي";next.onclick=()=>{if(state.quizIndex<state.currentQuiz.length-1){state.quizIndex++;renderQuizQuestion()}else{showQuizResult2()}}
 }
+function showQuizResult2(){const total=state.currentQuiz.length,pct=Math.round(state.quizScore/total*100),pass=state.quizMode==="practice"?true:pct>=70;const u=getUser();if(state.quizMode==="lesson"){const rec=lessonRec(state.track,state.level,state.lessonIndex);rec.attempts++;rec.best=Math.max(rec.best||0,pct);rec.score=pct;rec.passed=pass;if(pass&&!rec._xp){awardXP(XP.lesson,"إكمال الدرس");rec._xp=true}u.quizHistory.push({date:Date.now(),mode:"lesson",score:pct,track:state.track,level:state.level,index:state.lessonIndex});}else if(state.quizMode==="level"){const rec=levelRec(state.track,state.level);rec.attempts++;rec.best=Math.max(rec.best||0,pct);if(pass&&!rec.examPassed){rec.examPassed=true;rec.examScore=pct;awardXP(XP.exam,"إتقان الاختبار النهائي");}else if(pass)rec.examScore=pct;u.quizHistory.push({date:Date.now(),mode:"level",score:pct,track:state.track,level:state.level});}else if(state.quizMode==="review"){u.quizHistory.push({date:Date.now(),mode:"review",score:pct});}else{u.quizHistory.push({date:Date.now(),mode:"practice",score:pct})}const allCorrect=pct===100;if(allCorrect){awardXP(XP.perfect,"نتيجة مثالية");u.quizHistory[u.quizHistory.length-1].perfect=true}awardXP(XP.quiz,"إكمال الاختبار");saveUser();evaluateBadges();renderLessonProgress();document.getElementById("scoreRing").className="score-ring "+(pass?"pass":"fail");document.getElementById("scorePct").textContent=pct+"%";document.getElementById("scoreOf").textContent=`${state.quizScore} / ${total}`;document.getElementById("resultTitle").textContent=pass?(state.quizMode==="level"?"🎓🎉 تم اجتياز الاختبار النهائي":"🎉 أحسنت!"):"📚 راجع المصطلحات وحاول مرة أخرى";document.getElementById("resultText").textContent=state.quizMode==="practice"?"تم تسجيل أخطائك لتحسين الاختبارات المستقبلية.":pass?"تم تسجيل النتيجة وتحديث تقدمك.":"نسبة النجاح المطلوبة هي 70%. راجع الكلمات التي أخطأت بها ثم أعد الاختبار.";document.getElementById("xpEarnedResult").textContent=`+${state.quizXP+XP.quiz+(allCorrect?XP.perfect:0)+(state.quizMode==="lesson"&&pass?XP.lesson:0)+(state.quizMode==="level"&&pass?XP.exam:0)} XP إجمالي المكافآت لهذه المحاولة`;const miss=document.getElementById("missedList");miss.innerHTML="";const uniq=[];const seen=new Set();state.quizMissed.forEach(t=>{if(!seen.has(t.en)){seen.add(t.en);uniq.push(t)}});if(uniq.length){miss.innerHTML=`<div class="section-label">// مصطلحات تحتاج مراجعة</div>`;uniq.forEach(t=>{const row=document.createElement("div");row.className="review-card";row.style.marginTop="8px";row.innerHTML=`<div class="term-line">${escapeHtml2(t.en)}</div><div><b>${escapeHtml2(t.ar)}</b></div><div class="muted" style="font-size:12px">${escapeHtml2(t.def)}</div><button class="speak" style="margin-top:7px" data-s="${escapeHtml2(t.en)}">🔊</button>`;row.querySelector(".speak").onclick=e=>speak(e.currentTarget.dataset.s,.85);miss.appendChild(row)})}const actions=document.getElementById("resultActions");actions.innerHTML="";if(state.quizMode==="lesson"){if(pass){const lessons=getLevelLessons(state.track,state.level);if(state.lessonIndex<lessons.length-1)addActionBtn2(actions,"📖 الدرس التالي","primary-btn",()=>openLesson(state.track,state.level,state.lessonIndex+1));else addActionBtn2(actions,"🗺 خريطة المستوى","primary-btn",()=>openLessons(state.track,state.level))}else addActionBtn2(actions,"🔁 إعادة اختبار الدرس","primary-btn",()=>startQuiz("lesson"));addActionBtn2(actions,"📚 دروس المستوى","ghost-btn",()=>openLessons(state.track,state.level))}else if(state.quizMode==="level"){if(pass){const idx=LEVEL_KEYS.indexOf(state.level);if(idx<3)addActionBtn2(actions,"➡ المستوى التالي","primary-btn",()=>openLessons(state.track,LEVEL_KEYS[idx+1]));else addActionBtn2(actions,"🏆 المسارات","primary-btn",()=>openLevels(state.track))}else addActionBtn2(actions,"🔁 إعادة الاختبار النهائي","primary-btn",()=>startQuiz("level"));addActionBtn2(actions,"📚 دروس المستوى","ghost-btn",()=>openLessons(state.track,state.level))}else addActionBtn2(actions,"🧠 مركز المراجعة","primary-btn",()=>openReview());addActionBtn2(actions,"🏠 الرئيسية","ghost-btn",renderHome);sfx(pass?"pass":"fail");showScreen("screen-quiz-result")}
+function addActionBtn2(c,label,cls,fn){const b=document.createElement("button");b.className=cls;b.textContent=label;b.onclick=fn;c.appendChild(b)}
 
-function showQuizResult(){
-  document.getElementById("quizProgressFill").style.width="100%";
+/* ---------------- review center ---------------- */
+function getReviewTerms(){const u=getUser(),all=ALL_GLOSSARY.map(term=>{const s=u.termStats[term.en]||{correct:0,incorrect:0,lastReview:null};const age=s.lastReview?Math.min(14,(Date.now()-s.lastReview)/86400000):14;const risk=(s.incorrect||0)*3+age+(s.correct<2?3:0);return{term,risk,stat:s}}).filter(x=>x.risk>=4).sort((a,b)=>b.risk-a.risk);return all.length?all.slice(0,18):ALL_GLOSSARY.slice(0,12).map(term=>({term,risk:4,stat:{}}))}
+function openReview(){setTrackTheme(null);const list=getReviewTerms();const u=getUser();document.getElementById("reviewSummary").innerHTML=`<div class="kpi"><div class="v">${list.length}</div><div class="l">مصطلحات للمراجعة</div></div><div class="kpi"><div class="v">${Object.values(u.termStats).filter(s=>s.incorrect).length}</div><div class="l">مصطلحات بها أخطاء</div></div><div class="kpi"><div class="v">${masteredCount()}</div><div class="l">مصطلحات متقنة</div></div><div class="kpi"><div class="v">${u.xp}</div><div class="l">XP</div></div>`;const wrap=document.getElementById("reviewGrid");wrap.innerHTML="";list.forEach(x=>{const c=document.createElement("div");c.className="review-card";c.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><span class="risk">مراجعة ${Math.min(99,Math.round(x.risk*8))}% أولوية</span><button class="speak">🔊</button></div><div class="term-line" style="margin-top:8px">${escapeHtml2(x.term.en)}</div><div style="margin-top:3px"><b>${escapeHtml2(x.term.ar)}</b></div><div class="muted" style="font-size:11px;margin-top:4px">${escapeHtml2(x.term.def)}</div>`;c.querySelector(".speak").onclick=()=>speak(x.term.en,.85);wrap.appendChild(c)});document.getElementById("startReviewBtn").onclick=()=>startQuiz("review");showScreen("screen-review")}
 
-  const total=state.currentQuiz.length;
-  const score=state.quizScore;
-  const pct=Math.round((score/total)*100);
-  const pass=pct>=70;
+/* ---------------- home + analytics ---------------- */
+function renderHome(){const u=getUser();document.getElementById("welcomeName").textContent=u.username;document.getElementById("streakValue").textContent=u.streak||0;document.getElementById("xpValue").textContent=u.xp||0;document.getElementById("lessonsDoneValue").textContent=completedLessonsCount();document.getElementById("levelsDoneValue").textContent=completedLevelsCount();document.getElementById("vocabMasteredValue").textContent=masteredCount();document.getElementById("globalProgressText").textContent=globalProgress()+"%";document.getElementById("globalProgressFill").style.width=globalProgress()+"%";renderTracks();renderContinue();renderRecentBadges();renderHomeSummary();updateDailyBanner()}
+function renderTracks(){const grid=document.getElementById("trackGrid");grid.innerHTML="";Object.values(TRACKS).forEach(t=>{const div=document.createElement("div");div.className=`track-card ${t.cls}`;div.innerHTML=`<div class="track-icon">${t.icon}</div><h3>${escapeHtml2(t.name)}</h3><p>${escapeHtml2(t.short)}</p><div class="track-meta">4 مستويات · 12 درسًا · 1 اختبار نهائي/مستوى</div>`;div.onclick=()=>openLevels(t.key);grid.appendChild(div)})}
+function renderContinue(){let found=null;for(const t of Object.keys(TRACKS))for(const lv of LEVEL_KEYS){if(!isLevelUnlocked(t,LEVEL_KEYS.indexOf(lv)))continue;for(let i=0;i<3;i++){if(!lessonRec(t,lv,i).passed){found={t,lv,i};break}}if(found)break}const txt=document.getElementById("continueText"),btn=document.getElementById("continueBtn");if(!found){txt.textContent="🎉 أكملت كل الدروس المتاحة. واصل المراجعة للحفاظ على الإتقان.";btn.textContent="🧠 فتح المراجعة";btn.onclick=()=>openReview()}else{txt.textContent=`${TRACKS[found.t].name} · ${LEVEL_LABELS[found.lv]} · الدرس ${found.i+1}`;btn.textContent="🚀 متابعة التعلم";btn.onclick=()=>openLesson(found.t,found.lv,found.i)}}
+function renderRecentBadges(){const wrap=document.getElementById("recentBadges");wrap.innerHTML="";BADGES.filter(b=>getUser().achievements[b.id]).slice(0,3).forEach(b=>{const el=document.createElement("div");el.className="badge unlocked";el.innerHTML=`<div class="badge-icon">${b.icon}</div><div class="badge-title">${b.title}</div>`;wrap.appendChild(el)});if(!wrap.children.length)wrap.innerHTML='<div class="muted" style="font-size:12px">أكمل أول درس لتحصل على أول شارة.</div>'}
+function renderHomeSummary(){const u=getUser(),scores=u.quizHistory.map(x=>x.score).filter(x=>typeof x==="number"),avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0,best=scores.length?Math.max(...scores):0;document.getElementById("homeProgressSummary").innerHTML=`<div class="panel"><h3 style="margin-top:0">نتائج الاختبارات</h3><div class="metric-list"><div class="metric"><span>المتوسط</span><strong>${avg}%</strong></div><div class="metric"><span>أفضل محاولة</span><strong>${best}%</strong></div><div class="metric"><span>محاولات</span><strong>${u.quizHistory.length}</strong></div></div></div><div class="panel"><h3 style="margin-top:0">دقة الإجابات</h3><div class="metric-list"><div class="metric"><span>صحيحة</span><strong>${Object.values(u.termStats).reduce((s,x)=>s+(x.correct||0),0)}</strong></div><div class="metric"><span>خاطئة</span><strong>${Object.values(u.termStats).reduce((s,x)=>s+(x.incorrect||0),0)}</strong></div><div class="metric"><span>مصطلحات متقنة</span><strong>${masteredCount()}</strong></div></div></div>`}
+function updateDailyBanner(){const b=document.getElementById("dailyBanner");if(getUser().streak>=1){b.classList.remove("hidden");document.getElementById("dailyAction").onclick=()=>openReview()}else b.classList.add("hidden")}
+function openAnalytics(){renderAnalytics();showScreen("screen-analytics")}
+function renderAnalytics(){const u=getUser(),scores=u.quizHistory.map(x=>x.score).filter(x=>typeof x==="number"),avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0,best=scores.length?Math.max(...scores):0,correct=Object.values(u.termStats).reduce((s,x)=>s+(x.correct||0),0),wrong=Object.values(u.termStats).reduce((s,x)=>s+(x.incorrect||0),0);document.getElementById("analyticsGrid").innerHTML=`<div class="panel"><h3 style="margin-top:0">الأرقام الأساسية</h3><div class="metric-list"><div class="metric"><span>الدروس المكتملة</span><strong>${completedLessonsCount()}/${totalLessons()}</strong></div><div class="metric"><span>المستويات المكتملة</span><strong>${completedLevelsCount()}/12</strong></div><div class="metric"><span>المفردات المتقنة</span><strong>${masteredCount()}</strong></div><div class="metric"><span>متوسط الاختبارات</span><strong>${avg}%</strong></div><div class="metric"><span>أفضل نتيجة</span><strong>${best}%</strong></div><div class="metric"><span>صحيح / خطأ</span><strong>${correct} / ${wrong}</strong></div><div class="metric"><span>XP</span><strong>${u.xp}</strong></div><div class="metric"><span>Streak</span><strong>🔥 ${u.streak}</strong></div></div></div><div class="panel"><h3 style="margin-top:0">آخر النتائج</h3><div class="bars">${u.quizHistory.slice(-12).map(x=>`<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end"><div class="bar" style="height:${Math.max(8,x.score)}%" title="${x.score}%"></div><div class="bar-label">${x.score}%</div></div>`).join("")||'<div class="empty">لا توجد نتائج بعد.</div>'}</div></div>`;const wrap=document.getElementById("badgeGrid");wrap.innerHTML="";BADGES.forEach(b=>{const el=document.createElement("div");el.className="badge "+(u.achievements[b.id]?"unlocked":"");el.innerHTML=`<div class="badge-icon">${b.icon}</div><div class="badge-title">${b.title}</div><div class="badge-desc">${b.desc}</div>`;wrap.appendChild(el)})}
 
-  const ring=document.getElementById("scoreRing");
-  ring.className="score-ring "+(pass?"pass":"fail");
-  document.getElementById("scorePct").textContent=pct+"%";
-  document.getElementById("scoreOf").textContent=score+" / "+total;
+/* ---------------- dictionary ---------------- */
+function openDictionary(){setTrackTheme(null);document.getElementById("dictSearch").value="";document.getElementById("dictResults").innerHTML='<div class="empty">اكتب كلمة لبدء البحث.</div>';showScreen("screen-dict");setTimeout(()=>document.getElementById("dictSearch").focus(),120)}
+document.getElementById("dictSearch").addEventListener("input",e=>{const q=e.target.value.trim().toLowerCase(),out=document.getElementById("dictResults");if(!q){out.innerHTML='<div class="empty">اكتب كلمة لبدء البحث.</div>';return}const a=ALL_GLOSSARY.filter(v=>v.en.toLowerCase().includes(q)||v.ar.includes(q));const b=Object.keys(GENERAL_DICT).filter(k=>k.includes(q)||GENERAL_DICT[k].includes(q)).slice(0,12).map(k=>({en:k,ar:GENERAL_DICT[k],def:null}));const all=a.concat(b).slice(0,40);if(!all.length){out.innerHTML='<div class="empty">لم يتم العثور على نتائج.</div>';return}out.innerHTML="";all.forEach(v=>{const el=document.createElement("div");el.className="review-card";el.innerHTML=`<div class="tp-row"><div><div class="term-line">${escapeHtml2(v.en)}</div><div><b>${escapeHtml2(v.ar)}</b></div>${v.track?`<div class="muted" style="font-size:10px">${TRACKS[v.track].short} · ${LEVEL_LABELS[v.level]}</div>`:""}</div><button class="speak">🔊</button></div>${v.def?`<div class="muted" style="font-size:12px;margin-top:5px">${escapeHtml2(v.def)}</div>`:""}`;el.querySelector(".speak").onclick=()=>speak(v.en,.85);out.appendChild(el)})});
 
-  const titleEl=document.getElementById("resultTitle");
-  const textEl=document.getElementById("resultText");
+/* ---------------- settings ---------------- */
+document.getElementById("themeToggle").onclick=()=>{const s=settings();s.theme=s.theme==="light"?"dark":"light";saveUser();applySettings()};document.getElementById("muteToggle").onclick=()=>{const s=settings();s.muted=!s.muted;saveUser();applySettings();if(!s.muted)sfx("correct")};document.getElementById("volumeRange").oninput=e=>{settings().volume=+e.target.value;saveUser()};document.getElementById("fontRange").oninput=e=>{settings().font=+e.target.value;saveUser();applySettings()};document.getElementById("resetProgressBtn").onclick=()=>{if(!confirm("هل أنت متأكد من حذف كل تقدم هذا الحساب؟"))return;const u=getUser();u.xp=0;u.streak=0;u.lastActive=null;u.lessons={};u.levels={};u.termStats={};u.achievements={};u.quizHistory=[];saveUser();evaluateBadges();renderHome();toast("تمت إعادة ضبط التقدم.");showScreen("screen-home")};
 
-  if(state.quizMode==="lesson"){
-    const rec=ensureProgress(state.track,state.level);
-    rec.lessons[state.lessonIndex]=rec.lessons[state.lessonIndex] || {seen:true,passed:false,score:0};
-    rec.lessons[state.lessonIndex].score=pct;
-    rec.lessons[state.lessonIndex].passed=pass;
-    saveProgress();
+/* ---------------- global events ---------------- */
+document.getElementById("brandHome").onclick=()=>{setTrackTheme(null);renderHome();showScreen("screen-home")};document.getElementById("backHomeBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("backToLevelsBtn").onclick=()=>openLevels(state.track);document.getElementById("backLevelsBtn2").onclick=()=>openLessons(state.track,state.level);document.getElementById("dictBtn").onclick=openDictionary;document.getElementById("reviewBtn").onclick=openReview;document.getElementById("analyticsBtn").onclick=openAnalytics;document.getElementById("settingsBtn").onclick=()=>{const u=getUser();document.getElementById("accountInfo").textContent=`حسابك المحلي: ${u.username}`;applySettings();showScreen("screen-settings")};document.getElementById("analyticsBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("settingsBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("dictBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("reviewBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("logoutBtn").onclick=logout;document.getElementById("logoutBtn2").onclick=logout;document.getElementById("authSubmit").onclick=handleAuth;document.getElementById("authSwitch").onclick=()=>showAuth(authMode==="login"?"register":"login");document.getElementById("authPass").addEventListener("keydown",e=>{if(e.key==="Enter")handleAuth()});document.getElementById("authUser").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("authPass").focus()});document.querySelectorAll("[data-home-tab]").forEach(btn=>btn.onclick=()=>{document.querySelectorAll("[data-home-tab]").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById("homeTabPaths").classList.toggle("hidden",btn.dataset.homeTab!=="paths");document.getElementById("homeTabProgress").classList.toggle("hidden",btn.dataset.homeTab!=="progress")});
+// Add analytics entry through Settings nav via double-click? Keep accessible from dashboard with Alt+A.
+document.addEventListener("keydown",e=>{if(e.altKey&&e.key.toLowerCase()==="a")openAnalytics()});
 
-    if(pass){
-      titleEl.textContent="🎉 أحسنت! اجتزت اختبار الدرس";
-      textEl.textContent=
-        "تم تسجيل إكمال هذا الدرس. أكمل بقية الدروس حتى يفتح لك الاختبار النهائي الشامل للمستوى.";
-    }else{
-      titleEl.textContent="📚 تحتاج إلى مراجعة هذا الدرس";
-      textEl.textContent=
-        "نسبة النجاح 70%. راجع البطاقات وقطعة القراءة ثم أعد اختبار الدرس حتى تُتقن مصطلحاته.";
-    }
-  }else{
-    if(pass){
-      const rec=ensureProgress(state.track,state.level);
-      rec.examPassed=true;
-      rec.examScore=pct;
-      saveProgress();
-      titleEl.textContent="🎓🎉 نجحت في الاختبار النهائي للمستوى!";
-      textEl.textContent=
-        "أحسنت! أثبتَّ معرفة المصطلحات وترجمتها وتعريفاتها. تم فتح المستوى التالي.";
-    }else{
-      titleEl.textContent="❌ لم تحقق نسبة النجاح المطلوبة (70%)";
-      textEl.textContent=
-        "الاختبار النهائي شامل لجميع مصطلحات المستوى. يجب إعادة الاختبار والنجاح فيه قبل الانتقال إلى المستوى التالي.";
-    }
-  }
-
-  const missedWrap=document.getElementById("missedList");
-  missedWrap.innerHTML="";
-  if(state.quizMissed.length){
-    const heading=document.createElement("div");
-    heading.className="section-label";
-    heading.style.margin="18px 0 8px";
-    heading.textContent="// مصطلحات تحتاج مراجعة";
-    missedWrap.appendChild(heading);
-
-    const uniq=[];
-    const seen=new Set();
-    state.quizMissed.forEach(t=>{
-      if(!seen.has(t.en)){
-        seen.add(t.en);
-        uniq.push(t);
-      }
-    });
-
-    uniq.forEach(t=>{
-      const row=document.createElement("div");
-      row.className="missed-item";
-      row.innerHTML=`
-        <div>
-          <bdi dir="ltr" class="en" style="color:var(--accent);font-weight:bold;">${escapeHtml(t.en)}</bdi>
-          — ${escapeHtml(t.ar)}
-          <div style="font-size:12px;color:var(--text-dim);margin-top:3px;">${escapeHtml(t.def)}</div>
-        </div>
-        <button class="tp-speak" data-speak="${escapeHtml(t.en)}">🔊</button>`;
-      row.querySelector(".tp-speak").addEventListener("click",e=>
-        speak(e.currentTarget.dataset.speak,0.85));
-      missedWrap.appendChild(row);
-    });
-  }
-
-  const actions=document.getElementById("resultActions");
-  actions.innerHTML="";
-
-  if(state.quizMode==="lesson"){
-    if(pass){
-      addActionBtn(actions,"📖 الدرس التالي","btn",()=>{
-        const lessons=getLevelLessons(state.track,state.level);
-        if(state.lessonIndex < lessons.length-1){
-          openLesson(state.track,state.level,state.lessonIndex+1);
-        }else{
-          openLessons(state.track,state.level);
-        }
-      });
-    }else{
-      addActionBtn(actions,"🔁 إعادة اختبار الدرس","btn",()=>startQuiz("lesson"));
-      addActionBtn(actions,"📖 مراجعة الدرس","btn outline",()=>
-        openLesson(state.track,state.level,state.lessonIndex));
-    }
-    addActionBtn(actions,"📚 دروس المستوى","btn outline",()=>
-      openLessons(state.track,state.level));
-  }else{
-    if(!pass){
-      addActionBtn(actions,"🔁 إعادة الاختبار النهائي","btn",()=>startQuiz("level"));
-    }else{
-      const idx=LEVEL_KEYS.indexOf(state.level);
-      if(idx<LEVEL_KEYS.length-1){
-        addActionBtn(actions,"➡ المستوى التالي","btn",()=>{
-          const nextLevel=LEVEL_KEYS[idx+1];
-          openLessons(state.track,nextLevel);
-        });
-      }else{
-        addActionBtn(actions,"🏆 إكمال المسار","btn",()=>
-          openLevels(state.track));
-      }
-    }
-    addActionBtn(actions,"📚 دروس المستوى","btn outline",()=>
-      openLessons(state.track,state.level));
-    addActionBtn(actions,"🏠 الرئيسية","btn outline",goHome);
-  }
-
-  // End-of-quiz sound.
-  playExamEndSound(pass);
-  showScreen("screen-quiz-result");
-}
-
-function addActionBtn(container,label,cls,onClick){
-  const b=document.createElement("button");
-  b.className=cls;
-  b.textContent=label;
-  b.addEventListener("click",onClick);
-  container.appendChild(b);
-}
-
-/* =========================================================
-   DICTIONARY TOOL
-========================================================= */
-function openDictionary(){
-  setTrackTheme(null);
-  document.getElementById("dictResults").innerHTML =
-    '<div class="empty-note">اكتب كلمة أعلاه لبدء البحث في أكثر من 250 مصطلحًا وكلمة.</div>';
-  document.getElementById("dictSearch").value = "";
-  showScreen("screen-dict");
-  setTimeout(()=> document.getElementById("dictSearch").focus(), 150);
-}
-
-document.getElementById("dictSearch").addEventListener("input", (e)=>{
-  const q = e.target.value.trim().toLowerCase();
-  const results = document.getElementById("dictResults");
-  if(q.length < 1){
-    results.innerHTML = '<div class="empty-note">اكتب كلمة أعلاه لبدء البحث في أكثر من 250 مصطلحًا وكلمة.</div>';
-    return;
-  }
-  const glossaryHits = ALL_GLOSSARY.filter(v=>
-    v.en.toLowerCase().includes(q) || v.ar.includes(q)
-  );
-  const generalHits = Object.keys(GENERAL_DICT)
-    .filter(en=> en.includes(q) || GENERAL_DICT[en].includes(q))
-    .map(en=> ({en, ar:GENERAL_DICT[en], def:null}));
-
-  const all = glossaryHits.concat(generalHits).slice(0, 40);
-  if(all.length === 0){
-    results.innerHTML = '<div class="empty-note">لم يتم العثور على نتائج مطابقة.</div>';
-    return;
-  }
-  results.innerHTML = "";
-  all.forEach(v=>{
-    const div = document.createElement("div");
-    div.className = "dict-item";
-    div.innerHTML = `
-      <div class="row">
-        <div>
-          <bdi dir="ltr" class="en">${escapeHtml(v.en)}</bdi>
-          &nbsp;—&nbsp;
-          <span class="ar">${escapeHtml(v.ar)}</span>
-          ${v.track ? `<div class="dict-tag">${TRACKS[v.track].short} · ${LEVEL_LABELS[v.level]}</div>` : ""}
-        </div>
-        <button class="tp-speak" data-speak="${escapeHtml(v.en)}">🔊</button>
-      </div>
-      ${v.def ? `<div class="def">${escapeHtml(v.def)}</div>` : ""}`;
-    div.querySelector(".tp-speak").addEventListener("click", (ev)=> speak(ev.currentTarget.dataset.speak, 0.85));
-    results.appendChild(div);
-  });
-});
-
-if('speechSynthesis' in window){
-  window.speechSynthesis.onvoiceschanged = ()=>{};
-}
+/* ---------------- start ---------------- */
+if(appDB.active && appDB.users[appDB.active]){activeUser=appDB.active;enterApp()}else showAuth("login");
 </script>
 </body>
 </html>

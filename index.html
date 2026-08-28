@@ -35,6 +35,22 @@ button,input{font:inherit} button{cursor:pointer} .hidden{display:none!important
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--panel);border:1px solid var(--accent);padding:11px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:60;transition:.25s;max-width:min(92vw,480px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);display:grid;place-items:center;z-index:50;padding:16px}.modal{width:min(520px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}.modal h2{margin:0 0 6px}.form{display:grid;gap:10px;margin-top:14px}.field{display:grid;gap:6px}.field label{font-size:12px;color:var(--text-dim)}.field input{width:100%;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:11px 12px;border-radius:10px;outline:none}.field input:focus{border-color:var(--accent)}.auth-note{font-size:11px;color:var(--text-dimmer);margin-top:10px}.auth-switch{text-align:center;font-size:12px;color:var(--text-dim);margin-top:12px}.link-btn{background:none;border:0;color:var(--accent);padding:0}.daily-banner{border:1px solid rgba(234,179,8,.35);background:rgba(234,179,8,.07);border-radius:13px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.empty{padding:30px;text-align:center;color:var(--text-dimmer)}.muted{color:var(--text-dim)}
 @media(max-width:900px){.dashboard-grid,.analytics-grid,.settings-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.app-shell{padding:12px 10px 42px}.topbar{align-items:flex-start}.kpi-grid{grid-template-columns:1fr 1fr}.map-node{grid-template-columns:46px 1fr}.map-node .node-side{grid-column:2;text-align:right}.hero{padding:18px}.panel{padding:16px}.lesson-progress{min-width:100%}.passage-box{font-size:16px}.top-actions{width:100%}.top-actions>*{flex:1;justify-content:center}}
+
+/* ===== Premium UI refresh ===== */
+:root{--bg:#070b13;--bg-soft:#0d1320;--panel:#101827;--panel-2:#151f31;--line:#253149;--text:#eef3fb;--text-dim:#93a1ba;--text-dimmer:#63708a;--accent:#4aa7ff;--accent-soft:rgba(74,167,255,.12);--accent-glow:rgba(74,167,255,.26);--shadow-soft:0 10px 30px rgba(0,0,0,.16)}
+body.light{--bg:#f4f7fb;--bg-soft:#edf2f8;--panel:#fff;--panel-2:#f7f9fc;--line:#d9e1ed;--text:#152033;--text-dim:#61708a;--text-dimmer:#8794a9;--shadow-soft:0 8px 24px rgba(30,54,84,.08)}
+body{background:radial-gradient(900px 430px at 88% -5%,rgba(74,167,255,.12),transparent 62%),radial-gradient(700px 380px at -8% 106%,rgba(49,209,124,.07),transparent 62%),var(--bg);}
+.app-shell{max-width:1240px;padding:22px 18px 70px}.topbar{position:sticky;top:0;z-index:30;margin:0 -18px 22px;padding:12px 18px;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(18px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.panel{border-color:color-mix(in srgb,var(--line) 88%,transparent);box-shadow:var(--shadow-soft);overflow:hidden}.hero{padding:30px;background:linear-gradient(145deg,color-mix(in srgb,var(--panel) 92%,var(--accent) 8%),var(--panel))}
+.brand:hover{background:var(--accent-soft);border-radius:14px}.logo{box-shadow:0 10px 30px var(--accent-glow),inset 0 1px 0 rgba(255,255,255,.16)}
+.icon-btn,.ghost-btn,.primary-btn,.danger-btn{min-height:40px;box-shadow:0 4px 12px rgba(0,0,0,.07)}.primary-btn{box-shadow:0 8px 22px var(--accent-glow)}
+.kpi{transition:.18s ease}.kpi:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.progress-track{height:10px;box-shadow:inset 0 1px 3px rgba(0,0,0,.16)}.progress-fill{background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 65%,white));box-shadow:0 0 18px var(--accent-glow)}
+.daily-banner{border-color:color-mix(in srgb,var(--warn) 30%,var(--line));background:linear-gradient(90deg,rgba(242,201,76,.10),transparent)}
+.nav-tabs{padding:5px;border-radius:13px;background:var(--panel-2)}.track-card{min-height:185px;padding:22px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel) 88%,var(--tc) 12%));box-shadow:var(--shadow-soft)}.track-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.14)}.track-icon{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
+.map-node{min-height:72px;padding:14px 16px;transition:.18s ease}.map-node:not(.locked):hover{transform:translateX(-4px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 10px 28px rgba(0,0,0,.08)}
+.lesson-progress{background:var(--panel-2);padding:12px 14px;border:1px solid var(--line);border-radius:14px}.flashcard{height:155px}.flashcard:hover .flashcard-face{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.translation-panel{min-height:84px}.quiz-shell{max-width:900px;margin:0 auto}.quiz-option{min-height:58px}.quiz-option:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.06)}.score-ring{box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 5%,transparent),0 12px 34px rgba(0,0,0,.10)}
+.review-card,.setting,.badge{transition:.18s ease}.review-card:hover,.setting:hover,.badge:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}.user-chip,.mini-progress{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:12px;color:var(--text-dim);white-space:nowrap}.user-dot{font-size:8px;color:var(--good)}.mini-progress{font-family:var(--mono);color:var(--accent);font-weight:700}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 65%,white);outline-offset:2px}@media(max-width:860px){.dashboard-grid{grid-template-columns:1fr}.topbar{position:static}.top-actions{width:100%;overflow:auto;flex-wrap:nowrap}.kpi-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.app-shell{padding:12px}.topbar{margin:0 -12px 16px;padding:10px 12px}.brand p{display:none}.lesson-progress{min-width:100%}.map-node{grid-template-columns:46px 1fr}.map-node .node-side{display:none}.row-actions .primary-btn,.row-actions .ghost-btn{flex:1;justify-content:center}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -44,8 +60,8 @@ button,input{font:inherit} button{cursor:pointer} .hidden{display:none!important
     <h2 id="authTitle">تسجيل الدخول</h2>
     <p id="authSubtitle" class="lead">سجّل دخولك لمتابعة تقدمك من هذا الجهاز.</p>
     <div class="form">
-      <div class="field"><label>اسم المستخدم</label><input id="authUser" autocomplete="username" maxlength="24"></div>
-      <div class="field"><label>كلمة المرور</label><input id="authPass" type="password" autocomplete="current-password" maxlength="64"></div>
+      <div class="field"><label>اسم المستخدم</label><input id="authUser" aria-label="اسم المستخدم" autocomplete="username" maxlength="24"></div>
+      <div class="field"><label>كلمة المرور</label><input id="authPass" aria-label="كلمة المرور" type="password" autocomplete="current-password" maxlength="64"></div>
       <button id="authSubmit" class="primary-btn full">🔐 تسجيل الدخول</button>
       <div class="auth-switch"><span id="authSwitchText">ليس لديك حساب؟</span> <button id="authSwitch" class="link-btn">إنشاء حساب</button></div>
       <div class="auth-note">الحساب محلي على هذا الجهاز. لا يوجد خادم أو مزامنة سحابية في هذه النسخة.</div>
@@ -60,6 +76,8 @@ button,input{font:inherit} button{cursor:pointer} .hidden{display:none!important
       <div><h1>TechTerm</h1><p>أكاديمية المصطلحات التقنية — حاسوب · ذكاء اصطناعي · أمن سيبراني</p></div>
     </div>
     <div class="top-actions">
+      <div class="user-chip" title="الحساب الحالي"><span class="user-dot">●</span><span id="topUserName">الحساب</span></div>
+      <div class="mini-progress" title="التقدم الكلي"><span id="topProgressDot">0%</span></div>
       <button class="icon-btn" id="dictBtn">📖 القاموس</button>
       <button class="icon-btn" id="reviewBtn">🧠 المراجعة</button>
       <button class="icon-btn" id="analyticsBtn">📊 تقدمي</button>
@@ -107,7 +125,7 @@ button,input{font:inherit} button{cursor:pointer} .hidden{display:none!important
 
   <section id="screen-settings" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">SETTINGS</div><h2 class="title">⚙️ الإعدادات</h2><p class="lead">تحكم في المظهر، الصوت، حجم الخط، وبيانات التقدم.</p></div><button id="settingsBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div class="settings-grid" style="margin-top:16px"><div class="setting"><h3>المظهر</h3><p>التبديل بين الوضع الداكن والفاتح.</p><div class="setting-row"><span id="themeLabel">الوضع الداكن</span><button id="themeToggle" class="toggle"></button></div></div><div class="setting"><h3>الصوت</h3><p>كتم جميع المؤثرات والصوتيات.</p><div class="setting-row"><span id="muteLabel">مفعّل</span><button id="muteToggle" class="toggle on"></button></div></div><div class="setting"><h3>مستوى الصوت</h3><p>اضبط شدة مؤثرات التطبيق.</p><input id="volumeRange" class="range" type="range" min="0" max="100" step="1"></div><div class="setting"><h3>حجم الخط</h3><p>تكبير أو تصغير النص للقراءة المريحة.</p><input id="fontRange" class="range" type="range" min="90" max="125" step="5"></div><div class="setting"><h3>الحساب المحلي</h3><p id="accountInfo"></p><button id="logoutBtn2" class="ghost-btn">↪️ تسجيل الخروج</button></div><div class="setting"><h3>بيانات التقدم</h3><p>حذف تقدم الحساب الحالي وإعادة كل الدروس والإنجازات إلى الصفر.</p><button id="resetProgressBtn" class="danger-btn">🗑 إعادة ضبط التقدم</button></div></div></div></section>
 
-  <section id="screen-dict" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">DICTIONARY</div><h2 class="title">📖 قاموس المصطلحات التقنية</h2><p class="lead">ابحث بالعربية أو الإنجليزية في المصطلحات المتخصصة وكلمات النصوص.</p></div><button id="dictBackBtn" class="ghost-btn">↩ الرئيسية</button></div><input id="dictSearch" class="field-input" placeholder="اكتب مثلاً: algorithm أو خوارزمية" style="width:100%;margin-top:16px;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:13px;border-radius:10px"><div id="dictResults" style="display:grid;gap:9px;margin-top:13px"></div></div></section>
+  <section id="screen-dict" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">DICTIONARY</div><h2 class="title">📖 قاموس المصطلحات التقنية</h2><p class="lead">ابحث بالعربية أو الإنجليزية في المصطلحات المتخصصة وكلمات النصوص.</p></div><button id="dictBackBtn" class="ghost-btn">↩ الرئيسية</button></div><input id="dictSearch" aria-label="البحث في القاموس" class="field-input" placeholder="اكتب مثلاً: algorithm أو خوارزمية" style="width:100%;margin-top:16px;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:13px;border-radius:10px"><div id="dictResults" style="display:grid;gap:9px;margin-top:13px"></div></div></section>
 
   <footer style="text-align:center;color:var(--text-dimmer);font-size:11px;margin-top:24px">TechTerm يعمل محليًا من ملف واحد. التقدم والحسابات تُحفظ داخل localStorage لهذا المتصفح.</footer>
 </div>
@@ -471,7 +489,7 @@ function evaluateBadges(){
 }
 function applySettings(){const u=getUser();const s=u?u.settings:appDB.settings;document.body.classList.toggle("light",s.theme==="light");document.documentElement.style.setProperty("--scale",(s.font||100)/100);document.getElementById("themeToggle").classList.toggle("on",s.theme==="light");document.getElementById("themeLabel").textContent=s.theme==="light"?"الوضع الفاتح":"الوضع الداكن";document.getElementById("muteToggle").classList.toggle("on",!s.muted);document.getElementById("muteLabel").textContent=s.muted?"مكتوم":"مفعّل";document.getElementById("volumeRange").value=s.volume??65;document.getElementById("fontRange").value=s.font??100}
 function settings(){return getUser().settings}
-function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
+function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");const titles={"screen-home":"لوحة التحكم","screen-levels":"خريطة التعلم","screen-lessons":"دروس المستوى","screen-lesson":"الدرس","screen-quiz":"الاختبار","screen-quiz-result":"نتيجة الاختبار","screen-review":"مركز المراجعة","screen-analytics":"تحليلات التعلّم","screen-settings":"الإعدادات","screen-dict":"القاموس"};document.title=`TechTerm | ${titles[id]||"أكاديمية المصطلحات التقنية"}`;window.scrollTo({top:0,behavior:"smooth"})}
 function setTrackTheme(track){document.body.classList.remove("track-cs","track-ai","track-sec");if(track)document.body.classList.add("track-"+track)}
 function escapeHtml2(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function shuffle2(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -502,26 +520,41 @@ function showTranslation(result,original){const p=document.getElementById("trans
 function questionWeight(term){const s=ensureTermStat(term.en),fails=s.incorrect||0,recency=s.lastReview?Math.min(1,Math.max(0,(Date.now()-s.lastReview)/(1000*60*60*24*14))):1;return 1+fails*2+recency*1.5}
 function weightedPick(terms){const pool=terms.map(t=>({t,w:questionWeight(t)}));const total=pool.reduce((s,x)=>s+x.w,0);let r=Math.random()*total;for(const x of pool){r-=x.w;if(r<=0)return x.t}return pool[pool.length-1].t}
 function makeAdaptiveQuestion(v,pool){
-  const type=shuffle2(["en2ar","ar2en","definition2en","context","truefalse"])[0],other=pool.filter(x=>x.en!==v.en),d=shuffle2(other).slice(0,3);
-  if(type==="en2ar")return{type,prompt:`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟`,correct:v.ar,options:shuffle2([v.ar,...d.map(x=>x.ar)]),term:v,speak:v.en};
-  if(type==="ar2en")return{type,prompt:`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(v.ar)}</b>؟`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
-  if(type==="definition2en")return{type,prompt:`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(v.def)}</div>`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
-  if(type==="truefalse"){
-    const makeFalse=Math.random()<.5;
-    const falseTerm=d[0]||v;
-    const statement=makeFalse?`مصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi> يعني: ${escapeHtml2(falseTerm.ar)}`:`مصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi> يعني: ${escapeHtml2(v.ar)}`;
-    return{type,prompt:`هل العبارة التالية صحيحة؟<div style="margin-top:10px">${statement}</div>`,correct:makeFalse?"خطأ":"صحيح",options:["صحيح","خطأ"],term:v,speak:v.en};
+  const type=shuffle2(["en2ar","ar2en","definition2en","truefalse"])[0],other=pool.filter(x=>x.en!==v.en);
+  if(type==="en2ar"){
+    const d=shuffle2(other).slice(0,3);
+    return{type,prompt:`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟`,correct:v.ar,options:shuffle2([v.ar,...d.map(x=>x.ar)]),term:v,speak:v.en};
   }
-  const passage=PASSAGES[state.track][state.level].text;
-  const idx=passage.toLowerCase().indexOf(v.en.toLowerCase());
-  const snippet=idx>=0?passage.slice(Math.max(0,idx-55),Math.min(passage.length,idx+v.en.length+90)):v.en;
-  return{type,prompt:`اختر المصطلح الذي يناسب السياق التالي:<div class="muted" style="margin-top:8px;direction:ltr;text-align:left">… ${escapeHtml2(snippet)} …</div>`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  if(type==="ar2en"){
+    const d=shuffle2(other).slice(0,3);
+    return{type,prompt:`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(v.ar)}</b>؟`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  }
+  if(type==="definition2en"){
+    const d=shuffle2(other).slice(0,3);
+    return{type,prompt:`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(v.def)}</div>`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  }
+  const makeTrue=Math.random()<0.5;
+  const target=makeTrue?v:shuffle2(other)[0];
+  const statement=makeTrue
+    ? `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(v.def)}</div>`
+    : `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(target.def)}</div>`;
+  return{type,prompt:statement,correct:makeTrue?"صحيح":"غير صحيح",options:["صحيح","غير صحيح"],term:v,speak:v.en};
 }
 function makeQuizQuestions(terms,count,mode){const out=[];const pool=ALL_GLOSSARY.length?ALL_GLOSSARY:terms;const n=Math.min(count,Math.max(terms.length,1));for(let i=0;i<n;i++){const v=mode==="review"?weightedPick(pool):terms[i%terms.length];out.push(makeAdaptiveQuestion(v,pool))}return shuffle2(out)}
 function buildLessonQuiz2(terms){return makeQuizQuestions(terms,Math.max(terms.length,6),"lesson")}
 function buildPracticeQuiz(terms){return makeQuizQuestions(terms,Math.min(8,Math.max(terms.length,6)),"practice")}
-function buildFinalExam2(terms){const qs=[];terms.forEach(v=>{qs.push({base:v,type:"en2ar"});qs.push({base:v,type:"ar2en"});qs.push({base:v,type:"definition2en"})});return shuffle2(qs).map(x=>{const d=makeAdaptiveQuestion(x.base,terms);d.type=x.type;if(x.type==="en2ar"){d.prompt=`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟`;d.correct=x.base.ar;d.options=shuffle2([x.base.ar,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.ar)])}else if(x.type==="ar2en"){d.prompt=`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(x.base.ar)}</b>؟`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}else{d.prompt=`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(x.base.def)}</div>`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}d.term=x.base;d.speak=x.base.en;return d})}
-function startQuiz(mode){let terms=[];if(mode==="lesson"||mode==="practice"){terms=getLevelLessons(state.track,state.level)[state.lessonIndex].terms}else if(mode==="level")terms=VOCAB[state.track][state.level];else if(mode==="review")terms=getReviewTerms().map(x=>x.term);if(!terms.length)return;state.quizMode=mode;state.quizIndex=0;state.quizScore=0;state.quizMissed=[];state.quizXP=0;state.currentQuiz=mode==="lesson"?buildLessonQuiz2(terms):mode==="practice"?buildPracticeQuiz(terms):mode==="level"?buildFinalExam2(terms):makeQuizQuestions(terms,Math.min(12,Math.max(terms.length,6)),"review");document.getElementById("quizTitle").textContent=mode==="level"?`🎓 الاختبار النهائي — ${LEVEL_LABELS[state.level]}`:mode==="review"?"🧠 اختبار المراجعة الذكي":mode==="practice"?"🧩 Practice Mode":"📝 اختبار الدرس";document.getElementById("quizModeLabel").textContent=mode.toUpperCase();sfx("examStart");renderQuizQuestion() ;showScreen("screen-quiz")}
+function buildFinalExam2(terms){const qs=[];terms.forEach(v=>{qs.push({base:v,type:"en2ar"});qs.push({base:v,type:"ar2en"});qs.push({base:v,type:"definition2en"});qs.push({base:v,type:"truefalse"})});return shuffle2(qs).map(x=>{const d=makeAdaptiveQuestion(x.base,terms);d.type=x.type;if(x.type==="en2ar"){d.prompt=`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟`;d.correct=x.base.ar;d.options=shuffle2([x.base.ar,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.ar)])}else if(x.type==="ar2en"){d.prompt=`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(x.base.ar)}</b>؟`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}else if(x.type==="definition2en"){d.prompt=`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(x.base.def)}</div>`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}
+else {
+  const others=terms.filter(t=>t.en!==x.base.en);
+  const makeTrue=Math.random()<0.5;
+  const target=makeTrue?x.base:shuffle2(others)[0];
+  d.prompt=makeTrue
+    ? `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(x.base.def)}</div>`
+    : `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(target.def)}</div>`;
+  d.correct=makeTrue?"صحيح":"غير صحيح";d.options=["صحيح","غير صحيح"];
+}
+d.term=x.base;d.speak=x.base.en;return d})}
+function startQuiz(mode){if(mode==="level"&&!areAllLessonsPassed(state.track,state.level)){toast("🔒 الاختبار النهائي لا يفتح إلا بعد إكمال 100% من دروس المستوى.");return}let terms=[];if(mode==="lesson"||mode==="practice"){terms=getLevelLessons(state.track,state.level)[state.lessonIndex].terms}else if(mode==="level")terms=VOCAB[state.track][state.level];else if(mode==="review")terms=getReviewTerms().map(x=>x.term);if(!terms.length)return;state.quizMode=mode;state.quizIndex=0;state.quizScore=0;state.quizMissed=[];state.quizXP=0;state.currentQuiz=mode==="lesson"?buildLessonQuiz2(terms):mode==="practice"?buildPracticeQuiz(terms):mode==="level"?buildFinalExam2(terms):makeQuizQuestions(terms,Math.min(12,Math.max(terms.length,6)),"review");document.getElementById("quizTitle").textContent=mode==="level"?`🎓 الاختبار النهائي — ${LEVEL_LABELS[state.level]}`:mode==="review"?"🧠 اختبار المراجعة الذكي":mode==="practice"?"🧩 Practice Mode":"📝 اختبار الدرس";document.getElementById("quizModeLabel").textContent=mode.toUpperCase();sfx("examStart");renderQuizQuestion() ;showScreen("screen-quiz")}
 function renderQuizQuestion(){
   const q=state.currentQuiz[state.quizIndex],total=state.currentQuiz.length;
   document.getElementById("quizCounter").textContent=`${state.quizIndex+1}/${total}`;
@@ -532,7 +565,7 @@ function renderQuizQuestion(){
   document.getElementById("quizNextBtn").style.display="none";
   q.options.forEach(opt=>{
     const b=document.createElement("div");b.className="quiz-option";b.dataset.value=opt;
-    b.innerHTML=q.type==="en2ar"||q.type==="truefalse"?escapeHtml2(opt):`<bdi dir="ltr" class="en">${escapeHtml2(opt)}</bdi>`;
+    b.innerHTML=q.type==="en2ar"?escapeHtml2(opt):`<bdi dir="ltr" class="en">${escapeHtml2(opt)}</bdi>`;
     b.onclick=()=>answerQuiz2(opt,q,b);ob.appendChild(b);
   });
 }
@@ -541,7 +574,7 @@ function answerQuiz2(selected,q,el){
   document.querySelectorAll(".quiz-option").forEach(x=>x.classList.add("disabled"));
   const ok=selected===q.correct;
   const stat=ensureTermStat(q.term.en);stat.lastReview=Date.now();
-  if(ok){state.quizScore++;if(el)el.classList.add("correct");state.quizXP+=XP.correct;sfx("correct")}else{if(el)el.classList.add("incorrect");state.quizMissed.push(q.term);document.querySelectorAll(".quiz-option").forEach(x=>{if(x.dataset.value===q.correct)x.classList.add("correct")});sfx("wrong")}
+  if(ok){state.quizScore++;stat.correct=(stat.correct||0)+1;if(el)el.classList.add("correct");state.quizXP+=XP.correct;sfx("correct")}else{stat.incorrect=(stat.incorrect||0)+1;if(el)el.classList.add("incorrect");state.quizMissed.push(q.term);document.querySelectorAll(".quiz-option").forEach(x=>{if(x.dataset.value===q.correct)x.classList.add("correct")});sfx("wrong")}
   saveUser();
   const next=document.getElementById("quizNextBtn");next.style.display="inline-flex";next.textContent=state.quizIndex===state.currentQuiz.length-1?"عرض النتيجة":"السؤال التالي";next.onclick=()=>{if(state.quizIndex<state.currentQuiz.length-1){state.quizIndex++;renderQuizQuestion()}else{showQuizResult2()}}
 }
@@ -553,7 +586,7 @@ function getReviewTerms(){const u=getUser(),all=ALL_GLOSSARY.map(term=>{const s=
 function openReview(){setTrackTheme(null);const list=getReviewTerms();const u=getUser();document.getElementById("reviewSummary").innerHTML=`<div class="kpi"><div class="v">${list.length}</div><div class="l">مصطلحات للمراجعة</div></div><div class="kpi"><div class="v">${Object.values(u.termStats).filter(s=>s.incorrect).length}</div><div class="l">مصطلحات بها أخطاء</div></div><div class="kpi"><div class="v">${masteredCount()}</div><div class="l">مصطلحات متقنة</div></div><div class="kpi"><div class="v">${u.xp}</div><div class="l">XP</div></div>`;const wrap=document.getElementById("reviewGrid");wrap.innerHTML="";list.forEach(x=>{const c=document.createElement("div");c.className="review-card";c.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><span class="risk">مراجعة ${Math.min(99,Math.round(x.risk*8))}% أولوية</span><button class="speak">🔊</button></div><div class="term-line" style="margin-top:8px">${escapeHtml2(x.term.en)}</div><div style="margin-top:3px"><b>${escapeHtml2(x.term.ar)}</b></div><div class="muted" style="font-size:11px;margin-top:4px">${escapeHtml2(x.term.def)}</div>`;c.querySelector(".speak").onclick=()=>speak(x.term.en,.85);wrap.appendChild(c)});document.getElementById("startReviewBtn").onclick=()=>startQuiz("review");showScreen("screen-review")}
 
 /* ---------------- home + analytics ---------------- */
-function renderHome(){const u=getUser();document.getElementById("welcomeName").textContent=u.username;document.getElementById("streakValue").textContent=u.streak||0;document.getElementById("xpValue").textContent=u.xp||0;document.getElementById("lessonsDoneValue").textContent=completedLessonsCount();document.getElementById("levelsDoneValue").textContent=completedLevelsCount();document.getElementById("vocabMasteredValue").textContent=masteredCount();document.getElementById("globalProgressText").textContent=globalProgress()+"%";document.getElementById("globalProgressFill").style.width=globalProgress()+"%";renderTracks();renderContinue();renderRecentBadges();renderHomeSummary();updateDailyBanner()}
+function renderHome(){const u=getUser(),gp=globalProgress();document.getElementById("welcomeName").textContent=u.username;document.getElementById("topUserName").textContent=u.username;document.getElementById("topProgressDot").textContent=gp+"%";document.getElementById("streakValue").textContent=u.streak||0;document.getElementById("xpValue").textContent=u.xp||0;document.getElementById("lessonsDoneValue").textContent=completedLessonsCount();document.getElementById("levelsDoneValue").textContent=completedLevelsCount();document.getElementById("vocabMasteredValue").textContent=masteredCount();document.getElementById("globalProgressText").textContent=gp+"%";document.getElementById("globalProgressFill").style.width=gp+"%";renderTracks();renderContinue();renderRecentBadges();renderHomeSummary();updateDailyBanner()}
 function renderTracks(){const grid=document.getElementById("trackGrid");grid.innerHTML="";Object.values(TRACKS).forEach(t=>{const div=document.createElement("div");div.className=`track-card ${t.cls}`;div.innerHTML=`<div class="track-icon">${t.icon}</div><h3>${escapeHtml2(t.name)}</h3><p>${escapeHtml2(t.short)}</p><div class="track-meta">4 مستويات · 12 درسًا · 1 اختبار نهائي/مستوى</div>`;div.onclick=()=>openLevels(t.key);grid.appendChild(div)})}
 function renderContinue(){let found=null;for(const t of Object.keys(TRACKS))for(const lv of LEVEL_KEYS){if(!isLevelUnlocked(t,LEVEL_KEYS.indexOf(lv)))continue;for(let i=0;i<3;i++){if(!lessonRec(t,lv,i).passed){found={t,lv,i};break}}if(found)break}const txt=document.getElementById("continueText"),btn=document.getElementById("continueBtn");if(!found){txt.textContent="🎉 أكملت كل الدروس المتاحة. واصل المراجعة للحفاظ على الإتقان.";btn.textContent="🧠 فتح المراجعة";btn.onclick=()=>openReview()}else{txt.textContent=`${TRACKS[found.t].name} · ${LEVEL_LABELS[found.lv]} · الدرس ${found.i+1}`;btn.textContent="🚀 متابعة التعلم";btn.onclick=()=>openLesson(found.t,found.lv,found.i)}}
 function renderRecentBadges(){const wrap=document.getElementById("recentBadges");wrap.innerHTML="";BADGES.filter(b=>getUser().achievements[b.id]).slice(0,3).forEach(b=>{const el=document.createElement("div");el.className="badge unlocked";el.innerHTML=`<div class="badge-icon">${b.icon}</div><div class="badge-title">${b.title}</div>`;wrap.appendChild(el)});if(!wrap.children.length)wrap.innerHTML='<div class="muted" style="font-size:12px">أكمل أول درس لتحصل على أول شارة.</div>'}

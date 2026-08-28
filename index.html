@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1321">
+<title>TechTerm | أكاديمية المصطلحات التقنية</title>
+<style>
+:root{
+  --bg:#0a0e17; --bg-soft:#0f1522; --panel:#141b2b; --panel-2:#1a2236; --line:#26314a;
+  --text:#e7ecf7; --text-dim:#8b96ae; --text-dimmer:#5c6680; --good:#22c55e; --bad:#ef4444;
+  --warn:#eab308; --accent:#3b82f6; --accent-soft:rgba(59,130,246,.14);
+  --shadow:0 16px 40px rgba(0,0,0,.22); --radius:16px; --scale:1;
+  --sans:"Segoe UI","Tahoma","Arial",sans-serif; --mono:"Consolas","SFMono-Regular","Menlo","Courier New",monospace;
+}
+body.light{--bg:#f5f7fb;--bg-soft:#eef2f8;--panel:#fff;--panel-2:#f6f8fc;--line:#dbe2ef;--text:#172033;--text-dim:#5d6b84;--text-dimmer:#8290a8;--shadow:0 14px 32px rgba(39,56,85,.10)}
+body.track-cs{--accent:#2f9bd4;--accent-soft:rgba(47,155,212,.13)}
+body.track-ai{--accent:#8d63e8;--accent-soft:rgba(141,99,232,.14)}
+body.track-sec{--accent:#16b97a;--accent-soft:rgba(22,185,122,.13)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth} body{margin:0;min-height:100vh;background:radial-gradient(circle at 85% -10%,rgba(59,130,246,.09),transparent 42%),radial-gradient(circle at -10% 110%,rgba(34,197,94,.07),transparent 38%),var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;font-size:calc(15px * var(--scale));}
+button,input{font:inherit} button{cursor:pointer} .hidden{display:none!important}
+.app-shell{max-width:1180px;margin:0 auto;padding:18px 16px 60px}.topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:4px 0 16px;margin-bottom:18px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px;cursor:pointer}.logo{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;font-family:var(--mono);font-weight:800;background:linear-gradient(145deg,#3b9de0,#9b6bf2,#22c77e);box-shadow:0 8px 24px rgba(59,130,246,.22)}.brand h1{font-size:19px;margin:0}.brand p{margin:0;color:var(--text-dim);font-size:12px}.top-actions,.nav-actions,.row-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.icon-btn,.ghost-btn,.primary-btn,.danger-btn{border-radius:10px;padding:9px 13px;border:1px solid var(--line);background:var(--panel);color:var(--text);transition:.18s ease;display:inline-flex;align-items:center;gap:7px}.icon-btn:hover,.ghost-btn:hover{border-color:var(--accent);color:var(--accent)}.primary-btn{background:var(--accent);border-color:var(--accent);color:#07111f;font-weight:700}.primary-btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.danger-btn{border-color:rgba(239,68,68,.35);color:var(--bad);background:rgba(239,68,68,.06)}.small{padding:7px 10px;font-size:13px}.full{width:100%;justify-content:center}
+.screen{display:none}.screen.active{display:block;animation:fade .22s ease}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.dashboard-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:16px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}.hero{padding:26px}.hero-head{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}.eyebrow,.section-label{font:11px var(--mono);color:var(--text-dimmer);letter-spacing:.5px;text-transform:uppercase}.title{margin:0 0 5px;font-size:clamp(21px,3.5vw,29px)}.lead{margin:0;color:var(--text-dim);font-size:14px}.accent{color:var(--accent)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.kpi{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:14px}.kpi .v{font:700 24px var(--mono);color:var(--accent)}.kpi .l{font-size:11.5px;color:var(--text-dim);margin-top:3px}.progress-track{height:9px;background:var(--panel-2);border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);border-radius:inherit;transition:width .3s ease}.progress-wrap{margin-top:15px}.progress-row{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--text-dim);font-size:12px;margin-bottom:6px}
+.streak-card{display:flex;flex-direction:column;gap:10px;justify-content:center;min-height:100%}.streak{font-size:38px;font-weight:800}.streak-sub{color:var(--text-dim);font-size:13px}.nav-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.tab{border:1px solid var(--line);background:var(--panel);padding:9px 13px;border-radius:10px;color:var(--text-dim)}.tab.active{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+.track-grid,.level-grid,.lesson-grid,.review-grid,.badge-grid{display:grid;gap:14px}.track-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:16px}.track-card{position:relative;overflow:hidden;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:20px;min-height:160px;transition:.18s}.track-card:hover{transform:translateY(-2px);border-color:var(--tc)}.track-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--tc)}.track-card.cs{--tc:#2f9bd4}.track-card.ai{--tc:#8d63e8}.track-card.sec{--tc:#16b97a}.track-icon{font-size:30px}.track-card h3{margin:10px 0 4px;font-size:18px}.track-card p{margin:0;color:var(--text-dim);font-size:13px}.track-meta{margin-top:12px;color:var(--tc);font:11px var(--mono)}
+.map{display:flex;flex-direction:column;gap:12px;margin-top:18px}.map-node{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:13px;padding:13px;border:1px solid var(--line);background:var(--panel-2);border-radius:14px}.map-node .node-dot{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--bg-soft);border:2px solid var(--line);font-weight:800}.map-node.done .node-dot{border-color:var(--good);color:var(--good);background:rgba(34,197,94,.08)}.map-node.current .node-dot{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 12%,transparent)}.map-node.locked{opacity:.48}.map-node .node-title{font-weight:700}.map-node .node-sub{font-size:12px;color:var(--text-dim)}.map-node .node-side{text-align:left;font-size:12px;color:var(--text-dim)}.exam-node{border-style:dashed}.connector{height:16px;width:3px;background:var(--line);margin-right:24px;border-radius:2px}
+.lesson-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}.lesson-progress{min-width:240px}.vocab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin-top:12px}.flashcard{height:145px;perspective:1200px;cursor:pointer}.flashcard-inner{position:relative;width:100%;height:100%;transition:.5s;transform-style:preserve-3d}.flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}.flashcard-face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:center;background:var(--panel-2)}.flashcard-back{transform:rotateY(180deg);background:var(--accent-soft)}.term{font-family:var(--mono);direction:ltr;text-align:left;color:var(--accent);font-weight:800}.hint{font-size:11px;color:var(--text-dimmer);margin-top:7px}.ar{font-weight:800}.def{font-size:11.5px;color:var(--text-dim);margin-top:6px;line-height:1.6}.passage-box{direction:ltr;text-align:left;font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:2.05;padding:16px;border:1px solid var(--line);background:var(--panel-2);border-radius:12px;margin-top:12px}.word,.term-hit{cursor:pointer;padding:1px 3px;border-radius:4px;transition:background .15s,color .15s}.word:hover,.term-hit:hover{background:var(--accent-soft);color:var(--accent);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}.term-hit{color:var(--accent);font-weight:700;border-bottom:2px dotted var(--accent);background:none}.translation-panel{margin-top:12px;border:1px dashed var(--line);border-radius:12px;padding:14px 16px;min-height:56px;background:var(--panel-2)}.translation-panel.active{border-style:solid;border-color:var(--accent)}.tp-row{display:flex;justify-content:space-between;align-items:center;gap:10px}.tp-en{font:700 17px var(--mono);color:var(--accent);direction:ltr}.tp-ar{font-size:16px;font-weight:800;margin-top:5px}.tp-def{font-size:12.5px;color:var(--text-dim);margin-top:5px}.speak{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:8px;width:36px;height:36px}.speak:hover{border-color:var(--accent);color:var(--accent)}
+.quiz-option{border:1px solid var(--line);padding:13px 14px;border-radius:11px;background:var(--panel-2);display:flex;justify-content:space-between;gap:10px;align-items:center;transition:.16s}.quiz-option:hover{border-color:var(--accent)}.quiz-option.correct{border-color:var(--good);background:rgba(34,197,94,.11);color:var(--good)}.quiz-option.incorrect{border-color:var(--bad);background:rgba(239,68,68,.11);color:var(--bad)}.quiz-option.disabled{pointer-events:none}.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:12px;color:var(--text-dim)}.quiz-options{display:grid;gap:10px}.score-ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;margin:0 auto 15px;border:6px solid var(--line);text-align:center}.score-ring.pass{border-color:var(--good);color:var(--good)}.score-ring.fail{border-color:var(--bad);color:var(--bad)}.score-ring .pct{font:700 27px var(--mono)}.score-ring .of{font-size:11px;color:var(--text-dim)}
+.review-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:14px}.review-card{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:15px}.review-card .term-line{font:700 17px var(--mono);color:var(--accent);direction:ltr}.risk{display:inline-flex;font-size:10px;padding:3px 7px;border-radius:999px;background:rgba(239,68,68,.1);color:var(--bad);border:1px solid rgba(239,68,68,.18)}
+.analytics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}.metric-list{display:grid;gap:9px}.metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line);font-size:13px}.metric:last-child{border-bottom:0}.bars{display:flex;align-items:flex-end;gap:7px;height:130px;padding-top:10px}.bar{flex:1;min-width:10px;background:var(--accent);opacity:.85;border-radius:5px 5px 2px 2px}.bar-label{font-size:9px;color:var(--text-dimmer);text-align:center;margin-top:3px;white-space:nowrap}.badge-grid{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-top:14px}.badge{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:14px;opacity:.42;transition:.2s}.badge.unlocked{opacity:1;border-color:var(--accent);background:var(--accent-soft)}.badge-icon{font-size:28px}.badge-title{font-weight:800;margin-top:5px}.badge-desc{font-size:11px;color:var(--text-dim)}
+.settings-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.setting{border:1px solid var(--line);background:var(--panel-2);border-radius:13px;padding:16px}.setting h3{margin:0 0 5px;font-size:15px}.setting p{margin:0 0 10px;color:var(--text-dim);font-size:12px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.toggle{position:relative;width:48px;height:28px;background:var(--line);border-radius:999px;border:0}.toggle::after{content:"";position:absolute;width:22px;height:22px;top:3px;right:3px;border-radius:50%;background:var(--text);transition:.2s}.toggle.on{background:var(--accent)}.toggle.on::after{right:23px;background:#fff}.range{width:100%}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;background:var(--panel);border:1px solid var(--accent);padding:11px 15px;border-radius:12px;box-shadow:var(--shadow);z-index:60;transition:.25s;max-width:min(92vw,480px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);display:grid;place-items:center;z-index:50;padding:16px}.modal{width:min(520px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}.modal h2{margin:0 0 6px}.form{display:grid;gap:10px;margin-top:14px}.field{display:grid;gap:6px}.field label{font-size:12px;color:var(--text-dim)}.field input{width:100%;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:11px 12px;border-radius:10px;outline:none}.field input:focus{border-color:var(--accent)}.auth-note{font-size:11px;color:var(--text-dimmer);margin-top:10px}.auth-switch{text-align:center;font-size:12px;color:var(--text-dim);margin-top:12px}.link-btn{background:none;border:0;color:var(--accent);padding:0}.daily-banner{border:1px solid rgba(234,179,8,.35);background:rgba(234,179,8,.07);border-radius:13px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}.empty{padding:30px;text-align:center;color:var(--text-dimmer)}.muted{color:var(--text-dim)}
+@media(max-width:900px){.dashboard-grid,.analytics-grid,.settings-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.app-shell{padding:12px 10px 42px}.topbar{align-items:flex-start}.kpi-grid{grid-template-columns:1fr 1fr}.map-node{grid-template-columns:46px 1fr}.map-node .node-side{grid-column:2;text-align:right}.hero{padding:18px}.panel{padding:16px}.lesson-progress{min-width:100%}.passage-box{font-size:16px}.top-actions{width:100%}.top-actions>*{flex:1;justify-content:center}}
+
+/* ===== Premium UI refresh ===== */
+:root{--bg:#070b13;--bg-soft:#0d1320;--panel:#101827;--panel-2:#151f31;--line:#253149;--text:#eef3fb;--text-dim:#93a1ba;--text-dimmer:#63708a;--accent:#4aa7ff;--accent-soft:rgba(74,167,255,.12);--accent-glow:rgba(74,167,255,.26);--shadow-soft:0 10px 30px rgba(0,0,0,.16)}
+body.light{--bg:#f4f7fb;--bg-soft:#edf2f8;--panel:#fff;--panel-2:#f7f9fc;--line:#d9e1ed;--text:#152033;--text-dim:#61708a;--text-dimmer:#8794a9;--shadow-soft:0 8px 24px rgba(30,54,84,.08)}
+body{background:radial-gradient(900px 430px at 88% -5%,rgba(74,167,255,.12),transparent 62%),radial-gradient(700px 380px at -8% 106%,rgba(49,209,124,.07),transparent 62%),var(--bg);}
+.app-shell{max-width:1240px;padding:22px 18px 70px}.topbar{position:sticky;top:0;z-index:30;margin:0 -18px 22px;padding:12px 18px;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(18px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.panel{border-color:color-mix(in srgb,var(--line) 88%,transparent);box-shadow:var(--shadow-soft);overflow:hidden}.hero{padding:30px;background:linear-gradient(145deg,color-mix(in srgb,var(--panel) 92%,var(--accent) 8%),var(--panel))}
+.brand:hover{background:var(--accent-soft);border-radius:14px}.logo{box-shadow:0 10px 30px var(--accent-glow),inset 0 1px 0 rgba(255,255,255,.16)}
+.icon-btn,.ghost-btn,.primary-btn,.danger-btn{min-height:40px;box-shadow:0 4px 12px rgba(0,0,0,.07)}.primary-btn{box-shadow:0 8px 22px var(--accent-glow)}
+.kpi{transition:.18s ease}.kpi:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.progress-track{height:10px;box-shadow:inset 0 1px 3px rgba(0,0,0,.16)}.progress-fill{background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 65%,white));box-shadow:0 0 18px var(--accent-glow)}
+.daily-banner{border-color:color-mix(in srgb,var(--warn) 30%,var(--line));background:linear-gradient(90deg,rgba(242,201,76,.10),transparent)}
+.nav-tabs{padding:5px;border-radius:13px;background:var(--panel-2)}.track-card{min-height:185px;padding:22px;background:linear-gradient(145deg,var(--panel),color-mix(in srgb,var(--panel) 88%,var(--tc) 12%));box-shadow:var(--shadow-soft)}.track-card:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(0,0,0,.14)}.track-icon{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
+.map-node{min-height:72px;padding:14px 16px;transition:.18s ease}.map-node:not(.locked):hover{transform:translateX(-4px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));box-shadow:0 10px 28px rgba(0,0,0,.08)}
+.lesson-progress{background:var(--panel-2);padding:12px 14px;border:1px solid var(--line);border-radius:14px}.flashcard{height:155px}.flashcard:hover .flashcard-face{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.translation-panel{min-height:84px}.quiz-shell{max-width:900px;margin:0 auto}.quiz-option{min-height:58px}.quiz-option:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(0,0,0,.06)}.score-ring{box-shadow:0 0 0 10px color-mix(in srgb,var(--accent) 5%,transparent),0 12px 34px rgba(0,0,0,.10)}
+.review-card,.setting,.badge{transition:.18s ease}.review-card:hover,.setting:hover,.badge:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}.user-chip,.mini-progress{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:12px;color:var(--text-dim);white-space:nowrap}.user-dot{font-size:8px;color:var(--good)}.mini-progress{font-family:var(--mono);color:var(--accent);font-weight:700}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 65%,white);outline-offset:2px}@media(max-width:860px){.dashboard-grid{grid-template-columns:1fr}.topbar{position:static}.top-actions{width:100%;overflow:auto;flex-wrap:nowrap}.kpi-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.app-shell{padding:12px}.topbar{margin:0 -12px 16px;padding:10px 12px}.brand p{display:none}.lesson-progress{min-width:100%}.map-node{grid-template-columns:46px 1fr}.map-node .node-side{display:none}.row-actions .primary-btn,.row-actions .ghost-btn{flex:1;justify-content:center}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="authModal" class="modal-backdrop">
+  <div class="modal">
+    <div class="eyebrow">TECHTERM / LOCAL ACCOUNT</div>
+    <h2 id="authTitle">تسجيل الدخول</h2>
+    <p id="authSubtitle" class="lead">سجّل دخولك لمتابعة تقدمك من هذا الجهاز.</p>
+    <div class="form">
+      <div class="field"><label>اسم المستخدم</label><input id="authUser" aria-label="اسم المستخدم" autocomplete="username" maxlength="24"></div>
+      <div class="field"><label>كلمة المرور</label><input id="authPass" aria-label="كلمة المرور" type="password" autocomplete="current-password" maxlength="64"></div>
+      <button id="authSubmit" class="primary-btn full">🔐 تسجيل الدخول</button>
+      <div class="auth-switch"><span id="authSwitchText">ليس لديك حساب؟</span> <button id="authSwitch" class="link-btn">إنشاء حساب</button></div>
+      <div class="auth-note">الحساب محلي على هذا الجهاز. لا يوجد خادم أو مزامنة سحابية في هذه النسخة.</div>
+    </div>
+  </div>
+</div>
+
+<div class="app-shell hidden" id="appShell">
+  <header class="topbar">
+    <div class="brand" id="brandHome">
+      <div class="logo">&lt;/&gt;</div>
+      <div><h1>TechTerm</h1><p>أكاديمية المصطلحات التقنية — حاسوب · ذكاء اصطناعي · أمن سيبراني</p></div>
+    </div>
+    <div class="top-actions">
+      <div class="user-chip" title="الحساب الحالي"><span class="user-dot">●</span><span id="topUserName">الحساب</span></div>
+      <div class="mini-progress" title="التقدم الكلي"><span id="topProgressDot">0%</span></div>
+      <button class="icon-btn" id="dictBtn">📖 القاموس</button>
+      <button class="icon-btn" id="reviewBtn">🧠 المراجعة</button>
+      <button class="icon-btn" id="analyticsBtn">📊 تقدمي</button>
+      <button class="icon-btn" id="settingsBtn">⚙️ الإعدادات</button>
+      <button class="icon-btn" id="logoutBtn">↪️ خروج</button>
+    </div>
+  </header>
+
+  <section id="screen-home" class="screen active">
+    <div class="dashboard-grid">
+      <div class="panel hero">
+        <div class="hero-head">
+          <div><div class="eyebrow">DASHBOARD</div><h2 class="title">مرحبًا، <span id="welcomeName" class="accent"></span> 👋</h2><p class="lead">طوّر مصطلحاتك التقنية خطوة بخطوة، واكسب XP، وحافظ على سلسلة تعلّمك اليومية.</p></div>
+          <div class="streak-card"><div class="streak">🔥 <span id="streakValue">0</span></div><div class="streak-sub">يوم متتالي</div></div>
+        </div>
+        <div class="progress-wrap"><div class="progress-row"><span>التقدم الكلي</span><strong id="globalProgressText">0%</strong></div><div class="progress-track"><div id="globalProgressFill" class="progress-fill"></div></div></div>
+        <div class="kpi-grid">
+          <div class="kpi"><div id="xpValue" class="v">0</div><div class="l">XP</div></div>
+          <div class="kpi"><div id="lessonsDoneValue" class="v">0</div><div class="l">دروس مكتملة</div></div>
+          <div class="kpi"><div id="levelsDoneValue" class="v">0</div><div class="l">مستويات مكتملة</div></div>
+          <div class="kpi"><div id="vocabMasteredValue" class="v">0</div><div class="l">مصطلحات متقنة</div></div>
+        </div>
+        <div id="dailyBanner" class="daily-banner hidden"><div>🔥 <strong>عدت اليوم!</strong><span class="muted"> حافظ على سلسلة التعلّم.</span></div><button id="dailyAction" class="ghost-btn small">فتح المراجعة</button></div>
+      </div>
+      <div class="panel"><div class="eyebrow">QUICK START</div><h3 style="margin:5px 0">استمر من حيث توقفت</h3><p id="continueText" class="lead">اختر مسارًا للبدء.</p><div class="row-actions"><button id="continueBtn" class="primary-btn">🚀 متابعة التعلم</button></div><div style="margin-top:18px" class="section-label">// أحدث الإنجازات</div><div id="recentBadges" class="badge-grid"></div></div>
+    </div>
+    <div class="nav-tabs"><button class="tab active" data-home-tab="paths">🗺 المسارات</button><button class="tab" data-home-tab="progress">📊 ملخص التقدم</button></div>
+    <div id="homeTabPaths"><div class="panel"><h2 class="title">اختر مسارك</h2><p class="lead">ثلاثة مسارات، أربعة مستويات لكل مسار، وثلاثة دروس في كل مستوى.</p><div id="trackGrid" class="track-grid"></div></div></div>
+    <div id="homeTabProgress" class="hidden"><div class="panel"><h2 class="title">ملخصك الحالي</h2><div id="homeProgressSummary" class="analytics-grid"></div></div></div>
+  </section>
+
+  <section id="screen-levels" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">LEARNING MAP</div><h2 id="levelsTitle" class="title"></h2><p id="levelsLead" class="lead"></p></div><button id="backHomeBtn" class="ghost-btn">↩ الرئيسية</button></div><div id="levelMap" class="map"></div></div></section>
+
+  <section id="screen-lessons" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">LEVEL / LESSONS</div><h2 id="lessonsTitle" class="title"></h2><p id="lessonsLead" class="lead"></p></div><button id="backToLevelsBtn" class="ghost-btn">↩ المستويات</button></div><div id="lessonGrid" class="map"></div></div></section>
+
+  <section id="screen-lesson" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow" id="lessonBarLabel">LESSON</div><h2 id="lessonTitle" class="title"></h2><p id="lessonLead" class="lead"></p></div><div class="lesson-progress"><div class="progress-row"><span>إكمال الدرس</span><strong id="lessonProgressText">0%</strong></div><div class="progress-track"><div id="lessonProgressFill" class="progress-fill"></div></div></div></div><div class="row-actions" style="margin-top:16px"><button id="learnModeBtn" class="tab active">📖 Learn</button><button id="practiceModeBtn" class="tab">🧩 Practice</button><button id="backLevelsBtn2" class="ghost-btn">↩ رجوع</button></div><div id="lessonLearnArea"><div class="section-label">// المفردات</div><div id="vocabGrid" class="vocab-grid"></div><div class="section-label">// نص القراءة</div><div id="passageBox" class="passage-box"></div><div class="row-actions"><button id="listenPassageBtn" class="ghost-btn">🔊 استماع للنص</button></div><div id="translationPanel" class="translation-panel"><div class="muted">اضغط أي كلمة في النص أو بطاقة لعرض الترجمة والتعريف.</div></div><div class="row-actions"><button id="startLessonQuizBtn" class="primary-btn">📝 ابدأ اختبار الدرس</button></div></div><div id="lessonPracticeArea" class="hidden"><div class="panel" style="margin-top:14px;background:var(--panel-2)"><h3 style="margin-top:0">🧩 Practice Mode</h3><p class="lead">أسئلة قصيرة ومتنوعة للتدرب قبل الاختبار الرسمي. المصطلحات التي تخطئ بها أكثر ستظهر لك بنسبة أعلى لاحقًا.</p><div class="row-actions"><button id="startPracticeBtn" class="primary-btn">بدء التدريب</button></div></div></div></div></section>
+
+  <section id="screen-quiz" class="screen"><div class="panel"><div class="quiz-meta"><span id="quizModeLabel">QUIZ</span><span id="quizCounter">1/1</span></div><div class="progress-track"><div id="quizProgressFill" class="progress-fill"></div></div><h2 id="quizTitle" class="title" style="font-size:22px;margin-top:18px"></h2><div id="quizPrompt" style="font-size:16px;margin:14px 0"></div><div id="quizOptions" class="quiz-options"></div><div class="row-actions"><button id="quizNextBtn" class="primary-btn" style="display:none">السؤال التالي</button></div></div></section>
+
+  <section id="screen-quiz-result" class="screen"><div class="panel" style="text-align:center"><div id="scoreRing" class="score-ring"><div><div id="scorePct" class="pct">0%</div><div id="scoreOf" class="of">0 / 0</div></div></div><h2 id="resultTitle" class="title" style="font-size:25px"></h2><p id="resultText" class="lead"></p><div id="xpEarnedResult" class="accent" style="font-weight:800;margin-top:7px"></div><div id="missedList" style="margin-top:18px;text-align:right"></div><div id="resultActions" class="row-actions" style="justify-content:center"></div></div></section>
+
+  <section id="screen-review" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">SMART REVIEW</div><h2 class="title">🧠 مركز المراجعة الذكي</h2><p class="lead">مصطلحات مختارة تلقائيًا حسب أخطائك، تكرار الفشل، ومدة الغياب عن المراجعة.</p></div><button id="reviewBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div id="reviewSummary" class="kpi-grid"></div><div id="reviewGrid" class="review-grid"></div><div class="row-actions"><button id="startReviewBtn" class="primary-btn">🧠 إنشاء اختبار مراجعة</button></div></div></section>
+
+  <section id="screen-analytics" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">MY PROGRESS</div><h2 class="title">📊 تحليلات التعلّم</h2><p class="lead">صورة شاملة عن دروسك، مستوياتك، محاولاتك، المفردات، XP والسلسلة اليومية.</p></div><button id="analyticsBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div id="analyticsGrid" class="analytics-grid"></div><div class="section-label">// الإنجازات</div><div id="badgeGrid" class="badge-grid"></div></div></section>
+
+  <section id="screen-settings" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">SETTINGS</div><h2 class="title">⚙️ الإعدادات</h2><p class="lead">تحكم في المظهر، الصوت، حجم الخط، وبيانات التقدم.</p></div><button id="settingsBackBtn" class="ghost-btn">↩ الرئيسية</button></div><div class="settings-grid" style="margin-top:16px"><div class="setting"><h3>المظهر</h3><p>التبديل بين الوضع الداكن والفاتح.</p><div class="setting-row"><span id="themeLabel">الوضع الداكن</span><button id="themeToggle" class="toggle"></button></div></div><div class="setting"><h3>الصوت</h3><p>كتم جميع المؤثرات والصوتيات.</p><div class="setting-row"><span id="muteLabel">مفعّل</span><button id="muteToggle" class="toggle on"></button></div></div><div class="setting"><h3>مستوى الصوت</h3><p>اضبط شدة مؤثرات التطبيق.</p><input id="volumeRange" class="range" type="range" min="0" max="100" step="1"></div><div class="setting"><h3>حجم الخط</h3><p>تكبير أو تصغير النص للقراءة المريحة.</p><input id="fontRange" class="range" type="range" min="90" max="125" step="5"></div><div class="setting"><h3>الحساب المحلي</h3><p id="accountInfo"></p><button id="logoutBtn2" class="ghost-btn">↪️ تسجيل الخروج</button></div><div class="setting"><h3>بيانات التقدم</h3><p>حذف تقدم الحساب الحالي وإعادة كل الدروس والإنجازات إلى الصفر.</p><button id="resetProgressBtn" class="danger-btn">🗑 إعادة ضبط التقدم</button></div></div></div></section>
+
+  <section id="screen-dict" class="screen"><div class="panel"><div class="lesson-head"><div><div class="eyebrow">DICTIONARY</div><h2 class="title">📖 قاموس المصطلحات التقنية</h2><p class="lead">ابحث بالعربية أو الإنجليزية في المصطلحات المتخصصة وكلمات النصوص.</p></div><button id="dictBackBtn" class="ghost-btn">↩ الرئيسية</button></div><input id="dictSearch" aria-label="البحث في القاموس" class="field-input" placeholder="اكتب مثلاً: algorithm أو خوارزمية" style="width:100%;margin-top:16px;border:1px solid var(--line);background:var(--panel-2);color:var(--text);padding:13px;border-radius:10px"><div id="dictResults" style="display:grid;gap:9px;margin-top:13px"></div></div></section>
+
+  <footer style="text-align:center;color:var(--text-dimmer);font-size:11px;margin-top:24px">TechTerm يعمل محليًا من ملف واحد. التقدم والحسابات تُحفظ داخل localStorage لهذا المتصفح.</footer>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const TRACKS = {
+  cs:{ key:"cs", name:"علوم الحاسوب وتكنولوجيا المعلومات", short:"Computer Science & IT", icon:"💻", cls:"cs" },
+  ai:{ key:"ai", name:"الذكاء الاصطناعي", short:"Artificial Intelligence", icon:"🤖", cls:"ai" },
+  sec:{ key:"sec", name:"الأمن السيبراني", short:"Cybersecurity", icon:"🛡️", cls:"sec" }
+};
+const LEVEL_KEYS = ["beginner","intermediate","advanced","professional"];
+const LEVEL_LABELS = { beginner:"مبتدئ", intermediate:"متوسط", advanced:"متقدم", professional:"احترافي" };
+
+/* =========================================================
+   DATA — VOCAB + PASSAGES
+========================================================= */
+const VOCAB = {
+cs:{
+ beginner:[
+  {en:"computer", ar:"حاسوب", def:"جهاز إلكتروني يقوم بمعالجة البيانات وتنفيذ التعليمات وفق برنامج مخزَّن."},
+  {en:"hardware", ar:"عتاد (مكونات مادية)", def:"المكونات المادية الملموسة للحاسوب مثل المعالج والذاكرة والشاشة."},
+  {en:"software", ar:"برمجيات", def:"مجموعة البرامج والتعليمات التي تشغّل الحاسوب وتوجّه عمل عتاده."},
+  {en:"file", ar:"ملف", def:"وحدة مخزَّنة من البيانات تحمل اسمًا ويمكن حفظها أو فتحها أو نقلها."},
+  {en:"folder", ar:"مجلد", def:"حاوية تنظيمية تُستخدم لتجميع الملفات ذات الصلة داخل نظام التشغيل."},
+  {en:"keyboard", ar:"لوحة مفاتيح", def:"وحدة إدخال تُستخدم لكتابة النصوص والأوامر إلى الحاسوب."},
+  {en:"mouse", ar:"فأرة", def:"وحدة إدخال تُستخدم للتأشير والنقر على عناصر واجهة المستخدم."},
+  {en:"internet", ar:"إنترنت", def:"شبكة عالمية تربط ملايين الحواسيب وتتيح تبادل المعلومات بينها."},
+  {en:"password", ar:"كلمة مرور", def:"سلسلة سرّية من الرموز تُستخدم للتحقق من هوية المستخدم والوصول إلى نظام أو حساب."},
+  {en:"operating system", ar:"نظام التشغيل", def:"برنامج أساسي يدير موارد الحاسوب ويوفر بيئة لتشغيل بقية البرمجيات."}
+ ],
+ intermediate:[
+  {en:"algorithm", ar:"خوارزمية", def:"مجموعة منظمة من الخطوات المتسلسلة لحل مسألة أو تنفيذ مهمة محددة."},
+  {en:"variable", ar:"متغيّر", def:"عنصر برمجي يُستخدم لتخزين قيمة يمكن أن تتغيّر أثناء تنفيذ البرنامج."},
+  {en:"function", ar:"دالة", def:"وحدة برمجية مستقلة تنفّذ مهمة محددة ويمكن استدعاؤها عدة مرات."},
+  {en:"loop", ar:"حلقة تكرارية", def:"بنية برمجية تُستخدم لتكرار تنفيذ مجموعة من التعليمات عدة مرات."},
+  {en:"array", ar:"مصفوفة", def:"بنية بيانات تخزّن مجموعة من العناصر المتشابهة النوع تحت اسم واحد."},
+  {en:"database", ar:"قاعدة بيانات", def:"نظام منظم لتخزين البيانات واسترجاعها وإدارتها بكفاءة."},
+  {en:"debugging", ar:"تنقيح الأخطاء", def:"عملية اكتشاف الأخطاء البرمجية وتصحيحها داخل الشيفرة المصدرية."},
+  {en:"compiler", ar:"مترجم (مصرّف)", def:"برنامج يحوّل الشيفرة المصدرية المكتوبة بلغة برمجة عالية إلى لغة الآلة."},
+  {en:"syntax", ar:"قواعد الصياغة اللغوية", def:"مجموعة القواعد التي تحدد الشكل الصحيح لكتابة تعليمات لغة برمجية معينة."},
+  {en:"version control", ar:"إدارة الإصدارات", def:"نظام يسجّل التغييرات على الشيفرة البرمجية بمرور الوقت ويتيح الرجوع إليها."}
+ ],
+ advanced:[
+  {en:"api", ar:"واجهة برمجة التطبيقات (API)", def:"مجموعة من القواعد والبروتوكولات التي تتيح لبرنامج ما التواصل مع برنامج آخر."},
+  {en:"framework", ar:"إطار عمل", def:"بنية برمجية جاهزة توفر أدوات وقواعد لتسريع بناء التطبيقات ضمن معايير موحدة."},
+  {en:"cloud computing", ar:"الحوسبة السحابية", def:"تقديم موارد حاسوبية (تخزين، معالجة، برمجيات) عبر الإنترنت بدلًا من الأجهزة المحلية."},
+  {en:"scalability", ar:"قابلية التوسع", def:"قدرة النظام على التعامل مع زيادة الحمل أو عدد المستخدمين دون تدهور الأداء."},
+  {en:"microservices", ar:"الخدمات المصغّرة", def:"أسلوب معماري يقسّم التطبيق إلى خدمات مستقلة صغيرة تتواصل فيما بينها."},
+  {en:"latency", ar:"زمن الاستجابة (الكمون)", def:"الفترة الزمنية التي يستغرقها النظام للاستجابة لطلب معين."},
+  {en:"concurrency", ar:"التزامن", def:"قدرة النظام على تنفيذ عدة مهام في الوقت نفسه أو التداخل بينها."},
+  {en:"containerization", ar:"الحوسبة بالحاويات", def:"تقنية لتغليف التطبيق مع بيئته التشغيلية في وحدة معزولة قابلة للنقل تُسمى حاوية."},
+  {en:"load balancing", ar:"موازنة الحمل", def:"توزيع الطلبات الواردة على عدة خوادم لتحسين الأداء وضمان الاستقرار."},
+  {en:"technical debt", ar:"الدين التقني", def:"التكلفة المستقبلية الناتجة عن اختيار حلول برمجية سريعة وغير مثالية لتوفير الوقت حاليًا."}
+ ],
+ professional:[
+  {en:"distributed systems", ar:"الأنظمة الموزعة", def:"أنظمة تتكون من عدة حواسيب مستقلة تتعاون فيما بينها لتبدو للمستخدم كنظام واحد متكامل."},
+  {en:"fault tolerance", ar:"تحمّل الأعطال", def:"قدرة النظام على مواصلة العمل بشكل صحيح حتى عند حدوث أعطال في بعض مكوناته."},
+  {en:"consensus algorithm", ar:"خوارزمية الإجماع", def:"إجراء يتيح لعدة عقد في نظام موزّع الاتفاق على قيمة واحدة رغم احتمال حدوث أعطال."},
+  {en:"eventual consistency", ar:"الاتساق النهائي", def:"نموذج بيانات يضمن أن جميع نسخ البيانات ستتطابق في النهاية دون ضمان تطابقها الفوري."},
+  {en:"asynchronous programming", ar:"البرمجة غير المتزامنة", def:"أسلوب برمجي يسمح بتنفيذ عمليات متعددة دون انتظار انتهاء كل عملية قبل بدء التالية."},
+  {en:"software architecture", ar:"هندسة البرمجيات المعمارية", def:"التصميم البنيوي رفيع المستوى لنظام برمجي، يحدد مكوناته وعلاقاتها ومبادئه التوجيهية."},
+  {en:"formal verification", ar:"التحقق الصوري (الرسمي)", def:"أسلوب رياضي يُستخدم لإثبات صحة البرنامج مقابل مواصفات محددة إثباتًا قاطعًا."},
+  {en:"computational complexity", ar:"التعقيد الحسابي", def:"دراسة الموارد (الزمن والذاكرة) اللازمة لتنفيذ خوارزمية معينة مع نمو حجم المدخلات."},
+  {en:"idempotency", ar:"اللاتغيّرية (الإدمبوتنسية)", def:"خاصية العملية التي تعطي النتيجة نفسها بغض النظر عن عدد مرات تنفيذها."},
+  {en:"observability", ar:"قابلية الرصد", def:"القدرة على فهم الحالة الداخلية للنظام من خلال مخرجاته مثل السجلات والمقاييس والتتبع."}
+ ]
+},
+ai:{
+ beginner:[
+  {en:"artificial intelligence", ar:"الذكاء الاصطناعي", def:"فرع من علوم الحاسوب يهدف إلى بناء أنظمة قادرة على أداء مهام تتطلب عادة ذكاءً بشريًا."},
+  {en:"machine learning", ar:"تعلّم الآلة", def:"فرع من الذكاء الاصطناعي يمكّن الحاسوب من التعلّم من البيانات وتحسين أدائه دون برمجة صريحة لكل حالة."},
+  {en:"data", ar:"بيانات", def:"مجموعة من الحقائق أو القيم الخام التي تُجمع وتُعالج لاستخلاص معلومات مفيدة منها."},
+  {en:"model", ar:"نموذج", def:"تمثيل رياضي أو حسابي يتعلّمه النظام من البيانات لأداء مهمة مثل التصنيف أو التنبؤ."},
+  {en:"training", ar:"تدريب (النموذج)", def:"عملية تعليم النموذج من خلال عرض بيانات عليه وتعديل معاملاته لتحسين أدائه."},
+  {en:"prediction", ar:"تنبؤ", def:"الناتج الذي يقدّمه النموذج بناءً على مدخلات جديدة استنادًا لما تعلّمه سابقًا."},
+  {en:"dataset", ar:"مجموعة بيانات", def:"مجموعة منظمة من البيانات تُستخدم لتدريب النموذج أو اختباره."},
+  {en:"chatbot", ar:"روبوت محادثة", def:"برنامج يحاكي المحادثة البشرية ويتفاعل مع المستخدمين عبر النص أو الصوت."},
+  {en:"accuracy", ar:"الدقة", def:"مقياس يوضح نسبة التنبؤات الصحيحة التي يحققها النموذج من إجمالي التنبؤات."},
+  {en:"automation", ar:"الأتمتة", def:"استخدام التقنية لتنفيذ مهام كانت تتطلب تدخلًا بشريًا دون تدخل مباشر من الإنسان."}
+ ],
+ intermediate:[
+  {en:"neural network", ar:"الشبكة العصبية", def:"نموذج حاسوبي مستوحى من بنية الدماغ البشري، يتكوّن من طبقات مترابطة من العقد الاصطناعية."},
+  {en:"deep learning", ar:"التعلّم العميق", def:"فرع من تعلّم الآلة يعتمد على شبكات عصبية متعددة الطبقات لمعالجة بيانات معقدة كالصور والنصوص."},
+  {en:"supervised learning", ar:"التعلّم الموجَّه (تحت الإشراف)", def:"أسلوب تعلّم يُدرَّب فيه النموذج على بيانات موسومة تحمل إجابات صحيحة معروفة مسبقًا."},
+  {en:"unsupervised learning", ar:"التعلّم غير الموجَّه", def:"أسلوب تعلّم يكتشف فيه النموذج الأنماط في بيانات غير موسومة دون إجابات معروفة مسبقًا."},
+  {en:"overfitting", ar:"الإفراط في التخصيص (فرط التوافق)", def:"حالة يحفظ فيها النموذج بيانات التدريب بدقة عالية لكنه يفشل في التعميم على بيانات جديدة."},
+  {en:"feature", ar:"سمة (خاصية)", def:"متغيّر مُدخل يُستخدم لوصف البيانات ويساعد النموذج على التعلّم واتخاذ القرار."},
+  {en:"natural language processing", ar:"معالجة اللغة الطبيعية", def:"فرع من الذكاء الاصطناعي يُعنى بتمكين الحاسوب من فهم اللغة البشرية ومعالجتها وتوليدها."},
+  {en:"computer vision", ar:"الرؤية الحاسوبية", def:"فرع من الذكاء الاصطناعي يُعنى بتمكين الحاسوب من فهم الصور ومقاطع الفيديو وتحليلها."},
+  {en:"classification", ar:"التصنيف", def:"مهمة تعلّم آلي تهدف إلى تحديد الفئة التي تنتمي إليها بيانات مُدخلة معينة."},
+  {en:"hyperparameter", ar:"معامل فائق", def:"إعداد يُحدَّد قبل بدء عملية تدريب النموذج ويؤثر في كيفية تعلّمه، كمعدل التعلّم."}
+ ],
+ advanced:[
+  {en:"transformer", ar:"المحوّل (المُحوِّل العصبي)", def:"بنية شبكة عصبية تعتمد على آلية الانتباه، وتُعد الأساس وراء أغلب نماذج اللغة الحديثة."},
+  {en:"attention mechanism", ar:"آلية الانتباه", def:"آلية تتيح للنموذج التركيز على الأجزاء الأكثر أهمية من المدخلات عند معالجة كل عنصر فيها."},
+  {en:"embedding", ar:"التضمين", def:"تمثيل رقمي كثيف للكلمات أو البيانات في فضاء متعدد الأبعاد بحيث تعكس المسافات بينها التشابه في المعنى."},
+  {en:"fine-tuning", ar:"الضبط الدقيق", def:"عملية إعادة تدريب نموذج مُدرَّب مسبقًا على بيانات محددة لتخصيصه لمهمة أو مجال جديد."},
+  {en:"reinforcement learning", ar:"التعلّم المعزَّز", def:"أسلوب تعلّم يتخذ فيه عميل ذكي قرارات ضمن بيئة، ويتعلّم من خلال المكافآت والعقوبات."},
+  {en:"gradient descent", ar:"الانحدار التدريجي", def:"خوارزمية تحسين تُستخدم لتعديل معاملات النموذج تدريجيًا بهدف تقليل قيمة دالة الخسارة."},
+  {en:"loss function", ar:"دالة الخسارة", def:"دالة رياضية تقيس مدى ابتعاد تنبؤات النموذج عن القيم الصحيحة الفعلية."},
+  {en:"generative model", ar:"النموذج التوليدي", def:"نموذج قادر على إنشاء بيانات جديدة (نصوص أو صور) مشابهة للبيانات التي تدرّب عليها."},
+  {en:"bias", ar:"التحيّز (في الذكاء الاصطناعي)", def:"ميل منهجي غير مقصود في تنبؤات النموذج، غالبًا بسبب عدم توازن في بيانات التدريب."},
+  {en:"inference", ar:"الاستدلال", def:"مرحلة استخدام نموذج مدرَّب لتوليد تنبؤات على بيانات جديدة بعد انتهاء مرحلة التدريب."}
+ ],
+ professional:[
+  {en:"large language model", ar:"النموذج اللغوي الكبير (LLM)", def:"نموذج تعلّم عميق ضخم مُدرَّب على كميات هائلة من النصوص، قادر على فهم اللغة الطبيعية وتوليدها."},
+  {en:"llm", ar:"النموذج اللغوي الكبير", def:"اختصار Large Language Model — نموذج تعلّم عميق ضخم مُدرَّب على كميات هائلة من النصوص."},
+  {en:"tokenization", ar:"التقطيع الرمزي (التوكنة)", def:"عملية تقسيم النص إلى وحدات أصغر تسمى رموزًا (tokens) قابلة للمعالجة من قبل النموذج."},
+  {en:"hallucination", ar:"الهلوسة (في الذكاء الاصطناعي)", def:"إنتاج النموذج لمعلومات تبدو منطقية لكنها غير صحيحة أو غير مدعومة بالحقائق."},
+  {en:"alignment", ar:"المواءمة (التوافق القيمي)", def:"مجال بحثي يهدف إلى جعل سلوك أنظمة الذكاء الاصطناعي متوافقًا مع قيم وأهداف الإنسان."},
+  {en:"prompt engineering", ar:"هندسة التوجيه (هندسة المُدخلات)", def:"ممارسة صياغة المُدخلات النصية بعناية للحصول على أفضل استجابة ممكنة من نموذج لغوي."},
+  {en:"retrieval-augmented generation", ar:"التوليد المعزَّز بالاسترجاع (RAG)", def:"أسلوب يدمج بحثًا في مصادر خارجية مع توليد النص لتحسين دقة إجابات النموذج."},
+  {en:"model interpretability", ar:"قابلية تفسير النموذج", def:"القدرة على فهم وشرح كيفية اتخاذ نموذج الذكاء الاصطناعي لقراراته الداخلية."},
+  {en:"emergent capability", ar:"القدرة الناشئة", def:"سلوك أو قدرة تظهر فجأة في نموذج كبير دون أن تكون موجودة أو متوقعة في النماذج الأصغر."},
+  {en:"multimodal model", ar:"النموذج متعدد الوسائط", def:"نموذج قادر على معالجة وفهم أكثر من نوع واحد من البيانات في آنٍ واحد، كالنص والصورة."}
+ ]
+},
+sec:{
+ beginner:[
+  {en:"cybersecurity", ar:"الأمن السيبراني", def:"مجال يُعنى بحماية الأنظمة والشبكات والبيانات من الوصول غير المصرّح به أو الهجمات."},
+  {en:"malware", ar:"برمجية خبيثة", def:"برنامج مصمَّم عمدًا لإلحاق الضرر بنظام حاسوبي أو سرقة بياناته أو تعطيل عمله."},
+  {en:"virus", ar:"فيروس (حاسوبي)", def:"نوع من البرمجيات الخبيثة يُلحق نفسه ببرنامج آخر وينتشر عند تشغيله."},
+  {en:"firewall", ar:"جدار ناري", def:"نظام أمني يراقب حركة البيانات الداخلة والخارجة من الشبكة ويتحكم فيها وفق قواعد محددة."},
+  {en:"phishing", ar:"التصيّد الاحتيالي", def:"أسلوب احتيال يهدف إلى خداع الضحية لإفشاء معلومات حساسة عبر رسائل أو مواقع مزيّفة."},
+  {en:"encryption", ar:"التشفير", def:"عملية تحويل البيانات إلى صيغة غير مفهومة لحمايتها من الوصول غير المصرّح به."},
+  {en:"antivirus", ar:"برنامج مكافحة الفيروسات", def:"برنامج مصمَّم لاكتشاف البرمجيات الخبيثة ومنعها وإزالتها من النظام."},
+  {en:"backup", ar:"نسخة احتياطية", def:"نسخة إضافية من البيانات تُحفظ لاستعادتها في حال فقدان البيانات الأصلية أو تلفها."},
+  {en:"two-factor authentication", ar:"المصادقة الثنائية العوامل", def:"إجراء أمني يتطلب إثباتين مستقلين لهوية المستخدم قبل السماح له بالدخول."},
+  {en:"vulnerability", ar:"ثغرة أمنية", def:"نقطة ضعف في نظام أو برنامج يمكن استغلالها من قِبل مهاجم للوصول غير المصرّح به."}
+ ],
+ intermediate:[
+  {en:"authentication", ar:"المصادقة", def:"عملية التحقق من هوية مستخدم أو نظام قبل منحه صلاحية الوصول إلى مورد معين."},
+  {en:"authorization", ar:"التفويض (منح الصلاحيات)", def:"عملية تحديد الصلاحيات والموارد التي يُسمح لمستخدم مُصادَق عليه بالوصول إليها."},
+  {en:"brute-force attack", ar:"هجوم القوة الغاشمة", def:"أسلوب هجوم يعتمد على تجربة جميع الاحتمالات الممكنة بشكل منهجي حتى الوصول إلى القيمة الصحيحة."},
+  {en:"denial-of-service attack", ar:"هجوم حجب الخدمة (DoS)", def:"هجوم يهدف إلى إغراق نظام أو خادم بطلبات زائفة لجعل الخدمة غير متاحة للمستخدمين الشرعيين."},
+  {en:"social engineering", ar:"الهندسة الاجتماعية", def:"أسلوب خداع نفسي يستغل الثقة البشرية للحصول على معلومات سرية أو دفع الضحية لتنفيذ إجراء."},
+  {en:"ransomware", ar:"برمجية الفدية", def:"نوع من البرمجيات الخبيثة يشفّر بيانات الضحية ويطالب بدفع فدية مقابل استعادة الوصول إليها."},
+  {en:"patch", ar:"رقعة أمنية (تحديث إصلاحي)", def:"تحديث برمجي صغير يهدف إلى إصلاح ثغرة أمنية أو خطأ في نظام أو برنامج."},
+  {en:"intrusion detection system", ar:"نظام كشف التسلل", def:"نظام يراقب الشبكة أو النظام بحثًا عن أنشطة مشبوهة وينبّه المسؤولين عند اكتشافها."},
+  {en:"vpn", ar:"الشبكة الافتراضية الخاصة (VPN)", def:"تقنية تنشئ اتصالًا مشفَّرًا وآمنًا عبر شبكة عامة، مما يخفي هوية المستخدم ويحمي بياناته."},
+  {en:"penetration testing", ar:"اختبار الاختراق", def:"عملية محاكاة هجوم حقيقي على نظام بإذن مسبق، بهدف اكتشاف الثغرات الأمنية قبل استغلالها."}
+ ],
+ advanced:[
+  {en:"zero-day vulnerability", ar:"ثغرة يوم الصفر", def:"ثغرة أمنية غير معروفة للمُطوِّرين بعد، مما يجعلها قابلة للاستغلال قبل توفر أي إصلاح."},
+  {en:"sql injection", ar:"حقن SQL", def:"هجوم يستغل ثغرة في التطبيق لإدراج أوامر SQL خبيثة ضمن الاستعلامات، بهدف التلاعب بقاعدة البيانات."},
+  {en:"cross-site scripting", ar:"هجوم البرمجة النصية عبر المواقع (XSS)", def:"هجوم يُدرِج فيه المهاجم شيفرة نصية خبيثة داخل صفحة ويب موثوقة لتُنفَّذ في متصفح الضحية."},
+  {en:"privilege escalation", ar:"تصعيد الصلاحيات", def:"أسلوب هجومي يحصل فيه المهاجم على صلاحيات أعلى مما يفترض أن يمتلكه داخل النظام."},
+  {en:"threat intelligence", ar:"استخبارات التهديدات", def:"معلومات مُحلَّلة عن التهديدات والمهاجمين المحتملين تُستخدم لاتخاذ قرارات أمنية استباقية."},
+  {en:"siem", ar:"إدارة معلومات وأحداث الأمن (SIEM)", def:"نظام يجمع ويحلّل سجلات الأمن من مصادر متعددة لاكتشاف الحوادث والاستجابة لها بسرعة."},
+  {en:"incident response", ar:"الاستجابة للحوادث", def:"العملية المنظمة للتعامل مع حادثة أمنية بهدف احتوائها والحد من أضرارها واستعادة النظام."},
+  {en:"digital forensics", ar:"التحقيق الجنائي الرقمي", def:"علم جمع الأدلة الرقمية وتحليلها والحفاظ عليها لاستخدامها في التحقيق في حادثة أمنية."},
+  {en:"attack surface", ar:"سطح الهجوم", def:"مجموع النقاط أو المسارات المحتملة التي يمكن لمهاجم استغلالها للوصول إلى نظام ما."},
+  {en:"sandboxing", ar:"العزل الرقمي (البيئة المعزولة)", def:"تقنية تشغّل برنامجًا مشبوهًا داخل بيئة معزولة عن النظام الأساسي لمراقبة سلوكه دون خطر."}
+ ],
+ professional:[
+  {en:"advanced persistent threat", ar:"التهديد المستمر المتقدم (APT)", def:"هجوم سيبراني معقد وطويل الأمد، غالبًا تنفذه جهات مدعومة بموارد كبيرة، يهدف للبقاء دون اكتشاف."},
+  {en:"threat modeling", ar:"نمذجة التهديدات", def:"عملية منهجية لتحديد التهديدات المحتملة على نظام ما وتقييم مخاطرها قبل وقوعها."},
+  {en:"zero trust architecture", ar:"بنية الثقة الصفرية", def:"نموذج أمني لا يمنح ثقة تلقائية لأي مستخدم أو جهاز، ويشترط التحقق المستمر من كل طلب وصول."},
+  {en:"lateral movement", ar:"الحركة الجانبية", def:"أسلوب يستخدمه المهاجم بعد اختراق نظام أولي للتنقل داخل الشبكة والوصول إلى موارد إضافية."},
+  {en:"supply chain attack", ar:"هجوم سلسلة التوريد", def:"هجوم يستهدف مورّدًا أو طرفًا ثالثًا موثوقًا للوصول بشكل غير مباشر إلى الهدف النهائي."},
+  {en:"cryptographic protocol", ar:"البروتوكول التشفيري", def:"مجموعة قواعد رسمية تحدد كيفية تبادل البيانات المشفَّرة بأمان بين طرفين أو أكثر."},
+  {en:"red team", ar:"الفريق الأحمر", def:"فريق متخصص يحاكي أساليب المهاجمين الحقيقيين لاختبار مدى صمود دفاعات المؤسسة الأمنية."},
+  {en:"blue team", ar:"الفريق الأزرق", def:"فريق الدفاع المسؤول عن حماية المؤسسة ومراقبة أنظمتها والاستجابة للتهديدات الأمنية."},
+  {en:"security posture", ar:"الوضع الأمني العام", def:"التقييم الشامل لمدى قوة وجاهزية دفاعات المؤسسة الأمنية في مواجهة التهديدات المحتملة."},
+  {en:"regulatory compliance", ar:"الامتثال التنظيمي", def:"التزام المؤسسة بالمعايير والقوانين والتشريعات الأمنية المعمول بها في مجالها أو منطقتها."}
+ ]
+}
+};
+
+const PASSAGES = {
+cs:{
+ beginner:{titleAr:"حاسوبي في المنزل", titleEn:"My Computer at Home",
+  text:"I use my computer every day for study and fun. My computer has two main parts: hardware and software. The hardware includes the screen, the keyboard, and the mouse. The software includes the operating system and many programs. I save my work in files, and I organize these files inside folders. When I want to go online, I connect to the internet. To protect my account, I always use a strong password and never share it with anyone."},
+ intermediate:{titleAr:"تعلّم البرمجة", titleEn:"Learning to Program",
+  text:"When you start learning to program, you must first understand a few basic ideas. An algorithm is simply a clear set of steps that solves a problem. Inside your code, a variable stores a value that can change, while a function groups instructions together so you can reuse them. If you need to repeat an action, you use a loop, and if you need to store many values together, you use an array. Most real applications also connect to a database to save information permanently. Beginners often make mistakes, so debugging is an essential skill. Before your code can run, a compiler checks its syntax and translates it into machine language. Finally, professional developers rely on version control to track every change they make."},
+ advanced:{titleAr:"تصميم الأنظمة القابلة للتوسّع", titleEn:"Designing Scalable Systems",
+  text:"Modern software systems must be built with scalability in mind from the very beginning. Instead of one large application, many companies now rely on microservices, where each service communicates with others through a well-defined api. These services are often deployed using containerization, which packages an application with everything it needs to run consistently across different environments. As traffic grows, load balancing distributes incoming requests across multiple servers, reducing latency and preventing any single server from being overwhelmed. Engineers must also manage concurrency carefully, since many operations happen at the same time. Choosing a proven framework can speed up development, but teams that constantly cut corners under pressure often accumulate technical debt, which becomes expensive to fix later. Most large-scale systems today run on cloud computing platforms, which offer flexibility that traditional physical servers cannot easily match."},
+ professional:{titleAr:"هندسة الأنظمة الموزعة الموثوقة", titleEn:"Engineering Reliable Distributed Systems",
+  text:"Building large-scale distributed systems requires engineers to reason carefully about failure. Because any component can fail at any time, fault tolerance is not optional; it must be designed into the software architecture from the start. Many distributed databases rely on a consensus algorithm so that independent nodes can agree on a single value even when some of them fail or communicate slowly. To achieve high availability, some systems accept eventual consistency instead of strict, immediate agreement across all replicas. Modern backend services also depend heavily on asynchronous programming, allowing thousands of operations to proceed without blocking one another. Well-designed apis favor idempotency, so that retrying a failed request never produces unintended side effects. Understanding computational complexity remains essential, since an inefficient algorithm can quietly become the bottleneck of an entire platform. Finally, no serious production system can be operated safely without strong observability, which gives engineers the logs, metrics, and traces needed to diagnose problems quickly."}
+},
+ai:{
+ beginner:{titleAr:"ما هو الذكاء الاصطناعي؟", titleEn:"What Is Artificial Intelligence?",
+  text:"Artificial intelligence, or AI, is the science of building computer systems that can perform tasks that usually need human intelligence. One important part of AI is machine learning, where a computer learns from data instead of following fixed instructions. To build a system like this, engineers collect a large dataset and use it for training a model. After training, the model can make a prediction on new information it has never seen before. A simple chatbot is a good example of AI in daily life, since it can understand questions and give helpful answers. Engineers often measure the accuracy of a model to know how well it performs. Today, AI is used for automation in many industries, from healthcare to transportation."},
+ intermediate:{titleAr:"كيف تتعلم الآلات من البيانات؟", titleEn:"How Machines Learn from Data",
+  text:"Most modern AI systems rely on a neural network, a structure loosely inspired by the human brain. When this network has many layers, we call the approach deep learning, which has proven very powerful for tasks like image recognition. There are two common approaches to training a model. In supervised learning, the model learns from labeled examples, where the correct answer is already known. In unsupervised learning, the model looks for hidden patterns in data that has no labels at all. Before training, engineers choose which feature of the data the model should pay attention to, and they carefully set several values called a hyperparameter, such as the learning rate. One common risk during training is overfitting, when a model memorizes the training data instead of learning general patterns. Two major applications of deep learning are natural language processing, which helps computers understand text, and computer vision, which helps computers understand images. A typical task in both fields is classification, where the model decides which category new input belongs to."},
+ advanced:{titleAr:"داخل نماذج اللغة الحديثة", titleEn:"Inside Modern Language Models",
+  text:"Most large language models today are built on the transformer architecture, which relies on an attention mechanism to decide which parts of the input matter most at every step. Before any text reaches the model, words are converted into an embedding, a dense numerical representation that captures meaning in a way the network can process. During training, a loss function measures how far the model's predictions are from the correct answer, and an algorithm called gradient descent gradually adjusts the model's internal parameters to reduce that error. Once a general-purpose model has been trained, companies often perform fine-tuning on a smaller, specialized dataset to adapt it for a particular task. Some systems go further and use reinforcement learning, where the model improves its behavior through rewards rather than fixed labels. A generative model can then be used to produce new text, images, or code. After training finishes, the model enters the inference stage, where it is actually used to answer real user requests. Researchers must remain careful about bias, since imbalanced training data can quietly shape unfair or inaccurate predictions."},
+ professional:{titleAr:"التحديات التي تواجه النماذج اللغوية الكبيرة", titleEn:"Challenges Facing Large Language Models",
+  text:"A large language model, often called an llm, begins processing text through tokenization, breaking sentences into smaller units the model can handle mathematically. Despite their impressive fluency, these models sometimes produce a hallucination, generating confident but incorrect information, which makes rigorous evaluation essential before real-world deployment. To reduce this risk, many organizations rely on retrieval-augmented generation, combining the model's language ability with a search over trusted external sources. Getting useful results from these systems also depends heavily on prompt engineering, since small changes in wording can significantly change the output. A deeper research challenge is model interpretability, since it remains difficult to explain exactly why a model produced a particular answer. Researchers have also observed an emergent capability in very large models, meaning certain skills appear only after the model crosses a certain scale. The broader field of alignment focuses on ensuring these increasingly capable systems, including modern multimodal model architectures that combine text, images, and audio, remain safe and genuinely useful to humans."}
+},
+sec:{
+ beginner:{titleAr:"البقاء آمنًا على الإنترنت", titleEn:"Staying Safe Online",
+  text:"Cybersecurity is about protecting computers, networks, and data from attacks and unauthorized access. One common danger is malware, which includes harmful programs such as a virus that can damage your files or steal your information. To reduce risk, most companies use a firewall to control traffic entering and leaving their network, along with antivirus software to detect and remove dangerous files. Attackers often try phishing, sending fake messages that trick people into revealing passwords or personal details. To protect sensitive information, experts recommend encryption, which turns readable data into a secret code. It is also wise to keep a regular backup of important files and enable two-factor authentication on your accounts. Finally, every system may contain a vulnerability, a weakness that attackers could try to exploit, so keeping software updated is essential."},
+ intermediate:{titleAr:"التهديدات الشائعة وسبل الدفاع", titleEn:"Common Threats and Defenses",
+  text:"Before granting access to any system, security relies on two related steps. First comes authentication, verifying that a user really is who they claim to be, followed by authorization, which determines exactly what that user is allowed to do. Attackers use many methods to break through these defenses. A brute-force attack tries every possible password combination, while a denial-of-service attack floods a server with traffic until it becomes unavailable to real users. Not every attack targets technology directly; social engineering manipulates human trust to trick employees into giving away sensitive information. One of the most damaging threats today is ransomware, which encrypts a victim's files and demands payment for their release. To defend against these threats, organizations regularly install a patch to fix known weaknesses, deploy an intrusion detection system to monitor for suspicious activity, and encourage employees to use a vpn when working remotely. Many companies also hire security experts to perform penetration testing, safely simulating real attacks to find weaknesses before criminals do."},
+ advanced:{titleAr:"داخل مركز عمليات أمنية حديث", titleEn:"Inside a Modern Security Operations Center",
+  text:"Security teams face a constantly shifting landscape of threats. A zero-day vulnerability is especially dangerous because attackers can exploit it before a fix even exists. Web applications remain common targets: a sql injection attack can manipulate a database through unfiltered input, while cross-site scripting allows attackers to run malicious code inside a victim's browser. Once inside a system, attackers often attempt privilege escalation to gain administrator-level control. To stay ahead of these threats, security teams rely on threat intelligence to understand attacker behavior, and they use a siem platform to collect and analyze logs from across the entire organization in real time. When an actual breach occurs, a well-prepared incident response plan helps contain the damage quickly, and digital forensics specialists later examine what happened. Reducing the overall attack surface, the total number of exposed entry points, is one of the most effective long-term defenses. Analysts also frequently use sandboxing to safely observe how suspicious files behave without putting real systems at risk."},
+ professional:{titleAr:"الدفاع في مواجهة الخصوم المتقدّمين", titleEn:"Defending Against Advanced Adversaries",
+  text:"The most sophisticated attacks organizations face today often come from an advanced persistent threat, a well-resourced adversary willing to remain hidden inside a network for months while pursuing a specific objective. Defending against such adversaries starts with rigorous threat modeling, systematically identifying where a system is most likely to be attacked before any incident occurs. Many organizations are now shifting toward a zero trust architecture, which assumes no user or device should be trusted automatically, even inside the corporate network. Once attackers gain an initial foothold, they frequently attempt lateral movement, quietly spreading through connected systems to reach more valuable targets. Some of the most damaging incidents in recent years have originated from a supply chain attack, where a trusted vendor is compromised in order to reach the real target indirectly. Strong defenses also depend on a well-designed cryptographic protocol to protect data in transit. To continuously test their defenses, mature organizations maintain both a red team, which simulates real attacker techniques, and a blue team, which detects and responds to those simulated attacks. Together, these efforts help leadership understand the organization's overall security posture and ensure ongoing regulatory compliance."}
+}
+};
+
+/* =========================================================
+   DATA — LESSONS
+   كل مستوى يحتوي على 3 دروس مستقلة، ويُبنى محتوى كل درس
+   من مصطلحاته وقطعة القراءة الخاصة به.
+========================================================= */
+const LESSON_META = {"cs":{"beginner":[{"titleAr":"أساسيات الحاسوب ومكوّناته","titleEn":"Lesson 1","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"الملفات وأدوات الاستخدام","titleEn":"Lesson 2","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"نظام التشغيل والاتصال والحماية","titleEn":"Lesson 3","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."}],"intermediate":[{"titleAr":"أساسيات التفكير البرمجي","titleEn":"Lesson 1","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"هياكل البيانات والتكرار","titleEn":"Lesson 2","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"التنقيح والترجمة وإدارة الإصدارات","titleEn":"Lesson 3","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."}],"advanced":[{"titleAr":"واجهات البرمجة والأطر والسحابة","titleEn":"Lesson 1","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"التوسّع والخدمات والأداء","titleEn":"Lesson 2","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"التزامن والحاويات وموازنة الحمل","titleEn":"Lesson 3","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."}],"professional":[{"titleAr":"الأنظمة الموزعة وتحمل الأعطال","titleEn":"Lesson 1","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"الاتساق والبرمجة وهندسة الأنظمة","titleEn":"Lesson 2","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."},{"titleAr":"التحقق والتعقيد والاعتمادية","titleEn":"Lesson 3","lead":"درس متكامل يجمع المصطلحات في سياق عملي باللغة الإنجليزية."}]},"ai":{"beginner":[{"titleAr":"مقدمة في الذكاء الاصطناعي","titleEn":"Lesson 1","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"النموذج والتدريب والتنبؤ","titleEn":"Lesson 2","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"البيانات والتطبيقات وقياس الأداء","titleEn":"Lesson 3","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."}],"intermediate":[{"titleAr":"الشبكات العصبية والتعلّم العميق","titleEn":"Lesson 1","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"التعلّم الموجّه وغير الموجّه","titleEn":"Lesson 2","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"السمات والتطبيقات والتصنيف","titleEn":"Lesson 3","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."}],"advanced":[{"titleAr":"المحوّلات والانتباه والتضمين","titleEn":"Lesson 1","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"الضبط الدقيق والتعلّم المعزّز","titleEn":"Lesson 2","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"الخسارة والتوليد والاستدلال والتحيّز","titleEn":"Lesson 3","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."}],"professional":[{"titleAr":"النماذج اللغوية الكبيرة والتقطيع","titleEn":"Lesson 1","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"الهلوسة والهندسة والمواءمة","titleEn":"Lesson 2","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."},{"titleAr":"RAG والتفسير والقدرات الناشئة والوسائط المتعددة","titleEn":"Lesson 3","lead":"درس متكامل يربط المصطلحات بمفاهيم الذكاء الاصطناعي في سياق عملي."}]},"sec":{"beginner":[{"titleAr":"أساسيات الأمن والبرمجيات الخبيثة","titleEn":"Lesson 1","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"الدفاع عن الشبكة وحماية البيانات","titleEn":"Lesson 2","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"المكافحة والنسخ الاحتياطي وحماية الحسابات","titleEn":"Lesson 3","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."}],"intermediate":[{"titleAr":"المصادقة والصلاحيات والهجمات","titleEn":"Lesson 1","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"الهجمات على الخدمة والهندسة الاجتماعية","titleEn":"Lesson 2","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"التحديث والكشف واختبار الاختراق","titleEn":"Lesson 3","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."}],"advanced":[{"titleAr":"ثغرات الويب وهجمات الحقن","titleEn":"Lesson 1","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"تصعيد الصلاحيات والاستخبارات وSIEM","titleEn":"Lesson 2","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"الاستجابة والتحقيق وتقليل سطح الهجوم","titleEn":"Lesson 3","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."}],"professional":[{"titleAr":"التهديدات المتقدمة ونمذجة المخاطر","titleEn":"Lesson 1","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"الحركة الجانبية وسلسلة التوريد والتشفير","titleEn":"Lesson 2","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."},{"titleAr":"الفريقان الأحمر والأزرق والحوكمة الأمنية","titleEn":"Lesson 3","lead":"درس متكامل يضع المصطلحات الأمنية داخل سياق واقعي باللغة الإنجليزية."}]}};
+
+function getLevelLessons(trackKey, levelKey){
+  const vocab = VOCAB[trackKey][levelKey];
+  const meta = LESSON_META[trackKey][levelKey];
+  const groups = [vocab.slice(0,3), vocab.slice(3,6), vocab.slice(6,10)];
+  const originalText = PASSAGES[trackKey][levelKey].text;
+
+  return groups.map((terms, i)=>{
+    const info = meta[i];
+    const sentences = originalText.split(/(?<=[.!?])\s+/).filter(sentence =>
+      terms.some(term => {
+        const escaped = term.en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+        const pattern = term.en.includes(" ")
+          ? new RegExp("\\b" + escaped + "\\b","i")
+          : new RegExp("\\b" + escaped + "(?:s|es|ies)?\\b","i");
+        return pattern.test(sentence);
+      })
+    );
+    const keyTerms = terms.map(t=>t.en).join(", ");
+    const passage = (sentences.length ? sentences.join(" ") : originalText) +
+      ` Key terms in this lesson: ${keyTerms}.`;
+    return {...info, index:i, terms, passage};
+  });
+}
+
+/* =========================================================
+   DATA — GENERAL DICTIONARY (common English words)
+========================================================= */
+const GENERAL_DICT = {
+ "a":"أداة تنكير", "an":"أداة تنكير", "the":"أداة تعريف",
+ "and":"و", "or":"أو", "but":"لكن", "if":"إذا", "so":"لذلك", "because":"لأنّ", "since":"بما أنّ / منذ",
+ "while":"بينما", "when":"عندما", "where":"حيث / أين", "that":"أنّ / ذلك", "which":"الذي / التي",
+ "who":"مَن", "what":"ماذا", "how":"كيف", "why":"لماذا",
+ "this":"هذا", "these":"هؤلاء / هذه", "those":"أولئك / تلك", "it":"هو / هي", "its":"ملكه / خاصته",
+ "they":"هم", "them":"إياهم", "their":"ملكهم", "i":"أنا", "my":"ملكي", "you":"أنت", "your":"ملكك",
+ "we":"نحن", "our":"ملكنا", "he":"هو", "she":"هي", "his":"ملكه", "her":"ملكها / لها",
+ "is":"يكون", "are":"يكونون", "was":"كان", "were":"كانوا", "be":"يكون", "been":"كان", "being":"كائن",
+ "have":"يملك / لديه", "has":"يملك", "had":"كان لديه",
+ "do":"يفعل", "does":"يفعل", "did":"فعل", "can":"يستطيع", "could":"كان يستطيع",
+ "will":"سوف", "would":"كان سوف", "must":"يجب أن", "should":"ينبغي أن", "may":"قد", "might":"ربما",
+ "not":"لا / ليس", "no":"لا", "yes":"نعم",
+ "of":"مِن", "to":"إلى", "for":"مِن أجل", "with":"مع", "without":"بدون", "from":"مِن",
+ "in":"في", "on":"على", "at":"عند", "by":"بواسطة", "about":"حول", "into":"إلى داخل",
+ "through":"عبر / خلال", "across":"عبر", "between":"بين", "among":"وسط", "under":"تحت", "over":"فوق",
+ "before":"قبل", "after":"بعد", "during":"أثناء", "until":"حتى",
+ "also":"أيضًا", "very":"جدًا", "more":"أكثر", "most":"مُعظم", "many":"كثير", "much":"كثير",
+ "some":"بعض", "any":"أيّ", "all":"كل", "each":"كل واحد", "every":"كل", "few":"قليل", "several":"عدة",
+ "other":"آخر", "another":"آخر", "same":"نفسه", "different":"مختلف",
+ "new":"جديد", "old":"قديم", "large":"كبير", "small":"صغير", "main":"رئيسي",
+ "important":"مهم", "essential":"أساسي", "common":"شائع", "simple":"بسيط", "complex":"معقّد",
+ "real":"حقيقي", "possible":"ممكن", "easy":"سهل", "difficult":"صعب", "strong":"قوي",
+ "well":"جيدًا", "good":"جيد", "better":"أفضل", "best":"الأفضل",
+ "often":"غالبًا", "always":"دائمًا", "never":"أبدًا", "sometimes":"أحيانًا", "usually":"عادةً",
+ "today":"اليوم", "now":"الآن", "then":"ثم", "first":"أولًا", "finally":"أخيرًا",
+ "together":"معًا", "instead":"بدلًا من ذلك", "however":"ومع ذلك", "therefore":"لذلك",
+ "even":"حتى", "still":"لا يزال", "already":"مسبقًا", "quickly":"بسرعة", "carefully":"بعناية",
+ "directly":"مباشرةً", "especially":"خصوصًا", "particularly":"على وجه الخصوص", "including":"بما في ذلك",
+ "use":"يستخدم", "uses":"يستخدم", "used":"مُستخدَم", "using":"باستخدام",
+ "need":"يحتاج", "needs":"يحتاج", "make":"يصنع / يجعل", "makes":"يجعل", "made":"صنع",
+ "help":"يساعد", "helps":"يساعد", "allow":"يسمح", "allows":"يسمح",
+ "understand":"يفهم", "learn":"يتعلّم", "learning":"التعلّم", "start":"يبدأ", "begin":"يبدأ",
+ "run":"يُشغِّل / يعمل", "runs":"يعمل", "build":"يبني", "built":"مبنيّ",
+ "store":"يخزّن", "stores":"يخزّن", "change":"يُغيّر", "solve":"يحل", "solves":"يحل",
+ "protect":"يحمي", "protects":"يحمي", "connect":"يتصل / يربط", "process":"يعالج",
+ "create":"ينشئ", "provide":"يوفّر", "provides":"يوفّر", "require":"يتطلّب", "requires":"يتطلّب",
+ "reduce":"يقلّل", "increase":"يزيد", "improve":"يُحسّن", "ensure":"يضمن",
+ "depend":"يعتمد", "depends":"يعتمد", "remain":"يبقى", "remains":"يبقى",
+ "become":"يصبح", "becomes":"يصبح", "give":"يُعطي", "gives":"يُعطي", "share":"يشارك",
+ "know":"يعرف", "means":"يعني", "called":"يُسمّى",
+ "system":"نظام", "systems":"أنظمة", "example":"مثال", "part":"جزء", "parts":"أجزاء",
+ "way":"طريقة", "time":"وقت", "information":"معلومات", "screen":"شاشة", "code":"شيفرة / كود",
+ "language":"لغة", "machine":"آلة", "human":"بشري", "value":"قيمة", "values":"قيم",
+ "network":"شبكة", "networks":"شبكات", "attack":"هجوم", "attacks":"هجمات",
+ "companies":"شركات", "company":"شركة", "team":"فريق", "teams":"فرق", "user":"مستخدم", "users":"مستخدمون",
+ "server":"خادم", "servers":"خوادم", "application":"تطبيق", "applications":"تطبيقات",
+ "problem":"مشكلة", "task":"مهمة", "steps":"خطوات", "step":"خطوة", "step-by-step":"خطوة بخطوة",
+ "correct":"صحيح", "incorrect":"غير صحيح", "answer":"إجابة", "question":"سؤال",
+ "research":"بحث", "researchers":"باحثون", "engineer":"مهندس", "engineers":"مهندسون",
+ "organization":"منظمة", "organizations":"منظمات"
+};
+
+/* =========================================================
+   BUILD MASTER GLOSSARY MAP
+========================================================= */
+const MASTER_GLOSSARY_MAP = {};
+Object.keys(VOCAB).forEach(trackKey=>{
+  Object.keys(VOCAB[trackKey]).forEach(levelKey=>{
+    VOCAB[trackKey][levelKey].forEach(v=>{
+      MASTER_GLOSSARY_MAP[v.en.toLowerCase()] = { en:v.en, ar:v.ar, def:v.def, track:trackKey, level:levelKey };
+    });
+  });
+});
+const ALL_GLOSSARY = Object.values(MASTER_GLOSSARY_MAP);
+
+
+
+/* =========================================================
+   TECHTERM APP STATE — v3
+========================================================= */
+const DB_KEY = "techterm_app_v3";
+const XP = { lesson:40, correct:8, quiz:20, exam:120, perfect:60 };
+const BADGES = [
+ {id:"first",icon:"🥇",title:"First Lesson",desc:"إكمال أول درس"},
+ {id:"perfect",icon:"🔥",title:"Perfect Score",desc:"الحصول على 100% في اختبار"},
+ {id:"vocab",icon:"📚",title:"Vocabulary Master",desc:"إتقان 30 مصطلحًا"},
+ {id:"level",icon:"🎓",title:"Level Completed",desc:"إكمال مستوى كامل"},
+ {id:"master",icon:"🏆",title:"TechTerm Master",desc:"إكمال المسارات الثلاثة"}
+];
+let appDB = loadDB();
+let activeUser = null;
+let authMode = "login";
+let lastDailyToastShown = false;
+let audioCtx = null;
+const state = {track:null,level:null,lessonIndex:null,currentQuiz:null,quizIndex:0,quizScore:0,quizMissed:[],quizMode:null,quizXP:0};
+
+function loadDB(){
+  try{return JSON.parse(localStorage.getItem(DB_KEY)) || {users:{},active:null,settings:{theme:"dark",muted:false,volume:65,font:100}};}catch(e){return {users:{},active:null,settings:{theme:"dark",muted:false,volume:65,font:100}}}
+}
+function saveDB(){try{localStorage.setItem(DB_KEY,JSON.stringify(appDB))}catch(e){}}
+function hashPassword(str){
+  // Lightweight local account hash; this is not a server-side security boundary.
+  let h=2166136261; for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)} return (h>>>0).toString(16);
+}
+function userTemplate(username,passwordHash){return {username,passwordHash,createdAt:Date.now(),xp:0,streak:0,lastActive:null,lessons:{},levels:{},termStats:{},achievements:{},quizHistory:[],settings:{...appDB.settings}}}
+function getUser(){return activeUser ? appDB.users[activeUser] : null}
+function saveUser(){if(activeUser&&appDB.users[activeUser]){appDB.users[activeUser]=getUser();appDB.active=activeUser;saveDB()}}
+function ensureTermStat(en){const u=getUser();u.termStats[en]=u.termStats[en]||{correct:0,incorrect:0,lastReview:null};return u.termStats[en]}
+function levelKeyFor(track,level){return track+"/"+level}
+function lessonKey(track,level,i){return track+"/"+level+"/"+i}
+function lessonRec(track,level,i){const u=getUser();const k=lessonKey(track,level,i);u.lessons[k]=u.lessons[k]||{seen:false,passed:false,score:0,attempts:0,best:0,lastSeen:null};return u.lessons[k]}
+function levelRec(track,level){const u=getUser();const k=levelKeyFor(track,level);u.levels[k]=u.levels[k]||{examPassed:false,examScore:0,attempts:0,best:0};return u.levels[k]}
+function isLevelUnlocked(track,idx){if(idx===0)return true;return !!levelRec(track,LEVEL_KEYS[idx-1]).examPassed}
+function areAllLessonsPassed(track,level){return getLevelLessons(track,level).every((_,i)=>lessonRec(track,level,i).passed)}
+function completedLessonsCount(){return Object.values(getUser().lessons).filter(x=>x.passed).length}
+function completedLevelsCount(){return Object.values(getUser().levels).filter(x=>x.examPassed).length}
+function totalLessons(){return Object.values(LESSON_META).reduce((sum,t)=>sum+Object.values(t).reduce((s,a)=>s+a.length,0),0)}
+function globalProgress(){return Math.round(completedLessonsCount()/totalLessons()*100)}
+function masteredCount(){return Object.values(getUser().termStats).filter(s=>s.correct>=3&&s.incorrect<=1).length}
+function touchActiveDay(){
+  const u=getUser(); const today=todayKey();
+  if(u.lastActive===today)return;
+  if(u.lastActive){const diff=dayDiff(u.lastActive,today); if(diff===1)u.streak+=1;else u.streak=1;} else u.streak=1;
+  u.lastActive=today; saveUser();
+  if(u.streak>0&&!lastDailyToastShown){lastDailyToastShown=true; setTimeout(()=>toast(`🔥 سلسلة ${u.streak} يوم${u.streak===1?'':'ًا'} — استمر!`),350)}
+}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function dayDiff(a,b){const x=new Date(a+"T00:00:00Z"),y=new Date(b+"T00:00:00Z");return Math.round((y-x)/86400000)}
+function awardXP(amount,reason){const u=getUser();u.xp+=amount;saveUser(); if(amount>0) toast(`+${amount} XP · ${reason}`)}
+function unlockBadge(id){const u=getUser();if(!u.achievements[id]){u.achievements[id]=Date.now();saveUser();const b=BADGES.find(x=>x.id===id);if(b)toast(`${b.icon} شارة جديدة: ${b.title}`)}}
+function evaluateBadges(){
+ const u=getUser(); if(completedLessonsCount()>=1)unlockBadge("first"); if(u.quizHistory.some(x=>x.score===100))unlockBadge("perfect"); if(masteredCount()>=30)unlockBadge("vocab"); if(completedLevelsCount()>=1)unlockBadge("level"); if(completedLevelsCount()>=12)unlockBadge("master");
+}
+function applySettings(){const u=getUser();const s=u?u.settings:appDB.settings;document.body.classList.toggle("light",s.theme==="light");document.documentElement.style.setProperty("--scale",(s.font||100)/100);document.getElementById("themeToggle").classList.toggle("on",s.theme==="light");document.getElementById("themeLabel").textContent=s.theme==="light"?"الوضع الفاتح":"الوضع الداكن";document.getElementById("muteToggle").classList.toggle("on",!s.muted);document.getElementById("muteLabel").textContent=s.muted?"مكتوم":"مفعّل";document.getElementById("volumeRange").value=s.volume??65;document.getElementById("fontRange").value=s.font??100}
+function settings(){return getUser().settings}
+function showScreen(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");const titles={"screen-home":"لوحة التحكم","screen-levels":"خريطة التعلم","screen-lessons":"دروس المستوى","screen-lesson":"الدرس","screen-quiz":"الاختبار","screen-quiz-result":"نتيجة الاختبار","screen-review":"مركز المراجعة","screen-analytics":"تحليلات التعلّم","screen-settings":"الإعدادات","screen-dict":"القاموس"};document.title=`TechTerm | ${titles[id]||"أكاديمية المصطلحات التقنية"}`;window.scrollTo({top:0,behavior:"smooth"})}
+function setTrackTheme(track){document.body.classList.remove("track-cs","track-ai","track-sec");if(track)document.body.classList.add("track-"+track)}
+function escapeHtml2(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function shuffle2(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function speak(text,rate=.9){if(settings().muted||!('speechSynthesis' in window))return;window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate;const voices=speechSynthesis.getVoices();const v=voices.find(x=>(x.lang||"").toLowerCase().startsWith("en"));if(v)u.voice=v;speechSynthesis.speak(u)}
+function playTone(freq,dur=.12,type="sine",vol=.06,delay=0){if(settings().muted)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audioCtx=audioCtx||new AC();if(audioCtx.state==="suspended")audioCtx.resume();const now=audioCtx.currentTime+delay,osc=audioCtx.createOscillator(),gain=audioCtx.createGain(),v=(settings().volume||65)/100*vol;osc.type=type;osc.frequency.setValueAtTime(freq,now);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(v,now+.01);gain.gain.exponentialRampToValueAtTime(.0001,now+dur);osc.connect(gain);gain.connect(audioCtx.destination);osc.start(now);osc.stop(now+dur+.02)}catch(e){}}
+function sfx(kind){if(kind==="correct"){playTone(660,.09,"sine",.055);playTone(880,.13,"sine",.055,.08)}else if(kind==="wrong"){playTone(220,.15,"sawtooth",.045);playTone(160,.17,"sawtooth",.04,.11)}else if(kind==="examStart"){playTone(523,.12,"sine",.05);playTone(659,.12,"sine",.05,.12)}else if(kind==="pass"){playTone(523,.13,"sine",.06);playTone(659,.13,"sine",.06,.12);playTone(784,.18,"sine",.06,.24);playTone(1047,.25,"sine",.06,.42)}else if(kind==="fail"){playTone(392,.15,"sine",.05);playTone(330,.17,"sine",.05,.15);playTone(262,.25,"sine",.05,.31)}}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2400)}
+
+/* ---------------- authentication ---------------- */
+function showAuth(mode){authMode=mode;document.getElementById("authModal").classList.remove("hidden");document.getElementById("authTitle").textContent=mode==="login"?"تسجيل الدخول":"إنشاء حساب";document.getElementById("authSubtitle").textContent=mode==="login"?"سجّل دخولك لمتابعة تقدمك من هذا الجهاز.":"أنشئ حسابًا محليًا لحفظ الدروس وXP والإنجازات.";document.getElementById("authSubmit").textContent=mode==="login"?"🔐 تسجيل الدخول":"✨ إنشاء الحساب";document.getElementById("authSwitchText").textContent=mode==="login"?"ليس لديك حساب؟":"لديك حساب بالفعل؟";document.getElementById("authSwitch").textContent=mode==="login"?"إنشاء حساب":"تسجيل الدخول"}
+function handleAuth(){const user=document.getElementById("authUser").value.trim().toLowerCase(),pass=document.getElementById("authPass").value;if(user.length<3||pass.length<4){toast("اسم المستخدم 3 أحرف على الأقل وكلمة المرور 4 أحرف على الأقل.");return}const h=hashPassword(pass);if(authMode==="login"){if(!appDB.users[user]||appDB.users[user].passwordHash!==h){toast("بيانات الدخول غير صحيحة.");return}activeUser=user;appDB.active=user;saveDB();enterApp();}else{if(appDB.users[user]){toast("اسم المستخدم موجود بالفعل.");return}appDB.users[user]=userTemplate(user,h);activeUser=user;appDB.active=user;saveDB();enterApp();toast("✨ تم إنشاء الحساب بنجاح")} }
+function logout(){activeUser=null;appDB.active=null;saveDB();document.getElementById("appShell").classList.add("hidden");document.getElementById("authUser").value="";document.getElementById("authPass").value="";showAuth("login")}
+function enterApp(){document.getElementById("authModal").classList.add("hidden");document.getElementById("appShell").classList.remove("hidden");const u=getUser();u.settings=u.settings||{...appDB.settings};applySettings();touchActiveDay();evaluateBadges();renderHome();}
+
+/* ---------------- navigation ---------------- */
+function openLevels(track){state.track=track;setTrackTheme(track);const t=TRACKS[track];document.getElementById("levelsTitle").innerHTML=`${t.icon} ${t.name}`;document.getElementById("levelsLead").textContent="خريطة متسلسلة: أنهِ الاختبار النهائي للمستوى حتى يفتح المستوى التالي.";const wrap=document.getElementById("levelMap");wrap.innerHTML="";LEVEL_KEYS.forEach((lv,idx)=>{const unlocked=isLevelUnlocked(track,idx),rec=levelRec(track,lv),lessons=getLevelLessons(track,lv),done=rec.examPassed,passed=lessons.filter((_,i)=>lessonRec(track,lv,i).passed).length,el=document.createElement("div");el.className="map-node "+(done?"done ":(!unlocked?"locked ":"current "))+(idx===LEVEL_KEYS.length-1?"exam-node":"");el.innerHTML=`<div class="node-dot">${done?"✓":unlocked?idx+1:"🔒"}</div><div><div class="node-title">Level ${idx+1} — ${LEVEL_LABELS[lv]}</div><div class="node-sub">${passed}/3 دروس مكتملة · ${done?"اختبار نهائي مجتاز":"النهائي غير مجتاز"}</div></div><div class="node-side">${done?`${rec.best||rec.examScore}% ✓`:unlocked?"متاح الآن":"مغلق"}</div>`;if(unlocked)el.addEventListener("click",()=>openLessons(track,lv));wrap.appendChild(el);if(idx<LEVEL_KEYS.length-1){const c=document.createElement("div");c.className="connector";wrap.appendChild(c)}});showScreen("screen-levels")}
+function lessonStatus(track,level,i){const rec=lessonRec(track,level,i);return rec.passed?"done":"open"}
+function firstIncompleteLesson(track,level){const lessons=getLevelLessons(track,level);for(let i=0;i<lessons.length;i++)if(!lessonRec(track,level,i).passed)return i;return lessons.length-1}
+function openLessons(track,level){state.track=track;state.level=level;setTrackTheme(track);const t=TRACKS[track],lessons=getLevelLessons(track,level),first=firstIncompleteLesson(track,level),all=areAllLessonsPassed(track,level);document.getElementById("lessonsTitle").innerHTML=`${t.icon} ${t.name} — <span class="accent">${LEVEL_LABELS[level]}</span>`;document.getElementById("lessonsLead").textContent=`أنهِ الدروس بالتسلسل. الاختبار النهائي يفتح فقط عند 100% من دروس المستوى (${lessons.filter((_,i)=>lessonRec(track,level,i).passed).length}/${lessons.length}).`;const grid=document.getElementById("lessonGrid");grid.innerHTML="";lessons.forEach((lesson,i)=>{const rec=lessonRec(track,level,i),locked=i>first&&!rec.passed,el=document.createElement("div");el.className="map-node "+(rec.passed?"done":locked?"locked":"current");el.innerHTML=`<div class="node-dot">${rec.passed?"✓":locked?"🔒":i+1}</div><div><div class="node-title">درس ${i+1} — ${escapeHtml2(lesson.titleAr)}</div><div class="node-sub">${lesson.terms.length} مصطلحات · ${rec.best?`أفضل نتيجة ${rec.best}%`:"لم يُجتز بعد"}</div></div><div class="node-side">${rec.passed?"✓ مكتمل":locked?"مغلق":"متاح"}</div>`;if(!locked)el.addEventListener("click",()=>openLesson(track,level,i));grid.appendChild(el)});const exam=document.createElement("div");exam.className="map-node exam-node "+(all?"current":"locked");exam.innerHTML=`<div class="node-dot">${all?"🎓":"🔒"}</div><div><div class="node-title">الاختبار النهائي للمستوى</div><div class="node-sub">30 سؤالًا · Translation + Definition + Adaptive Review</div></div><div class="node-side">${all?"مفتوح":"أكمل 100% من الدروس"}</div>`;if(all)exam.addEventListener("click",()=>startQuiz("level"));grid.appendChild(exam);showScreen("screen-lessons")}
+function openLesson(track,level,i){state.track=track;state.level=level;state.lessonIndex=i;setTrackTheme(track);const lessons=getLevelLessons(track,level),lesson=lessons[i],rec=lessonRec(track,level,i);if(!lesson)return;const first=firstIncompleteLesson(track,level);if(i>first&&!rec.passed){toast("🔒 أكمل الدرس السابق أولًا.");return}rec.seen=true;rec.lastSeen=Date.now();saveUser();document.getElementById("lessonBarLabel").textContent=`${track}/${level}/lesson-${i+1}.md`;document.getElementById("lessonTitle").innerHTML=`${TRACKS[track].icon} ${escapeHtml2(lesson.titleAr)} — <span class="accent">${escapeHtml2(lesson.titleEn)}</span>`;document.getElementById("lessonLead").textContent=lesson.lead;renderLessonProgress();const grid=document.getElementById("vocabGrid");grid.innerHTML="";lesson.terms.forEach(v=>{const card=document.createElement("div");card.className="flashcard";card.innerHTML=`<div class="flashcard-inner"><div class="flashcard-face"><div class="term">${escapeHtml2(v.en)}</div><div class="hint">اضغط لعرض الترجمة والتعريف</div></div><div class="flashcard-face flashcard-back"><div class="ar">${escapeHtml2(v.ar)}</div><div class="def">${escapeHtml2(v.def)}</div></div></div>`;card.onclick=()=>{card.classList.toggle("flipped");showTranslation(v,v.en)};grid.appendChild(card)});document.getElementById("passageBox").innerHTML=renderPassageHTML2(lesson.passage,lesson.terms);document.getElementById("passageBox").onclick=async e=>{const el=e.target.closest(".word,.term-hit");if(!el)return;const k=el.dataset.key||el.dataset.word;const result=lookup(k);if(result.found){showTranslation(result,el.textContent);return}showTranslation({found:true,en:el.textContent,ar:"جاري جلب الترجمة…",def:null},el.textContent);const translated=await translateWord(k);if(translated){showTranslation({found:true,en:translated.en||el.textContent,ar:translated.ar,def:null},el.textContent)}else{showTranslation({found:false,en:el.textContent},el.textContent)}};document.getElementById("translationPanel").classList.remove("active");document.getElementById("translationPanel").innerHTML='<div class="muted">اضغط أي كلمة في النص أو بطاقة لعرض الترجمة والتعريف.</div>';document.getElementById("listenPassageBtn").onclick=()=>speak(lesson.passage,.88);document.getElementById("startLessonQuizBtn").onclick=()=>startQuiz("lesson");document.getElementById("startPracticeBtn").onclick=()=>startQuiz("practice");document.getElementById("learnModeBtn").onclick=()=>switchLessonMode("learn");document.getElementById("practiceModeBtn").onclick=()=>switchLessonMode("practice");switchLessonMode("learn");showScreen("screen-lesson")}
+function switchLessonMode(mode){document.getElementById("lessonLearnArea").classList.toggle("hidden",mode!=="learn");document.getElementById("lessonPracticeArea").classList.toggle("hidden",mode!=="practice");document.getElementById("learnModeBtn").classList.toggle("active",mode==="learn");document.getElementById("practiceModeBtn").classList.toggle("active",mode==="practice")}
+function renderLessonProgress(){const rec=lessonRec(state.track,state.level,state.lessonIndex);const pct=rec.passed?100:Math.min(99,Math.round((rec.seen?25:0)+(rec.attempts?75:0)));document.getElementById("lessonProgressText").textContent=pct+"%";document.getElementById("lessonProgressFill").style.width=pct+"%"}
+function renderPassageHTML2(text,list){let placeholders=[];let x=text;list.slice().sort((a,b)=>b.en.length-a.en.length).forEach(v=>{const esc=v.en.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const re=new RegExp("\\b("+esc+")\\b","gi");x=x.replace(re,m=>{const idx=placeholders.length;placeholders.push({display:m,key:v.en.toLowerCase()});return"\u0001"+idx+"\u0002"})});return x.split(/(\u0001\d+\u0002|[A-Za-z']+)/g).map(p=>{const m=p.match(/^\u0001(\d+)\u0002$/);if(m){const ph=placeholders[+m[1]];return`<mark class="term-hit" data-key="${escapeHtml2(ph.key)}">${escapeHtml2(ph.display)}</mark>`}if(/^[A-Za-z']+$/.test(p))return`<span class="word" data-word="${escapeHtml2(p.toLowerCase())}">${escapeHtml2(p)}</span>`;return escapeHtml2(p)}).join("")}
+function lookup(raw){const k=String(raw).toLowerCase().trim();if(MASTER_GLOSSARY_MAP[k])return{found:true,...MASTER_GLOSSARY_MAP[k]};if(GENERAL_DICT[k])return{found:true,en:k,ar:GENERAL_DICT[k],def:null};for(const s of [k.replace(/ies$/,"y"),k.replace(/es$/,""),k.replace(/s$/,""),k.replace(/ing$/,""),k.replace(/ed$/,""),k.replace(/ly$/,""),k.replace(/'s$/,"")]){if(MASTER_GLOSSARY_MAP[s])return{found:true,...MASTER_GLOSSARY_MAP[s]};if(GENERAL_DICT[s])return{found:true,en:s,ar:GENERAL_DICT[s],def:null}}const cached=localStorage.getItem("techterm_word_"+k);if(cached)return{found:true,en:k,ar:cached,def:null};return{found:false,en:raw}}
+
+async function translateWord(word){const k=String(word).toLowerCase().trim();const cached=localStorage.getItem("techterm_word_"+k);if(cached)return{en:k,ar:cached};try{const url="https://api.mymemory.translated.net/get?q="+encodeURIComponent(k)+"&langpair=en|ar";const res=await fetch(url,{headers:{Accept:"application/json"}});if(!res.ok)throw new Error("translation request failed");const data=await res.json();const ar=data?.responseData?.translatedText?.trim();if(!ar||ar.toLowerCase()===k)return null;localStorage.setItem("techterm_word_"+k,ar);return{en:k,ar}}catch(err){return null}}
+function showTranslation(result,original){const p=document.getElementById("translationPanel");p.classList.add("active");if(result.found){p.innerHTML=`<div class="tp-row"><bdi class="tp-en">${escapeHtml2(result.en||original)}</bdi><button class="speak" data-speak="${escapeHtml2(result.en||original)}">🔊</button></div><div class="tp-ar">${escapeHtml2(result.ar)}</div>${result.def?`<div class="tp-def">${escapeHtml2(result.def)}</div>`:""}`;p.querySelector(".speak").onclick=e=>speak(e.currentTarget.dataset.speak,.85)}else p.innerHTML=`<div class="tp-row"><bdi class="tp-en">${escapeHtml2(original)}</bdi><button class="speak" data-speak="${escapeHtml2(original)}">🔊</button></div><div class="muted" style="margin-top:5px">لم يتم العثور على ترجمة لهذه الكلمة في القاموس.</div>`;if(p.querySelector(".speak"))p.querySelector(".speak").onclick=e=>speak(e.currentTarget.dataset.speak,.85)}
+
+/* ---------------- adaptive quiz engine ---------------- */
+function questionWeight(term){const s=ensureTermStat(term.en),fails=s.incorrect||0,recency=s.lastReview?Math.min(1,Math.max(0,(Date.now()-s.lastReview)/(1000*60*60*24*14))):1;return 1+fails*2+recency*1.5}
+function weightedPick(terms){const pool=terms.map(t=>({t,w:questionWeight(t)}));const total=pool.reduce((s,x)=>s+x.w,0);let r=Math.random()*total;for(const x of pool){r-=x.w;if(r<=0)return x.t}return pool[pool.length-1].t}
+function makeAdaptiveQuestion(v,pool){
+  const type=shuffle2(["en2ar","ar2en","definition2en","truefalse"])[0],other=pool.filter(x=>x.en!==v.en);
+  if(type==="en2ar"){
+    const d=shuffle2(other).slice(0,3);
+    return{type,prompt:`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟`,correct:v.ar,options:shuffle2([v.ar,...d.map(x=>x.ar)]),term:v,speak:v.en};
+  }
+  if(type==="ar2en"){
+    const d=shuffle2(other).slice(0,3);
+    return{type,prompt:`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(v.ar)}</b>؟`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  }
+  if(type==="definition2en"){
+    const d=shuffle2(other).slice(0,3);
+    return{type,prompt:`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(v.def)}</div>`,correct:v.en,options:shuffle2([v.en,...d.map(x=>x.en)]),term:v,speak:v.en};
+  }
+  const makeTrue=Math.random()<0.5;
+  const target=makeTrue?v:shuffle2(other)[0];
+  const statement=makeTrue
+    ? `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(v.def)}</div>`
+    : `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(v.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(target.def)}</div>`;
+  return{type,prompt:statement,correct:makeTrue?"صحيح":"غير صحيح",options:["صحيح","غير صحيح"],term:v,speak:v.en};
+}
+function makeQuizQuestions(terms,count,mode){const out=[];const pool=ALL_GLOSSARY.length?ALL_GLOSSARY:terms;const n=Math.min(count,Math.max(terms.length,1));for(let i=0;i<n;i++){const v=mode==="review"?weightedPick(pool):terms[i%terms.length];out.push(makeAdaptiveQuestion(v,pool))}return shuffle2(out)}
+function buildLessonQuiz2(terms){return makeQuizQuestions(terms,Math.max(terms.length,6),"lesson")}
+function buildPracticeQuiz(terms){return makeQuizQuestions(terms,Math.min(8,Math.max(terms.length,6)),"practice")}
+function buildFinalExam2(terms){const qs=[];terms.forEach(v=>{qs.push({base:v,type:"en2ar"});qs.push({base:v,type:"ar2en"});qs.push({base:v,type:"definition2en"});qs.push({base:v,type:"truefalse"})});return shuffle2(qs).map(x=>{const d=makeAdaptiveQuestion(x.base,terms);d.type=x.type;if(x.type==="en2ar"){d.prompt=`ما الترجمة العربية الصحيحة للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟`;d.correct=x.base.ar;d.options=shuffle2([x.base.ar,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.ar)])}else if(x.type==="ar2en"){d.prompt=`ما المصطلح الإنجليزي المقابل لـ <b>${escapeHtml2(x.base.ar)}</b>؟`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}else if(x.type==="definition2en"){d.prompt=`أي مصطلح يطابق التعريف التالي؟<div class="muted" style="margin-top:8px">${escapeHtml2(x.base.def)}</div>`;d.correct=x.base.en;d.options=shuffle2([x.base.en,...shuffle2(terms.filter(t=>t.en!==x.base.en)).slice(0,3).map(t=>t.en)])}
+else {
+  const others=terms.filter(t=>t.en!==x.base.en);
+  const makeTrue=Math.random()<0.5;
+  const target=makeTrue?x.base:shuffle2(others)[0];
+  d.prompt=makeTrue
+    ? `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(x.base.def)}</div>`
+    : `هل التعريف التالي صحيح للمصطلح <bdi class="term">${escapeHtml2(x.base.en)}</bdi>؟<div class="muted" style="margin-top:8px">${escapeHtml2(target.def)}</div>`;
+  d.correct=makeTrue?"صحيح":"غير صحيح";d.options=["صحيح","غير صحيح"];
+}
+d.term=x.base;d.speak=x.base.en;return d})}
+function startQuiz(mode){if(mode==="level"&&!areAllLessonsPassed(state.track,state.level)){toast("🔒 الاختبار النهائي لا يفتح إلا بعد إكمال 100% من دروس المستوى.");return}let terms=[];if(mode==="lesson"||mode==="practice"){terms=getLevelLessons(state.track,state.level)[state.lessonIndex].terms}else if(mode==="level")terms=VOCAB[state.track][state.level];else if(mode==="review")terms=getReviewTerms().map(x=>x.term);if(!terms.length)return;state.quizMode=mode;state.quizIndex=0;state.quizScore=0;state.quizMissed=[];state.quizXP=0;state.currentQuiz=mode==="lesson"?buildLessonQuiz2(terms):mode==="practice"?buildPracticeQuiz(terms):mode==="level"?buildFinalExam2(terms):makeQuizQuestions(terms,Math.min(12,Math.max(terms.length,6)),"review");document.getElementById("quizTitle").textContent=mode==="level"?`🎓 الاختبار النهائي — ${LEVEL_LABELS[state.level]}`:mode==="review"?"🧠 اختبار المراجعة الذكي":mode==="practice"?"🧩 Practice Mode":"📝 اختبار الدرس";document.getElementById("quizModeLabel").textContent=mode.toUpperCase();sfx("examStart");renderQuizQuestion() ;showScreen("screen-quiz")}
+function renderQuizQuestion(){
+  const q=state.currentQuiz[state.quizIndex],total=state.currentQuiz.length;
+  document.getElementById("quizCounter").textContent=`${state.quizIndex+1}/${total}`;
+  document.getElementById("quizProgressFill").style.width=Math.round(state.quizIndex/total*100)+"%";
+  document.getElementById("quizPrompt").innerHTML=q.prompt;
+  const ob=document.getElementById("quizOptions");
+  ob.innerHTML="";
+  document.getElementById("quizNextBtn").style.display="none";
+  q.options.forEach(opt=>{
+    const b=document.createElement("div");b.className="quiz-option";b.dataset.value=opt;
+    b.innerHTML=q.type==="en2ar"?escapeHtml2(opt):`<bdi dir="ltr" class="en">${escapeHtml2(opt)}</bdi>`;
+    b.onclick=()=>answerQuiz2(opt,q,b);ob.appendChild(b);
+  });
+}
+function normalizeAnswer(x){return String(x||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[.,!?]+$/g,"")}
+function answerQuiz2(selected,q,el){
+  document.querySelectorAll(".quiz-option").forEach(x=>x.classList.add("disabled"));
+  const ok=selected===q.correct;
+  const stat=ensureTermStat(q.term.en);stat.lastReview=Date.now();
+  if(ok){state.quizScore++;stat.correct=(stat.correct||0)+1;if(el)el.classList.add("correct");state.quizXP+=XP.correct;sfx("correct")}else{stat.incorrect=(stat.incorrect||0)+1;if(el)el.classList.add("incorrect");state.quizMissed.push(q.term);document.querySelectorAll(".quiz-option").forEach(x=>{if(x.dataset.value===q.correct)x.classList.add("correct")});sfx("wrong")}
+  saveUser();
+  const next=document.getElementById("quizNextBtn");next.style.display="inline-flex";next.textContent=state.quizIndex===state.currentQuiz.length-1?"عرض النتيجة":"السؤال التالي";next.onclick=()=>{if(state.quizIndex<state.currentQuiz.length-1){state.quizIndex++;renderQuizQuestion()}else{showQuizResult2()}}
+}
+function showQuizResult2(){const total=state.currentQuiz.length,pct=Math.round(state.quizScore/total*100),pass=state.quizMode==="practice"?true:pct>=70;const u=getUser();if(state.quizMode==="lesson"){const rec=lessonRec(state.track,state.level,state.lessonIndex);rec.attempts++;rec.best=Math.max(rec.best||0,pct);rec.score=pct;rec.passed=pass;if(pass&&!rec._xp){awardXP(XP.lesson,"إكمال الدرس");rec._xp=true}u.quizHistory.push({date:Date.now(),mode:"lesson",score:pct,track:state.track,level:state.level,index:state.lessonIndex});}else if(state.quizMode==="level"){const rec=levelRec(state.track,state.level);rec.attempts++;rec.best=Math.max(rec.best||0,pct);if(pass&&!rec.examPassed){rec.examPassed=true;rec.examScore=pct;awardXP(XP.exam,"إتقان الاختبار النهائي");}else if(pass)rec.examScore=pct;u.quizHistory.push({date:Date.now(),mode:"level",score:pct,track:state.track,level:state.level});}else if(state.quizMode==="review"){u.quizHistory.push({date:Date.now(),mode:"review",score:pct});}else{u.quizHistory.push({date:Date.now(),mode:"practice",score:pct})}const allCorrect=pct===100;if(allCorrect){awardXP(XP.perfect,"نتيجة مثالية");u.quizHistory[u.quizHistory.length-1].perfect=true}awardXP(XP.quiz,"إكمال الاختبار");saveUser();evaluateBadges();renderLessonProgress();document.getElementById("scoreRing").className="score-ring "+(pass?"pass":"fail");document.getElementById("scorePct").textContent=pct+"%";document.getElementById("scoreOf").textContent=`${state.quizScore} / ${total}`;document.getElementById("resultTitle").textContent=pass?(state.quizMode==="level"?"🎓🎉 تم اجتياز الاختبار النهائي":"🎉 أحسنت!"):"📚 راجع المصطلحات وحاول مرة أخرى";document.getElementById("resultText").textContent=state.quizMode==="practice"?"تم تسجيل أخطائك لتحسين الاختبارات المستقبلية.":pass?"تم تسجيل النتيجة وتحديث تقدمك.":"نسبة النجاح المطلوبة هي 70%. راجع الكلمات التي أخطأت بها ثم أعد الاختبار.";document.getElementById("xpEarnedResult").textContent=`+${state.quizXP+XP.quiz+(allCorrect?XP.perfect:0)+(state.quizMode==="lesson"&&pass?XP.lesson:0)+(state.quizMode==="level"&&pass?XP.exam:0)} XP إجمالي المكافآت لهذه المحاولة`;const miss=document.getElementById("missedList");miss.innerHTML="";const uniq=[];const seen=new Set();state.quizMissed.forEach(t=>{if(!seen.has(t.en)){seen.add(t.en);uniq.push(t)}});if(uniq.length){miss.innerHTML=`<div class="section-label">// مصطلحات تحتاج مراجعة</div>`;uniq.forEach(t=>{const row=document.createElement("div");row.className="review-card";row.style.marginTop="8px";row.innerHTML=`<div class="term-line">${escapeHtml2(t.en)}</div><div><b>${escapeHtml2(t.ar)}</b></div><div class="muted" style="font-size:12px">${escapeHtml2(t.def)}</div><button class="speak" style="margin-top:7px" data-s="${escapeHtml2(t.en)}">🔊</button>`;row.querySelector(".speak").onclick=e=>speak(e.currentTarget.dataset.s,.85);miss.appendChild(row)})}const actions=document.getElementById("resultActions");actions.innerHTML="";if(state.quizMode==="lesson"){if(pass){const lessons=getLevelLessons(state.track,state.level);if(state.lessonIndex<lessons.length-1)addActionBtn2(actions,"📖 الدرس التالي","primary-btn",()=>openLesson(state.track,state.level,state.lessonIndex+1));else addActionBtn2(actions,"🗺 خريطة المستوى","primary-btn",()=>openLessons(state.track,state.level))}else addActionBtn2(actions,"🔁 إعادة اختبار الدرس","primary-btn",()=>startQuiz("lesson"));addActionBtn2(actions,"📚 دروس المستوى","ghost-btn",()=>openLessons(state.track,state.level))}else if(state.quizMode==="level"){if(pass){const idx=LEVEL_KEYS.indexOf(state.level);if(idx<3)addActionBtn2(actions,"➡ المستوى التالي","primary-btn",()=>openLessons(state.track,LEVEL_KEYS[idx+1]));else addActionBtn2(actions,"🏆 المسارات","primary-btn",()=>openLevels(state.track))}else addActionBtn2(actions,"🔁 إعادة الاختبار النهائي","primary-btn",()=>startQuiz("level"));addActionBtn2(actions,"📚 دروس المستوى","ghost-btn",()=>openLessons(state.track,state.level))}else addActionBtn2(actions,"🧠 مركز المراجعة","primary-btn",()=>openReview());addActionBtn2(actions,"🏠 الرئيسية","ghost-btn",renderHome);sfx(pass?"pass":"fail");showScreen("screen-quiz-result")}
+function addActionBtn2(c,label,cls,fn){const b=document.createElement("button");b.className=cls;b.textContent=label;b.onclick=fn;c.appendChild(b)}
+
+/* ---------------- review center ---------------- */
+function getReviewTerms(){const u=getUser(),all=ALL_GLOSSARY.map(term=>{const s=u.termStats[term.en]||{correct:0,incorrect:0,lastReview:null};const age=s.lastReview?Math.min(14,(Date.now()-s.lastReview)/86400000):14;const risk=(s.incorrect||0)*3+age+(s.correct<2?3:0);return{term,risk,stat:s}}).filter(x=>x.risk>=4).sort((a,b)=>b.risk-a.risk);return all.length?all.slice(0,18):ALL_GLOSSARY.slice(0,12).map(term=>({term,risk:4,stat:{}}))}
+function openReview(){setTrackTheme(null);const list=getReviewTerms();const u=getUser();document.getElementById("reviewSummary").innerHTML=`<div class="kpi"><div class="v">${list.length}</div><div class="l">مصطلحات للمراجعة</div></div><div class="kpi"><div class="v">${Object.values(u.termStats).filter(s=>s.incorrect).length}</div><div class="l">مصطلحات بها أخطاء</div></div><div class="kpi"><div class="v">${masteredCount()}</div><div class="l">مصطلحات متقنة</div></div><div class="kpi"><div class="v">${u.xp}</div><div class="l">XP</div></div>`;const wrap=document.getElementById("reviewGrid");wrap.innerHTML="";list.forEach(x=>{const c=document.createElement("div");c.className="review-card";c.innerHTML=`<div style="display:flex;justify-content:space-between;gap:8px"><span class="risk">مراجعة ${Math.min(99,Math.round(x.risk*8))}% أولوية</span><button class="speak">🔊</button></div><div class="term-line" style="margin-top:8px">${escapeHtml2(x.term.en)}</div><div style="margin-top:3px"><b>${escapeHtml2(x.term.ar)}</b></div><div class="muted" style="font-size:11px;margin-top:4px">${escapeHtml2(x.term.def)}</div>`;c.querySelector(".speak").onclick=()=>speak(x.term.en,.85);wrap.appendChild(c)});document.getElementById("startReviewBtn").onclick=()=>startQuiz("review");showScreen("screen-review")}
+
+/* ---------------- home + analytics ---------------- */
+function renderHome(){const u=getUser(),gp=globalProgress();document.getElementById("welcomeName").textContent=u.username;document.getElementById("topUserName").textContent=u.username;document.getElementById("topProgressDot").textContent=gp+"%";document.getElementById("streakValue").textContent=u.streak||0;document.getElementById("xpValue").textContent=u.xp||0;document.getElementById("lessonsDoneValue").textContent=completedLessonsCount();document.getElementById("levelsDoneValue").textContent=completedLevelsCount();document.getElementById("vocabMasteredValue").textContent=masteredCount();document.getElementById("globalProgressText").textContent=gp+"%";document.getElementById("globalProgressFill").style.width=gp+"%";renderTracks();renderContinue();renderRecentBadges();renderHomeSummary();updateDailyBanner()}
+function renderTracks(){const grid=document.getElementById("trackGrid");grid.innerHTML="";Object.values(TRACKS).forEach(t=>{const div=document.createElement("div");div.className=`track-card ${t.cls}`;div.innerHTML=`<div class="track-icon">${t.icon}</div><h3>${escapeHtml2(t.name)}</h3><p>${escapeHtml2(t.short)}</p><div class="track-meta">4 مستويات · 12 درسًا · 1 اختبار نهائي/مستوى</div>`;div.onclick=()=>openLevels(t.key);grid.appendChild(div)})}
+function renderContinue(){let found=null;for(const t of Object.keys(TRACKS))for(const lv of LEVEL_KEYS){if(!isLevelUnlocked(t,LEVEL_KEYS.indexOf(lv)))continue;for(let i=0;i<3;i++){if(!lessonRec(t,lv,i).passed){found={t,lv,i};break}}if(found)break}const txt=document.getElementById("continueText"),btn=document.getElementById("continueBtn");if(!found){txt.textContent="🎉 أكملت كل الدروس المتاحة. واصل المراجعة للحفاظ على الإتقان.";btn.textContent="🧠 فتح المراجعة";btn.onclick=()=>openReview()}else{txt.textContent=`${TRACKS[found.t].name} · ${LEVEL_LABELS[found.lv]} · الدرس ${found.i+1}`;btn.textContent="🚀 متابعة التعلم";btn.onclick=()=>openLesson(found.t,found.lv,found.i)}}
+function renderRecentBadges(){const wrap=document.getElementById("recentBadges");wrap.innerHTML="";BADGES.filter(b=>getUser().achievements[b.id]).slice(0,3).forEach(b=>{const el=document.createElement("div");el.className="badge unlocked";el.innerHTML=`<div class="badge-icon">${b.icon}</div><div class="badge-title">${b.title}</div>`;wrap.appendChild(el)});if(!wrap.children.length)wrap.innerHTML='<div class="muted" style="font-size:12px">أكمل أول درس لتحصل على أول شارة.</div>'}
+function renderHomeSummary(){const u=getUser(),scores=u.quizHistory.map(x=>x.score).filter(x=>typeof x==="number"),avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0,best=scores.length?Math.max(...scores):0;document.getElementById("homeProgressSummary").innerHTML=`<div class="panel"><h3 style="margin-top:0">نتائج الاختبارات</h3><div class="metric-list"><div class="metric"><span>المتوسط</span><strong>${avg}%</strong></div><div class="metric"><span>أفضل محاولة</span><strong>${best}%</strong></div><div class="metric"><span>محاولات</span><strong>${u.quizHistory.length}</strong></div></div></div><div class="panel"><h3 style="margin-top:0">دقة الإجابات</h3><div class="metric-list"><div class="metric"><span>صحيحة</span><strong>${Object.values(u.termStats).reduce((s,x)=>s+(x.correct||0),0)}</strong></div><div class="metric"><span>خاطئة</span><strong>${Object.values(u.termStats).reduce((s,x)=>s+(x.incorrect||0),0)}</strong></div><div class="metric"><span>مصطلحات متقنة</span><strong>${masteredCount()}</strong></div></div></div>`}
+function updateDailyBanner(){const b=document.getElementById("dailyBanner");if(getUser().streak>=1){b.classList.remove("hidden");document.getElementById("dailyAction").onclick=()=>openReview()}else b.classList.add("hidden")}
+function openAnalytics(){renderAnalytics();showScreen("screen-analytics")}
+function renderAnalytics(){const u=getUser(),scores=u.quizHistory.map(x=>x.score).filter(x=>typeof x==="number"),avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0,best=scores.length?Math.max(...scores):0,correct=Object.values(u.termStats).reduce((s,x)=>s+(x.correct||0),0),wrong=Object.values(u.termStats).reduce((s,x)=>s+(x.incorrect||0),0);document.getElementById("analyticsGrid").innerHTML=`<div class="panel"><h3 style="margin-top:0">الأرقام الأساسية</h3><div class="metric-list"><div class="metric"><span>الدروس المكتملة</span><strong>${completedLessonsCount()}/${totalLessons()}</strong></div><div class="metric"><span>المستويات المكتملة</span><strong>${completedLevelsCount()}/12</strong></div><div class="metric"><span>المفردات المتقنة</span><strong>${masteredCount()}</strong></div><div class="metric"><span>متوسط الاختبارات</span><strong>${avg}%</strong></div><div class="metric"><span>أفضل نتيجة</span><strong>${best}%</strong></div><div class="metric"><span>صحيح / خطأ</span><strong>${correct} / ${wrong}</strong></div><div class="metric"><span>XP</span><strong>${u.xp}</strong></div><div class="metric"><span>Streak</span><strong>🔥 ${u.streak}</strong></div></div></div><div class="panel"><h3 style="margin-top:0">آخر النتائج</h3><div class="bars">${u.quizHistory.slice(-12).map(x=>`<div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end"><div class="bar" style="height:${Math.max(8,x.score)}%" title="${x.score}%"></div><div class="bar-label">${x.score}%</div></div>`).join("")||'<div class="empty">لا توجد نتائج بعد.</div>'}</div></div>`;const wrap=document.getElementById("badgeGrid");wrap.innerHTML="";BADGES.forEach(b=>{const el=document.createElement("div");el.className="badge "+(u.achievements[b.id]?"unlocked":"");el.innerHTML=`<div class="badge-icon">${b.icon}</div><div class="badge-title">${b.title}</div><div class="badge-desc">${b.desc}</div>`;wrap.appendChild(el)})}
+
+/* ---------------- dictionary ---------------- */
+function openDictionary(){setTrackTheme(null);document.getElementById("dictSearch").value="";document.getElementById("dictResults").innerHTML='<div class="empty">اكتب كلمة لبدء البحث.</div>';showScreen("screen-dict");setTimeout(()=>document.getElementById("dictSearch").focus(),120)}
+document.getElementById("dictSearch").addEventListener("input",e=>{const q=e.target.value.trim().toLowerCase(),out=document.getElementById("dictResults");if(!q){out.innerHTML='<div class="empty">اكتب كلمة لبدء البحث.</div>';return}const a=ALL_GLOSSARY.filter(v=>v.en.toLowerCase().includes(q)||v.ar.includes(q));const b=Object.keys(GENERAL_DICT).filter(k=>k.includes(q)||GENERAL_DICT[k].includes(q)).slice(0,12).map(k=>({en:k,ar:GENERAL_DICT[k],def:null}));const all=a.concat(b).slice(0,40);if(!all.length){out.innerHTML='<div class="empty">لم يتم العثور على نتائج.</div>';return}out.innerHTML="";all.forEach(v=>{const el=document.createElement("div");el.className="review-card";el.innerHTML=`<div class="tp-row"><div><div class="term-line">${escapeHtml2(v.en)}</div><div><b>${escapeHtml2(v.ar)}</b></div>${v.track?`<div class="muted" style="font-size:10px">${TRACKS[v.track].short} · ${LEVEL_LABELS[v.level]}</div>`:""}</div><button class="speak">🔊</button></div>${v.def?`<div class="muted" style="font-size:12px;margin-top:5px">${escapeHtml2(v.def)}</div>`:""}`;el.querySelector(".speak").onclick=()=>speak(v.en,.85);out.appendChild(el)})});
+
+/* ---------------- settings ---------------- */
+document.getElementById("themeToggle").onclick=()=>{const s=settings();s.theme=s.theme==="light"?"dark":"light";saveUser();applySettings()};document.getElementById("muteToggle").onclick=()=>{const s=settings();s.muted=!s.muted;saveUser();applySettings();if(!s.muted)sfx("correct")};document.getElementById("volumeRange").oninput=e=>{settings().volume=+e.target.value;saveUser()};document.getElementById("fontRange").oninput=e=>{settings().font=+e.target.value;saveUser();applySettings()};document.getElementById("resetProgressBtn").onclick=()=>{if(!confirm("هل أنت متأكد من حذف كل تقدم هذا الحساب؟"))return;const u=getUser();u.xp=0;u.streak=0;u.lastActive=null;u.lessons={};u.levels={};u.termStats={};u.achievements={};u.quizHistory=[];saveUser();evaluateBadges();renderHome();toast("تمت إعادة ضبط التقدم.");showScreen("screen-home")};
+
+/* ---------------- global events ---------------- */
+document.getElementById("brandHome").onclick=()=>{setTrackTheme(null);renderHome();showScreen("screen-home")};document.getElementById("backHomeBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("backToLevelsBtn").onclick=()=>openLevels(state.track);document.getElementById("backLevelsBtn2").onclick=()=>openLessons(state.track,state.level);document.getElementById("dictBtn").onclick=openDictionary;document.getElementById("reviewBtn").onclick=openReview;document.getElementById("analyticsBtn").onclick=openAnalytics;document.getElementById("settingsBtn").onclick=()=>{const u=getUser();document.getElementById("accountInfo").textContent=`حسابك المحلي: ${u.username}`;applySettings();showScreen("screen-settings")};document.getElementById("analyticsBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("settingsBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("dictBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("reviewBackBtn").onclick=()=>{renderHome();showScreen("screen-home")};document.getElementById("logoutBtn").onclick=logout;document.getElementById("logoutBtn2").onclick=logout;document.getElementById("authSubmit").onclick=handleAuth;document.getElementById("authSwitch").onclick=()=>showAuth(authMode==="login"?"register":"login");document.getElementById("authPass").addEventListener("keydown",e=>{if(e.key==="Enter")handleAuth()});document.getElementById("authUser").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("authPass").focus()});document.querySelectorAll("[data-home-tab]").forEach(btn=>btn.onclick=()=>{document.querySelectorAll("[data-home-tab]").forEach(x=>x.classList.remove("active"));btn.classList.add("active");document.getElementById("homeTabPaths").classList.toggle("hidden",btn.dataset.homeTab!=="paths");document.getElementById("homeTabProgress").classList.toggle("hidden",btn.dataset.homeTab!=="progress")});
+// Add analytics entry through Settings nav via double-click? Keep accessible from dashboard with Alt+A.
+document.addEventListener("keydown",e=>{if(e.altKey&&e.key.toLowerCase()==="a")openAnalytics()});
+
+/* ---------------- start ---------------- */
+if(appDB.active && appDB.users[appDB.active]){activeUser=appDB.active;enterApp()}else showAuth("login");
+</script>
+</body>
+</html>
